@@ -27,10 +27,12 @@ jobs:
           node-version: 20
 
       - name: Install
-        run: npm install --include=dev
+        run: |
+          npm install
+          npm install vite @vitejs/plugin-react --save-dev
 
       - name: Build
-        run: npx vite build
+        run: ./node_modules/.bin/vite build
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
