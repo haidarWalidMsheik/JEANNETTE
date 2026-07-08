@@ -27,11 +27,11 @@ jobs:
         with:
           node-version: 22
 
-      - name: Clean npm cache
-        run: npm cache clean --force
+      - name: Update npm
+        run: npm install -g npm@latest
 
-      - name: Install
-        run: npm ci --include=dev
+      - name: Install dependencies
+        run: npm install --include=dev --legacy-peer-deps --no-audit --no-fund
 
       - name: Build
         run: npm run build
