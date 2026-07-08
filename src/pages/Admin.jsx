@@ -1,0 +1,264 @@
+import { useEffect, useMemo, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { hasSupabase, isCurrentUserFixedAdmin, supabase } from "../lib/supabase";
+import { CATEGORY_NAMES, categoryOrder } from "../config/categories";
+import { deleteProject, listProjects, saveProject } from "../services/projectService";
+
+
+function fileSizeLabel(bytes) {
+  if (!bytes) return "";
+  return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+}
+
+const blankProject = {
+  id: "",
+  name: "",
+  price: "",
+  category: "Branding",
+  type: "",
+  description: "",
+  sort_order: 0,
+  image_url: "",
+  image_path: "",
+};
+
+function sortedProjects(projects) {
+  return [...projects].sort((a, b) => {
+    const byCategory = categoryOrder(a.category) - categoryOrder(b.category);
+    if (byCategory !== 0) return byCategory;
+    const bySort = Number(a.sort_order || 0) - Number(b.sort_order || 0);
+    if (bySort !== 0) return bySort;
+    return String(a.name || "").localeCompare(String(b.name || ""));
+  });
+}
+
+export default function Admin() {
+  const navigate = useNavigate();
+  const [ready, setReady] = useState(false);
+  const [projects, setProjects] = useState([]);
+  const [form, setForm] = useState(blankProject);
+  const [imageFile, setImageFile] = useState(null);
+  const [imageInfo, setImageInfo] = useState("");
+  const [status, setStatus] = useState("");
+  const [error, setError] = useState("");
+  const [saving, setSaving] = useState(false);
+
+  async function checkAdmin() {
+    if (!hasSupabase || !supabase) {
+      setError("Supabase is not connected. Add your Supabase environment variables first.");
+      return;
+    }
+
+    const allowed = await isCurrentUserFixedAdmin();
+
+    if (!allowed) {
+      navigate("/admin-login");
+      return;
+    }
+
+    setReady(true);
+  }
+
+  async function load() {
+    try {
+      setError("");
+      const data = await listProjects();
+      setProjects(data);
+    } catch (err) {
+      setError(err.message || "Could not load projects.");
+    }
+  }
+
+  useEffect(() => {
+    checkAdmin();
+  }, []);
+
+  useEffect(() => {
+    if (ready) load();
+  }, [ready]);
+
+  const groupedProjects = useMemo(() => {
+    const groups = {};
+    for (const category of CATEGORY_NAMES) groups[category] = [];
+    for (const project of sortedProjects(projects)) {
+      if (!groups[project.category]) groups[project.category] = [];
+      groups[project.category].push(project);
+    }
+    return groups;
+  }, [projects]);
+
+  function updateField(name, value) {
+    setForm((current) => ({ ...current, [name]: value }));
+  }
+
+  function editProject(project) {
+    setForm({
+      ...blankProject,
+      ...project,
+      price: String(project.price ?? ""),
+    });
+    setImageFile(null);
+    setImageInfo("");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function resetForm() {
+    setForm(blankProject);
+    setImageFile(null);
+    setImageInfo("");
+  }
+
+
+  function handleImageChange(file) {
+    setImageFile(file || null);
+
+    if (!file) {
+      setImageInfo("");
+      return;
+    }
+
+    const size = fileSizeLabel(file.size);
+    if (file.size > 5 * 1024 * 1024) {
+      setImageInfo(`Selected photo is ${size}. The website will auto-compress it before upload.`);
+    } else {
+      setImageInfo(`Selected photo is ${size}. Ready to upload.`);
+    }
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    try {
+      setSaving(true);
+      setStatus("");
+      setError("");
+      await saveProject(form, imageFile);
+      setStatus(form.id ? "Item updated and resorted." : "Item added to the correct category.");
+      resetForm();
+      await load();
+    } catch (err) {
+      setError(err.message || "Could not save project.");
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function handleDelete(project) {
+    if (!confirm(`Delete ${project.name}?`)) return;
+    try {
+      setError("");
+      await deleteProject(project);
+      await load();
+    } catch (err) {
+      setError(err.message || "Could not delete project.");
+    }
+  }
+
+  async function logout() {
+    if (hasSupabase && supabase) await supabase.auth.signOut();
+    navigate("/");
+  }
+
+  if (!ready) return <main className="admin-page"><p>Checking admin...</p></main>;
+
+  return (
+    <main className="admin-page">
+      <header className="admin-header">
+        <div>
+          <p className="admin-kicker">Jeannette Portfolio</p>
+          <h1>CRUD</h1>
+          <p>Same public website face, plus this private CRUD page. Home page and girl photo are locked; project boxes and photos are saved on Supabase.</p>
+        </div>
+        <div className="admin-header-actions">
+          <Link to="/guest">View guest page</Link>
+          <Link to="/projects">View projects</Link>
+          <button onClick={logout}>Logout</button>
+        </div>
+      </header>
+
+      {!hasSupabase && (
+        <div className="setup-warning">
+          Supabase is not connected. CRUD is disabled until the database server is connected.
+        </div>
+      )}
+
+      <form className="crud-form" onSubmit={handleSubmit}>
+        <h2>{form.id ? "Edit item" : "Add item"}</h2>
+        <div className="form-grid">
+          <label>
+            Item name
+            <input value={form.name} onChange={(e) => updateField("name", e.target.value)} required />
+          </label>
+          <label>
+            Price
+            <input value={form.price} onChange={(e) => updateField("price", e.target.value)} type="number" min="0" step="0.01" required />
+          </label>
+          <label>
+            Category
+            <select value={form.category} onChange={(e) => updateField("category", e.target.value)}>
+              {CATEGORY_NAMES.map((category) => (
+                <option key={category}>{category}</option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Type
+            <input value={form.type} onChange={(e) => updateField("type", e.target.value)} placeholder="Logo, carousel, website..." />
+          </label>
+          <label>
+            Sort order
+            <input value={form.sort_order} onChange={(e) => updateField("sort_order", e.target.value)} type="number" />
+          </label>
+          <label>
+            Image
+            <input type="file" accept="image/png,image/jpeg,image/webp,image/gif" onChange={(e) => handleImageChange(e.target.files?.[0] || null)} />
+            <small className="image-upload-note">Large JPG, PNG, and WEBP photos are compressed automatically before upload.</small>
+          </label>
+        </div>
+        <label>
+          Description
+          <textarea value={form.description} onChange={(e) => updateField("description", e.target.value)} rows="4" />
+        </label>
+        {imageInfo && <p className="image-upload-info">{imageInfo}</p>}
+        {form.image_url && (
+          <div className="current-image-preview">
+            <span>Current image:</span>
+            <img src={form.image_url} alt="Current project" />
+          </div>
+        )}
+        {error && <p className="error-text">{error}</p>}
+        {status && <p className="success-text">{status}</p>}
+        <div className="form-actions">
+          <button disabled={saving}>{saving ? "Saving..." : form.id ? "Update item" : "Add item"}</button>
+          <button type="button" onClick={resetForm}>Clear</button>
+        </div>
+      </form>
+
+      <section className="admin-list">
+        <h2>CRUD items sorted by category</h2>
+        {CATEGORY_NAMES.map((category) => (
+          <div className="admin-category" key={category}>
+            <h3>{category}</h3>
+            {groupedProjects[category]?.length ? (
+              groupedProjects[category].map((project) => (
+                <article className="admin-project-row" key={project.id}>
+                  <div className="row-image">{project.image_url ? <img src={project.image_url} alt={project.name} /> : <span>No image</span>}</div>
+                  <div>
+                    <strong>{project.name}</strong>
+                    <p>{project.type || "No type"} - ${Number(project.price || 0).toFixed(2)}</p>
+                    <small>{project.description}</small>
+                  </div>
+                  <div className="row-actions">
+                    <button onClick={() => editProject(project)}>Edit</button>
+                    <button className="danger" onClick={() => handleDelete(project)}>Delete</button>
+                  </div>
+                </article>
+              ))
+            ) : (
+              <p className="admin-muted">No items yet.</p>
+            )}
+          </div>
+        ))}
+      </section>
+    </main>
+  );
+}
