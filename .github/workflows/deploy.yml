@@ -27,10 +27,10 @@ jobs:
           node-version: 20
 
       - name: Install
-        run: npm ci
+        run: npm install --include=dev
 
       - name: Build
-        run: npm run build
+        run: npx vite build
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
