@@ -19,19 +19,20 @@ export default function App() {
   return (
     <>
       <div className="route-transition" key={location.pathname}>
-        <Routes location={location}>
-        <Route path="/" element={<Home />} />
-        <Route path="/guest" element={<Home />} />
-        <Route path="/projects" element={<ProjectsLanding />} />
-        <Route path="/category/:slug" element={<CategoryPage />} />
-        <Route path="/project/:id" element={<ProjectDetails />} />
-        <Route path="/collaborate" element={<Collaborate />} />
-        <Route path="/admin-login" element={<AdminLogin />} />
-        <Route path="/crud" element={<Admin />} />
-        <Route path="/admin" element={<Navigate to="/crud" replace />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/guest" element={<Home />} />
+          <Route path="/projects" element={<ProjectsLanding />} />
+          <Route path="/category/:slug" element={<CategoryPage />} />
+          <Route path="/project/:id" element={<ProjectDetails />} />
+          <Route path="/collaborate" element={<Collaborate />} />
+          <Route path="/admin-login" element={<AdminLogin />} />
+          <Route path="/crud" element={<Admin />} />
+          <Route path="/admin" element={<Navigate to="/crud" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
+
       <BackToTop />
     </>
   );
