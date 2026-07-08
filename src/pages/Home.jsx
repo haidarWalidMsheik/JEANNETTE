@@ -24,7 +24,7 @@ export default function Home() {
         <p className="landing-note note-right">You've now landed in my small creative space.</p>
         <p className="landing-note note-left">It’s Jeannette.</p>
         <h1 className="big-hi-text">HI THERE</h1>
-        <img className="girl-face-fixed" src={`${import.meta.env.BASE_URL}design/girl-hero.png`}alt="Jeannette portrait" />
+        <img className="girl-face-fixed" src={`${import.meta.env.BASE_URL}design/girl-about.png`} alt="Jeannette portrait" />
         <p className="landing-note note-bottom">Take a look around. You might find a few brands, some ideas, and maybe a glimpse of serenity along the way!</p>
       </section>
 
@@ -47,7 +47,7 @@ export default function Home() {
           <div className="red-sun" />
           <img
             className="girl-second-photo"
-            src= {`${import.meta.env.BASE_URL}design/girl-about.png`} 
+            src= {`${import.meta.env.BASE_URL}design/girl-hero.png`}      
             alt="Jeannette seated portrait"
           />
         </div>
