@@ -27,8 +27,11 @@ jobs:
         with:
           node-version: 22
 
+      - name: Clean npm cache
+        run: npm cache clean --force
+
       - name: Install
-        run: npm install
+        run: npm ci --include=dev
 
       - name: Build
         run: npm run build
