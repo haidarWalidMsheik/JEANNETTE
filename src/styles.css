@@ -4045,3 +4045,27 @@ body:has(.coded-projects-landing)::before {
 .projects-screen-bg {
   background-image: url("/JEANNETTE/design/projects-bg.jpeg") !important;
 }
+/* MORE SPACE BETWEEN PROJECTS NAVBAR AND BACKGROUND PHOTO */
+
+.coded-projects-landing {
+  --projects-gap-under-nav: clamp(26px, 3vw, 52px);
+}
+
+/* make sure the photo starts lower on every screen */
+.projects-screen-bg {
+  top: calc(var(--projects-nav-height) + var(--projects-gap-under-nav)) !important;
+}
+
+/* tablet */
+@media (max-width: 900px) {
+  .coded-projects-landing {
+    --projects-gap-under-nav: 34px;
+  }
+}
+
+/* phone */
+@media (max-width: 560px) {
+  .coded-projects-landing {
+    --projects-gap-under-nav: 40px;
+  }
+}
