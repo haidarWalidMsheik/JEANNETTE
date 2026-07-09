@@ -3602,3 +3602,42 @@ body {
     bottom: 14px;
   }
 }
+/* PROJECTS PAGE FIXED BACKGROUND PHOTO */
+
+.coded-projects-landing {
+  position: relative;
+  min-height: 100vh;
+  background: #111;
+  color: #fff;
+  overflow-x: hidden;
+  overflow-y: auto;
+  isolation: isolate;
+}
+
+/* fixed image behind everything */
+.coded-projects-landing::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.28)),
+    url("/JEANNETTE/design/projects-bg.jpeg");
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #111;
+  pointer-events: none;
+}
+
+/* hide the old animated background */
+.coded-projects-landing .project-motion-bg {
+  display: none !important;
+}
+
+/* keep nav and project buttons above the background */
+.coded-projects-landing .coded-nav,
+.coded-projects-landing .projects-landing-layout {
+  position: relative;
+  z-index: 2;
+}
