@@ -5,11 +5,11 @@ import { CATEGORIES } from "../config/categories";
 export default function ProjectsLanding() {
   return (
     <main className="coded-projects-landing">
+      <div className="projects-screen-bg" aria-hidden="true" />
+
       <SiteNav />
 
       <section className="projects-landing-layout">
-        
-
         <div className="category-tiles">
           {CATEGORIES.map((category, index) => (
             <Link
