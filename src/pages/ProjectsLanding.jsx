@@ -8,17 +8,7 @@ export default function ProjectsLanding() {
       <SiteNav />
 
       <section className="projects-landing-layout">
-        <div className="projects-landing-copy">
-          <p>What I bring to the table.</p>
-          <h1>
-            WHAT I BRING TO
-            <br />
-            THE TABLE.
-          </h1>
-          <span>
-            Choose a category and see the work items added by the admin CRUD page.
-          </span>
-        </div>
+        
 
         <div className="category-tiles">
           {CATEGORIES.map((category, index) => (
