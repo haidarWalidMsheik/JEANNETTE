@@ -3,9 +3,17 @@ import SiteNav from "../components/SiteNav";
 import { CATEGORIES } from "../config/categories";
 
 export default function ProjectsLanding() {
+  const base = import.meta.env.BASE_URL;
+
   return (
     <main className="coded-projects-landing">
-      <div className="projects-screen-bg" aria-hidden="true" />
+      <div
+        className="projects-screen-bg"
+        aria-hidden="true"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18)), url("${base}design/projects-bg.jpeg")`,
+        }}
+      />
 
       <SiteNav />
 
