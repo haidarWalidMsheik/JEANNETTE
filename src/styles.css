@@ -3527,38 +3527,30 @@ body {
     bottom: 20px;
   }
 }
-/* PROJECTS LANDING FIXED BACKGROUND IMAGE */
+/* PROJECTS LANDING BACKGROUND - SHOW FULL IMAGE WITHOUT MOVING */
 
 .coded-projects-landing {
   position: relative;
   min-height: 100vh;
   background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.35)),
+    linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
     url("/JEANNETTE/design/projects-bg.jpeg");
-  background-size: cover;
+  background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background-color: #111;
   overflow: hidden;
-  isolation: isolate;
 }
 
-/* hide old moving color background */
+/* delete/hide old moving background */
 .coded-projects-landing .project-motion-bg {
   display: none !important;
 }
 
-/* keep content above photo */
+/* keep nav and circles above the photo */
 .coded-projects-landing .coded-nav,
 .coded-projects-landing .projects-landing-layout {
   position: relative;
   z-index: 2;
-}
-
-/* mobile/tablet fix */
-@media (max-width: 900px) {
-  .coded-projects-landing {
-    background-attachment: scroll;
-    background-position: center center;
-  }
 }
