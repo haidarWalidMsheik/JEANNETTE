@@ -3645,4 +3645,38 @@ body {
 .coded-projects-landing .category-tile {
   background: rgba(255, 255, 255, 0.10);
   backdrop-filter: blur(4px);
+}/* PROJECTS LANDING FIXED IMAGE BACKGROUND */
+
+.coded-projects-landing {
+  position: relative;
+  min-height: 100vh;
+  background: #111 !important;
+  color: #fff;
+  overflow-x: hidden;
+  overflow-y: visible !important;
+  isolation: isolate;
+}
+
+/* the photo stays fixed in the screen while scrolling */
+.projects-fixed-bg-image {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: contain;
+  object-position: center center;
+  z-index: 0;
+  pointer-events: none;
+  background: #111;
+}
+
+/* hide old animated background if it still exists anywhere */
+.coded-projects-landing .project-motion-bg {
+  display: none !important;
+}
+
+/* keep nav and content above the fixed photo */
+.coded-projects-landing > *:not(.projects-fixed-bg-image) {
+  position: relative;
+  z-index: 2;
 }
