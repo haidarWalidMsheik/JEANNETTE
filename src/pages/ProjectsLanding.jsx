@@ -3,17 +3,8 @@ import SiteNav from "../components/SiteNav";
 import { CATEGORIES } from "../config/categories";
 
 export default function ProjectsLanding() {
-  const base = import.meta.env.BASE_URL;
-
   return (
     <main className="coded-projects-landing">
-      <img
-        className="projects-fixed-bg-image"
-        src={`${base}design/projects-bg.jpeg`}
-        alt=""
-        aria-hidden="true"
-      />
-
       <SiteNav />
 
       <section className="projects-landing-layout">

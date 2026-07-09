@@ -3645,38 +3645,58 @@ body {
 .coded-projects-landing .category-tile {
   background: rgba(255, 255, 255, 0.10);
   backdrop-filter: blur(4px);
-}/* PROJECTS LANDING FIXED IMAGE BACKGROUND */
+}
+/* PROJECTS LANDING: ONE FIXED SCREEN BACKGROUND */
 
+body:has(.coded-projects-landing)::before {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: clamp(76px, 7vw, 115px);
+  bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.22)),
+    url("../design/projects-bg.jpeg");
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #111;
+}
+
+/* make app content stay above the fixed screen background */
+#root {
+  position: relative;
+  z-index: 1;
+}
+
+/* remove old project background conflict */
 .coded-projects-landing {
   position: relative;
   min-height: 100vh;
-  background: #111 !important;
+  background: transparent !important;
   color: #fff;
   overflow-x: hidden;
   overflow-y: visible !important;
-  isolation: isolate;
+  isolation: auto !important;
 }
 
-/* the photo stays fixed in the screen while scrolling */
-.projects-fixed-bg-image {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: contain;
-  object-position: center center;
-  z-index: 0;
-  pointer-events: none;
-  background: #111;
-}
-
-/* hide old animated background if it still exists anywhere */
+/* remove duplicate/fake images if they still exist */
+.projects-fixed-bg-image,
 .coded-projects-landing .project-motion-bg {
   display: none !important;
 }
 
-/* keep nav and content above the fixed photo */
-.coded-projects-landing > *:not(.projects-fixed-bg-image) {
+/* keep nav and content in front */
+.coded-projects-landing .coded-nav,
+.coded-projects-landing .projects-landing-layout {
   position: relative;
-  z-index: 2;
+  z-index: 5;
+}
+
+/* small space between nav and the content */
+.coded-projects-landing .projects-landing-layout {
+  padding-top: clamp(24px, 4vw, 60px);
 }
