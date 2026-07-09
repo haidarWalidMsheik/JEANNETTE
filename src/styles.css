@@ -4034,3 +4034,14 @@ body:has(.coded-projects-landing)::before {
     width: clamp(96px, 36vw, 132px);
   }
 }
+/* REMOVE FADED SHADOW BELOW PROJECTS NAVBAR */
+
+.coded-projects-landing .coded-nav {
+  box-shadow: none !important;
+  border-bottom: none !important;
+}
+
+/* remove dark fade/gradient from the fixed background */
+.projects-screen-bg {
+  background-image: url("/JEANNETTE/design/projects-bg.jpeg") !important;
+}
