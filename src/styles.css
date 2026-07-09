@@ -3602,7 +3602,7 @@ body {
     bottom: 14px;
   }
 }
-/* PROJECTS PAGE FIXED BACKGROUND PHOTO */
+/* PROJECTS PAGE: FIXED VIEWPORT BACKGROUND */
 
 .coded-projects-landing {
   position: relative;
@@ -3610,18 +3610,18 @@ body {
   background: #111;
   color: #fff;
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: visible;
   isolation: isolate;
 }
 
-/* fixed image behind everything */
+/* this photo stays fixed on the screen while scrolling */
 .coded-projects-landing::before {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: 0;
   background:
-    linear-gradient(rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.28)),
+    linear-gradient(rgba(0, 0, 0, 0.30), rgba(0, 0, 0, 0.30)),
     url("/JEANNETTE/design/projects-bg.jpeg");
   background-size: contain;
   background-position: center center;
@@ -3630,14 +3630,19 @@ body {
   pointer-events: none;
 }
 
-/* hide the old animated background */
+/* hide old moving animated background */
 .coded-projects-landing .project-motion-bg {
   display: none !important;
 }
 
-/* keep nav and project buttons above the background */
-.coded-projects-landing .coded-nav,
-.coded-projects-landing .projects-landing-layout {
+/* keep all content above the fixed photo */
+.coded-projects-landing > * {
   position: relative;
   z-index: 2;
+}
+
+/* make category circles a little transparent so background is still visible */
+.coded-projects-landing .category-tile {
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(4px);
 }
