@@ -23,7 +23,7 @@ export default function Home() {
       <section className="photo-home-section about-photo-only-section">
         <img
           className="photo-section-image"
-          src={`${base}design/about-bg-clean.png`}
+          src={`${base}design/home-hero-bg.jpeg`}
           alt="Jeannette graphic designer section"
         />
 
