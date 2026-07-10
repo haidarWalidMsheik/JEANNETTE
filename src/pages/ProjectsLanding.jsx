@@ -1,17 +1,46 @@
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import SiteNav from "../components/SiteNav";
 import { CATEGORIES } from "../config/categories";
 
 export default function ProjectsLanding() {
+  const pageRef = useRef(null);
   const base = import.meta.env.BASE_URL;
 
+  useEffect(() => {
+    const page = pageRef.current;
+    if (!page) return;
+
+    const nav = page.querySelector(".coded-nav");
+    if (!nav) return;
+
+    const updateNavHeight = () => {
+      page.style.setProperty("--projects-nav-real-height", `${nav.offsetHeight}px`);
+    };
+
+    updateNavHeight();
+
+    let observer;
+    if (window.ResizeObserver) {
+      observer = new ResizeObserver(updateNavHeight);
+      observer.observe(nav);
+    }
+
+    window.addEventListener("resize", updateNavHeight);
+
+    return () => {
+      window.removeEventListener("resize", updateNavHeight);
+      if (observer) observer.disconnect();
+    };
+  }, []);
+
   return (
-    <main className="coded-projects-landing">
+    <main className="coded-projects-landing" ref={pageRef}>
       <div
         className="projects-screen-bg"
         aria-hidden="true"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18)), url("${base}design/projects-bg.jpeg")`,
+          backgroundImage: `url("${base}design/projects-bg.jpeg")`,
         }}
       />
 

@@ -4159,4 +4159,69 @@ body:has(.coded-projects-landing)::before {
     justify-content: center;
     padding: 34px 16px 100px;
   }
+}/* FINAL: PHOTO DIRECTLY UNDER NAVBAR, NO GAP, NO OVERLAP */
+
+.route-transition:has(.coded-projects-landing) {
+  animation: none !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+.coded-projects-landing {
+  --projects-nav-real-height: 90px;
+
+  position: relative;
+  min-height: 160vh;
+  background: #111 !important;
+  color: #fff;
+  overflow-x: hidden;
+  overflow-y: visible !important;
+  isolation: auto !important;
+}
+
+/* navbar same clean home style */
+.coded-projects-landing .coded-nav {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  max-width: none;
+  margin: 0 !important;
+  padding: clamp(12px, 1.8vw, 22px) clamp(18px, 4vw, 64px);
+  background: rgba(0, 0, 0, 0.94) !important;
+  box-shadow: none !important;
+  border-bottom: none !important;
+}
+
+/* photo starts EXACTLY under navbar */
+.projects-screen-bg {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: var(--projects-nav-real-height) !important;
+  bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  background-size: contain !important;
+  background-position: center top !important;
+  background-repeat: no-repeat !important;
+  background-color: #111 !important;
+}
+
+/* remove all old fake/fade backgrounds */
+.coded-projects-landing .project-motion-bg,
+.projects-fixed-bg-image,
+.coded-projects-landing::before,
+body:has(.coded-projects-landing)::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* everything stays in front of the photo */
+.coded-projects-landing .coded-nav,
+.coded-projects-landing .projects-landing-layout,
+.coded-projects-landing .category-tiles,
+.coded-projects-landing .category-tile {
+  position: relative;
+  z-index: 5;
 }
