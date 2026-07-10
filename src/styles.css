@@ -5047,3 +5047,61 @@ body:has(.coded-projects-landing)::before {
     bottom: 10px;
   }
 }
+/* PROJECT LANDING BACKGROUND PHOTO */
+
+.route-transition:has(.coded-projects-landing) {
+  animation: none !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+.coded-projects-landing {
+  --projects-nav-real-height: 90px;
+
+  position: relative;
+  min-height: 160vh;
+  background: #111 !important;
+  color: #fff;
+  overflow-x: hidden;
+  overflow-y: visible !important;
+  isolation: auto !important;
+}
+
+/* navbar stays above */
+.coded-projects-landing .coded-nav {
+  position: relative;
+  z-index: 30;
+}
+
+/* photo fixed under navbar */
+.projects-screen-bg {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: var(--projects-nav-real-height);
+  bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  background-size: cover !important;
+  background-position: center top !important;
+  background-repeat: no-repeat !important;
+  background-color: #111 !important;
+}
+
+/* remove old duplicate backgrounds */
+.coded-projects-landing .project-motion-bg,
+.projects-fixed-bg-image,
+.coded-projects-landing::before,
+body:has(.coded-projects-landing)::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* circles stay above photo */
+.coded-projects-landing .projects-landing-layout,
+.coded-projects-landing .category-tiles,
+.coded-projects-landing .category-tile {
+  position: relative;
+  z-index: 5;
+}
