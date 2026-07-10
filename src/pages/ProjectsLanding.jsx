@@ -18,6 +18,14 @@ export default function ProjectsLanding() {
       <SiteNav />
 
       <section className="projects-landing-layout">
+        <h1 className="projects-bg-title">
+          WHAT
+          <br />
+          I BRING TO
+          <br />
+          THE TABLE.
+        </h1>
+
         <div className="category-tiles">
           {CATEGORIES.map((category, index) => (
             <Link
