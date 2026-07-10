@@ -3534,7 +3534,7 @@ body {
   min-height: 100vh;
   background:
     linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
-    url("/JEANNETTE/design/projects-bg.png");
+    url("/design/projects-bg.png");
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
@@ -3622,7 +3622,7 @@ body {
   z-index: 0;
   background:
     linear-gradient(rgba(0, 0, 0, 0.30), rgba(0, 0, 0, 0.30)),
-    url("/JEANNETTE/design/projects-bg.png");
+    url("/design/projects-bg.png");
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
@@ -3659,7 +3659,7 @@ body:has(.coded-projects-landing)::before {
   pointer-events: none;
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.22)),
-    url("../design/projects-bg.png");
+    url("/design/projects-bg.png");
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
@@ -3732,7 +3732,7 @@ body:has(.coded-projects-landing)::before {
 
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.20), rgba(0, 0, 0, 0.20)),
-    url("/JEANNETTE/design/projects-bg.png");
+    url("/design/projects-bg.png");
 
   background-size: contain;
   background-position: center top;
@@ -4043,7 +4043,7 @@ body:has(.coded-projects-landing)::before {
 
 /* remove dark fade/gradient from the fixed background */
 .projects-screen-bg {
-  background-image: url("/JEANNETTE/design/projects-bg.png") !important;
+  background-image: url("/design/projects-bg.png") !important;
 }
 /* PROJECTS FINAL FIX: NO FADE + PHOTO LOWER THAN NAVBAR */
 
@@ -4091,7 +4091,7 @@ body:has(.coded-projects-landing)::before {
   z-index: 0;
   pointer-events: none;
 
-  background-image: url("/JEANNETTE/design/projects-bg.png") !important;
+  background-image: url("/design/projects-bg.png") !important;
   background-size: contain !important;
   background-position: center top !important;
   background-repeat: no-repeat !important;
@@ -4398,7 +4398,7 @@ body:has(.coded-projects-landing)::before {
   z-index: 0;
   pointer-events: none;
 
-  background-image: url("/JEANNETTE/design/collaborate.png");
+  background-image: url("/design/collaborate.png");
   background-size: contain;
   background-position: left top;
   background-repeat: no-repeat;
@@ -5250,7 +5250,7 @@ body:has(.coded-projects-landing)::before {
 }
 
 .projects-screen-bg {
-  background-image: url("/JEANNETTE/design/projects-bg.png") !important;
+  background-image: url("/design/projects-bg.png") !important;
   background-size: cover !important;
   background-position: center center !important;
   background-repeat: no-repeat !important;
@@ -5259,7 +5259,7 @@ body:has(.coded-projects-landing)::before {
 
 @media (max-width: 900px) {
   .projects-screen-bg {
-    background-image: url("/JEANNETTE/design/projects-bg.png") !important;
+    background-image: url("/design/projects-bg.png") !important;
     background-size: cover !important;
     background-position: center center !important;
   }
@@ -5267,7 +5267,7 @@ body:has(.coded-projects-landing)::before {
 
 @media (max-width: 560px) {
   .projects-screen-bg {
-    background-image: url("/JEANNETTE/design/projects-bg.png") !important;
+    background-image: url("/design/projects-bg.png") !important;
     background-size: cover !important;
     background-position: center center !important;
   }
@@ -5292,7 +5292,7 @@ body:has(.coded-projects-landing)::before {
   z-index: 0 !important;
   pointer-events: none !important;
 
-  background-image: url("/JEANNETTE/design/projects-bg.png") !important;
+  background-image: url("/design/projects-bg.png") !important;
   background-size: cover !important;
   background-position: center center !important;
   background-repeat: no-repeat !important;
