@@ -5272,3 +5272,49 @@ body:has(.coded-projects-landing)::before {
     background-position: center center !important;
   }
 }
+/* PROJECTS BACKGROUND: START FROM TOP TO END */
+
+.coded-projects-landing {
+  position: relative;
+  min-height: 160vh;
+  background: #111 !important;
+  overflow-x: hidden !important;
+  overflow-y: visible !important;
+}
+
+/* photo fills the whole screen from top to bottom */
+.projects-screen-bg {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+
+  z-index: 0 !important;
+  pointer-events: none !important;
+
+  background-image: url("/JEANNETTE/design/projects-bg.png") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-color: #111 !important;
+}
+
+/* keep navbar and circles above the photo */
+.coded-projects-landing .coded-nav,
+.coded-projects-landing .projects-landing-layout,
+.coded-projects-landing .category-tiles,
+.coded-projects-landing .category-tile,
+.projects-bg-title {
+  position: relative !important;
+  z-index: 5 !important;
+}
+
+/* remove old backgrounds */
+.coded-projects-landing .project-motion-bg,
+.projects-fixed-bg-image,
+.coded-projects-landing::before,
+body:has(.coded-projects-landing)::before {
+  display: none !important;
+  content: none !important;
+  background-image: none !important;
+}
