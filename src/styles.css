@@ -4967,3 +4967,11 @@ body:has(.coded-projects-landing)::before {
     padding: 10px 16px !important;
   }
 }
+/* REMOVE RECTANGLE / TRIANGLE ABOVE PROJECT LANDING CIRCLES */
+
+.coded-projects-landing .tile-triangle,
+.coded-projects-landing .category-tile .tile-triangle {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}

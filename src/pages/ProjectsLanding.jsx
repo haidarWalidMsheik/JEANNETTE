@@ -49,15 +49,14 @@ export default function ProjectsLanding() {
       <section className="projects-landing-layout">
         <div className="category-tiles">
           {CATEGORIES.map((category, index) => (
-            <Link
-              className="category-tile magnetic-tile"
-              key={category.slug}
-              to={`/category/${category.slug}`}
-            >
-              <i className="tile-triangle" aria-hidden="true" />
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <strong>{category.name}</strong>
-            </Link>
+          <Link
+  className="category-tile magnetic-tile"
+  key={category.slug}
+  to={`/category/${category.slug}`}
+>
+  <span>{String(index + 1).padStart(2, "0")}</span>
+  <strong>{category.name}</strong>
+</Link>
           ))}
         </div>
       </section>
