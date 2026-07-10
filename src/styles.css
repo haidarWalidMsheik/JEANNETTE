@@ -5493,3 +5493,32 @@ body:has(.coded-projects-landing)::before {
   margin: 0 !important;
   padding: 0 !important;
 }
+/* PROJECT LANDING: STOP PAGE SCROLL */
+
+body:has(.coded-projects-landing),
+html:has(.coded-projects-landing) {
+  overflow: hidden !important;
+}
+
+.coded-projects-landing {
+  min-height: 100vh !important;
+  height: 100vh !important;
+  overflow: hidden !important;
+}
+
+/* background stays fixed under navbar */
+.projects-screen-bg {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: var(--projects-nav-height) !important;
+  bottom: 0 !important;
+  height: auto !important;
+}
+
+/* content fits inside one screen */
+.coded-projects-landing .projects-landing-layout {
+  min-height: calc(100vh - var(--projects-nav-height)) !important;
+  height: calc(100vh - var(--projects-nav-height)) !important;
+  overflow: hidden !important;
+}
