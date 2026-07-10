@@ -5396,3 +5396,100 @@ body:has(.coded-projects-landing)::before {
   transform: scaleX(1.235) !important;
   transform-origin: left center !important;
 }
+/* FINAL PROJECT LANDING BACKGROUND: BELOW NAVBAR, DESKTOP + MOBILE */
+
+.route-transition:has(.coded-projects-landing) {
+  animation: none !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+.coded-projects-landing {
+  --projects-nav-height: 90px;
+
+  position: relative !important;
+  min-height: 160vh !important;
+  background: #111 !important;
+  color: #fff !important;
+  overflow-x: hidden !important;
+  overflow-y: visible !important;
+}
+
+/* navbar stays normal */
+.coded-projects-landing .coded-nav {
+  position: relative !important;
+  z-index: 30 !important;
+  margin-bottom: 0 !important;
+}
+
+/* photo starts exactly below navbar */
+.projects-screen-bg {
+  position: fixed !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: var(--projects-nav-height) !important;
+  bottom: 0 !important;
+
+  z-index: 0 !important;
+  pointer-events: none !important;
+
+  background-image: var(--projects-bg-desktop) !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-color: #111 !important;
+}
+
+/* content above background */
+.coded-projects-landing .projects-landing-layout,
+.coded-projects-landing .category-tiles,
+.coded-projects-landing .category-tile {
+  position: relative !important;
+  z-index: 5 !important;
+}
+
+/* remove old backgrounds */
+.coded-projects-landing .project-motion-bg,
+.projects-fixed-bg-image,
+.coded-projects-landing::before,
+body:has(.coded-projects-landing)::before {
+  display: none !important;
+  content: none !important;
+  background-image: none !important;
+}
+
+/* mobile photo */
+@media (max-width: 700px) {
+  .projects-screen-bg {
+    background-image: var(--projects-bg-mobile) !important;
+    background-size: cover !important;
+    background-position: center center !important;
+  }
+}
+/* FINAL HOME: NO SPACE BETWEEN NAVBAR AND FIRST PHOTO */
+
+.photo-home-page {
+  gap: 0 !important;
+}
+
+.hero-photo-section {
+  gap: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.hero-nav-layer {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: normal !important;
+}
+
+.hero-nav-layer .coded-nav {
+  margin: 0 !important;
+}
+
+.hero-photo-section .photo-section-image {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}

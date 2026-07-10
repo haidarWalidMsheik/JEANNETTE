@@ -1,31 +1,53 @@
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import SiteNav from "../components/SiteNav";
 import { CATEGORIES } from "../config/categories";
 
 export default function ProjectsLanding() {
+  const pageRef = useRef(null);
   const base = import.meta.env.BASE_URL;
 
-  return (
-    <main className="coded-projects-landing">
-      <div
-        className="projects-screen-bg"
-        aria-hidden="true"
-        style={{
-          backgroundImage: `url("${base}design/projects-bg.png")`,
-        }}
-      />
+  useEffect(() => {
+    const page = pageRef.current;
+    if (!page) return;
 
+    const nav = page.querySelector(".coded-nav");
+
+    const updateNavHeight = () => {
+      const navHeight = nav ? nav.offsetHeight : 90;
+      page.style.setProperty("--projects-nav-height", `${navHeight}px`);
+    };
+
+    updateNavHeight();
+
+    let observer;
+    if (window.ResizeObserver && nav) {
+      observer = new ResizeObserver(updateNavHeight);
+      observer.observe(nav);
+    }
+
+    window.addEventListener("resize", updateNavHeight);
+
+    return () => {
+      window.removeEventListener("resize", updateNavHeight);
+      if (observer) observer.disconnect();
+    };
+  }, []);
+
+  return (
+    <main
+      ref={pageRef}
+      className="coded-projects-landing"
+      style={{
+        "--projects-bg-desktop": `url("${base}design/projects-bg.png")`,
+        "--projects-bg-mobile": `url("${base}design/projects-bg-mobile.png")`,
+      }}
+    >
       <SiteNav />
 
-      <section className="projects-landing-layout">
-        <h1 className="projects-bg-title">
-          WHAT
-          <br />
-          I BRING TO
-          <br />
-          THE TABLE.
-        </h1>
+      <div className="projects-screen-bg" aria-hidden="true" />
 
+      <section className="projects-landing-layout">
         <div className="category-tiles">
           {CATEGORIES.map((category, index) => (
             <Link
