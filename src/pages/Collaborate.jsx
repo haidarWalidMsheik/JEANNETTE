@@ -11,6 +11,7 @@ const initialForm = {
 };
 
 export default function Collaborate() {
+  const [sendBurst, setSendBurst] = useState(false);
   const pageRef = useRef(null);
   const [form, setForm] = useState(initialForm);
   const [error, setError] = useState("");
@@ -56,7 +57,23 @@ export default function Collaborate() {
       return;
     }
 
-    window.open(buildContactWhatsAppLink(form), "_blank", "noopener,noreferrer");
+    const whatsappUrl = buildContactWhatsAppLink(form);
+
+    setSendBurst(true);
+
+    const whatsappWindow = window.open("", "_blank", "noopener,noreferrer");
+
+    setTimeout(() => {
+      if (whatsappWindow) {
+        whatsappWindow.location.href = whatsappUrl;
+      } else {
+        window.location.href = whatsappUrl;
+      }
+
+      setTimeout(() => {
+        setSendBurst(false);
+      }, 500);
+    }, 850);
   }
 
   return (
@@ -98,7 +115,9 @@ export default function Collaborate() {
             <span>BUSINESS NAME</span>
             <input
               value={form.businessName}
-              onChange={(event) => updateField("businessName", event.target.value)}
+              onChange={(event) =>
+                updateField("businessName", event.target.value)
+              }
               placeholder="Enter company name"
             />
           </label>
@@ -107,7 +126,9 @@ export default function Collaborate() {
             <span>PROJECT TYPE</span>
             <input
               value={form.projectType}
-              onChange={(event) => updateField("projectType", event.target.value)}
+              onChange={(event) =>
+                updateField("projectType", event.target.value)
+              }
               placeholder="Project Type"
             />
           </label>
@@ -123,6 +144,11 @@ export default function Collaborate() {
           </label>
 
           {error && <p className="contact-error-coded">{error}</p>}
+
+          <span
+            className={`send-red-circle ${sendBurst ? "is-active" : ""}`}
+            aria-hidden="true"
+          />
 
           <button className="coded-send-button" type="submit">
             SEND
