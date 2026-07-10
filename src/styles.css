@@ -4650,3 +4650,143 @@ body:has(.coded-projects-landing)::before {
     min-width: 85px !important;
   }
 }
+/* FINAL PROJECT CARDS: LINKEDIN STYLE, NO PRICE, NO BUTTONS */
+
+.coded-category-page .coded-project-grid.linkedin-project-list {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: clamp(18px, 2vw, 28px) !important;
+}
+
+.coded-category-page .linkedin-project-card {
+  display: flex !important;
+  flex-direction: row-reverse !important;
+  align-items: stretch !important;
+
+  width: 100% !important;
+  min-height: 240px !important;
+
+  border-radius: 26px !important;
+  overflow: hidden !important;
+
+  background: rgba(17, 17, 17, 0.96) !important;
+  color: #fff !important;
+  text-decoration: none !important;
+
+  border: 1px solid rgba(17, 17, 17, 0.12) !important;
+  box-shadow: 0 18px 40px rgba(17, 17, 17, 0.16) !important;
+
+  transform: none !important;
+}
+
+.coded-category-page .linkedin-project-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 26px 56px rgba(17, 17, 17, 0.22) !important;
+}
+
+.coded-category-page .linkedin-project-image {
+  width: 42% !important;
+  min-width: 280px !important;
+  min-height: 240px !important;
+
+  display: grid !important;
+  place-items: center !important;
+  overflow: hidden !important;
+
+  background: #c7c9c9 !important;
+}
+
+.coded-category-page .linkedin-project-image img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+.coded-category-page .linkedin-project-info {
+  width: 58% !important;
+
+  position: relative !important;
+  background: #111 !important;
+  color: #fff !important;
+
+  padding: clamp(22px, 3vw, 44px) !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  gap: 12px !important;
+}
+
+.coded-category-page .linkedin-project-info small {
+  color: #ee2126 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  font-weight: 900 !important;
+}
+
+.coded-category-page .linkedin-project-info h2 {
+  margin: 0 !important;
+  color: #fff !important;
+  font-size: clamp(28px, 4vw, 62px) !important;
+  line-height: 0.95 !important;
+  text-transform: uppercase !important;
+}
+
+.coded-category-page .linkedin-project-info p {
+  margin: 0 !important;
+  color: rgba(255, 255, 255, 0.72) !important;
+  line-height: 1.45 !important;
+  max-width: 620px !important;
+}
+
+/* remove all old price/buttons from cards */
+.coded-category-page .coded-project-info strong,
+.coded-category-page .coded-project-info a,
+.coded-category-page .price-badge,
+.coded-category-page .quick-contact {
+  display: none !important;
+}
+
+/* stop old first card transform */
+.coded-category-page .coded-project-card:first-child,
+.coded-category-page .coded-project-card:hover,
+.coded-category-page .coded-project-card:nth-child(n + 2):hover {
+  transform: none !important;
+}
+
+.coded-category-page .linkedin-project-card:hover {
+  transform: translateY(-6px) !important;
+}
+
+/* mobile: vertical cards */
+@media (max-width: 700px) {
+  .coded-category-page .linkedin-project-card {
+    flex-direction: column !important;
+    min-height: 0 !important;
+  }
+
+  .coded-category-page .linkedin-project-image {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 230px !important;
+    min-height: 230px !important;
+  }
+
+  .coded-category-page .linkedin-project-info {
+    width: 100% !important;
+    padding: 22px !important;
+  }
+
+  .coded-category-page .linkedin-project-info h2 {
+    font-size: clamp(30px, 10vw, 44px) !important;
+  }
+}
+
+/* admin preview two images */
+
+.admin-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}

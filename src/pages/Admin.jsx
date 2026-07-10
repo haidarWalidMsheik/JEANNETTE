@@ -4,7 +4,6 @@ import { hasSupabase, isCurrentUserFixedAdmin, supabase } from "../lib/supabase"
 import { CATEGORY_NAMES, categoryOrder } from "../config/categories";
 import { deleteProject, listProjects, saveProject } from "../services/projectService";
 
-
 function fileSizeLabel(bytes) {
   if (!bytes) return "";
   return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
@@ -18,27 +17,42 @@ const blankProject = {
   type: "",
   description: "",
   sort_order: 0,
+
   image_url: "",
   image_path: "",
+
+  card_image_url: "",
+  card_image_path: "",
+
+  detail_image_url: "",
+  detail_image_path: "",
 };
 
 function sortedProjects(projects) {
   return [...projects].sort((a, b) => {
     const byCategory = categoryOrder(a.category) - categoryOrder(b.category);
     if (byCategory !== 0) return byCategory;
+
     const bySort = Number(a.sort_order || 0) - Number(b.sort_order || 0);
     if (bySort !== 0) return bySort;
+
     return String(a.name || "").localeCompare(String(b.name || ""));
   });
 }
 
 export default function Admin() {
   const navigate = useNavigate();
+
   const [ready, setReady] = useState(false);
   const [projects, setProjects] = useState([]);
   const [form, setForm] = useState(blankProject);
-  const [imageFile, setImageFile] = useState(null);
-  const [imageInfo, setImageInfo] = useState("");
+
+  const [cardImageFile, setCardImageFile] = useState(null);
+  const [detailImageFile, setDetailImageFile] = useState(null);
+
+  const [cardImageInfo, setCardImageInfo] = useState("");
+  const [detailImageInfo, setDetailImageInfo] = useState("");
+
   const [status, setStatus] = useState("");
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
@@ -79,11 +93,14 @@ export default function Admin() {
 
   const groupedProjects = useMemo(() => {
     const groups = {};
+
     for (const category of CATEGORY_NAMES) groups[category] = [];
+
     for (const project of sortedProjects(projects)) {
       if (!groups[project.category]) groups[project.category] = [];
       groups[project.category].push(project);
     }
+
     return groups;
   }, [projects]);
 
@@ -96,42 +113,72 @@ export default function Admin() {
       ...blankProject,
       ...project,
       price: String(project.price ?? ""),
+      card_image_url: project.card_image_url || project.image_url || "",
+      card_image_path: project.card_image_path || project.image_path || "",
+      detail_image_url: project.detail_image_url || project.image_url || "",
+      detail_image_path: project.detail_image_path || project.image_path || "",
     });
-    setImageFile(null);
-    setImageInfo("");
+
+    setCardImageFile(null);
+    setDetailImageFile(null);
+    setCardImageInfo("");
+    setDetailImageInfo("");
+
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   function resetForm() {
     setForm(blankProject);
-    setImageFile(null);
-    setImageInfo("");
+    setCardImageFile(null);
+    setDetailImageFile(null);
+    setCardImageInfo("");
+    setDetailImageInfo("");
   }
 
-
-  function handleImageChange(file) {
-    setImageFile(file || null);
+  function handleCardImageChange(file) {
+    setCardImageFile(file || null);
 
     if (!file) {
-      setImageInfo("");
+      setCardImageInfo("");
       return;
     }
 
     const size = fileSizeLabel(file.size);
+
     if (file.size > 5 * 1024 * 1024) {
-      setImageInfo(`Selected photo is ${size}. The website will auto-compress it before upload.`);
+      setCardImageInfo(`Selected card photo is ${size}. The website will auto-compress it before upload.`);
     } else {
-      setImageInfo(`Selected photo is ${size}. Ready to upload.`);
+      setCardImageInfo(`Selected card photo is ${size}. Ready to upload.`);
+    }
+  }
+
+  function handleDetailImageChange(file) {
+    setDetailImageFile(file || null);
+
+    if (!file) {
+      setDetailImageInfo("");
+      return;
+    }
+
+    const size = fileSizeLabel(file.size);
+
+    if (file.size > 5 * 1024 * 1024) {
+      setDetailImageInfo(`Selected big project photo is ${size}. The website will auto-compress it before upload.`);
+    } else {
+      setDetailImageInfo(`Selected big project photo is ${size}. Ready to upload.`);
     }
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
+
     try {
       setSaving(true);
       setStatus("");
       setError("");
-      await saveProject(form, imageFile);
+
+      await saveProject(form, cardImageFile, detailImageFile);
+
       setStatus(form.id ? "Item updated and resorted." : "Item added to the correct category.");
       resetForm();
       await load();
@@ -144,6 +191,7 @@ export default function Admin() {
 
   async function handleDelete(project) {
     if (!confirm(`Delete ${project.name}?`)) return;
+
     try {
       setError("");
       await deleteProject(project);
@@ -158,7 +206,13 @@ export default function Admin() {
     navigate("/");
   }
 
-  if (!ready) return <main className="admin-page"><p>Checking admin...</p></main>;
+  if (!ready) {
+    return (
+      <main className="admin-page">
+        <p>Checking admin...</p>
+      </main>
+    );
+  }
 
   return (
     <main className="admin-page">
@@ -166,8 +220,12 @@ export default function Admin() {
         <div>
           <p className="admin-kicker">Jeannette Portfolio</p>
           <h1>CRUD</h1>
-          <p>Same public website face, plus this private CRUD page. Home page and girl photo are locked; project boxes and photos are saved on Supabase.</p>
+          <p>
+            Add a card photo for the category card, and a big project photo for
+            the project details page.
+          </p>
         </div>
+
         <div className="admin-header-actions">
           <Link to="/guest">View guest page</Link>
           <Link to="/projects">View projects</Link>
@@ -183,73 +241,154 @@ export default function Admin() {
 
       <form className="crud-form" onSubmit={handleSubmit}>
         <h2>{form.id ? "Edit item" : "Add item"}</h2>
+
         <div className="form-grid">
           <label>
             Item name
-            <input value={form.name} onChange={(e) => updateField("name", e.target.value)} required />
+            <input
+              value={form.name}
+              onChange={(e) => updateField("name", e.target.value)}
+              required
+            />
           </label>
+
           <label>
             Price
-            <input value={form.price} onChange={(e) => updateField("price", e.target.value)} type="number" min="0" step="0.01" required />
+            <input
+              value={form.price}
+              onChange={(e) => updateField("price", e.target.value)}
+              type="number"
+              min="0"
+              step="0.01"
+              required
+            />
           </label>
+
           <label>
             Category
-            <select value={form.category} onChange={(e) => updateField("category", e.target.value)}>
+            <select
+              value={form.category}
+              onChange={(e) => updateField("category", e.target.value)}
+            >
               {CATEGORY_NAMES.map((category) => (
                 <option key={category}>{category}</option>
               ))}
             </select>
           </label>
+
           <label>
             Type
-            <input value={form.type} onChange={(e) => updateField("type", e.target.value)} placeholder="Logo, carousel, website..." />
+            <input
+              value={form.type}
+              onChange={(e) => updateField("type", e.target.value)}
+              placeholder="Logo, carousel, website..."
+            />
           </label>
+
           <label>
             Sort order
-            <input value={form.sort_order} onChange={(e) => updateField("sort_order", e.target.value)} type="number" />
+            <input
+              value={form.sort_order}
+              onChange={(e) => updateField("sort_order", e.target.value)}
+              type="number"
+            />
           </label>
+
           <label>
-            Image
-            <input type="file" accept="image/png,image/jpeg,image/webp,image/gif" onChange={(e) => handleImageChange(e.target.files?.[0] || null)} />
-            <small className="image-upload-note">Large JPG, PNG, and WEBP photos are compressed automatically before upload.</small>
+            Card photo
+            <input
+              type="file"
+              accept="image/png,image/jpeg,image/webp,image/gif"
+              onChange={(e) => handleCardImageChange(e.target.files?.[0] || null)}
+            />
+            <small className="image-upload-note">
+              This photo appears on the project card.
+            </small>
+          </label>
+
+          <label>
+            Big project photo
+            <input
+              type="file"
+              accept="image/png,image/jpeg,image/webp,image/gif"
+              onChange={(e) => handleDetailImageChange(e.target.files?.[0] || null)}
+            />
+            <small className="image-upload-note">
+              This photo appears when the user opens the project.
+            </small>
           </label>
         </div>
+
         <label>
           Description
-          <textarea value={form.description} onChange={(e) => updateField("description", e.target.value)} rows="4" />
+          <textarea
+            value={form.description}
+            onChange={(e) => updateField("description", e.target.value)}
+            rows="4"
+          />
         </label>
-        {imageInfo && <p className="image-upload-info">{imageInfo}</p>}
-        {form.image_url && (
-          <div className="current-image-preview">
-            <span>Current image:</span>
-            <img src={form.image_url} alt="Current project" />
-          </div>
-        )}
+
+        {cardImageInfo && <p className="image-upload-info">{cardImageInfo}</p>}
+        {detailImageInfo && <p className="image-upload-info">{detailImageInfo}</p>}
+
+        <div className="admin-preview-grid">
+          {(form.card_image_url || form.image_url) && (
+            <div className="current-image-preview">
+              <span>Current card photo:</span>
+              <img src={form.card_image_url || form.image_url} alt="Current card" />
+            </div>
+          )}
+
+          {(form.detail_image_url || form.image_url) && (
+            <div className="current-image-preview">
+              <span>Current big photo:</span>
+              <img src={form.detail_image_url || form.image_url} alt="Current detail" />
+            </div>
+          )}
+        </div>
+
         {error && <p className="error-text">{error}</p>}
         {status && <p className="success-text">{status}</p>}
+
         <div className="form-actions">
-          <button disabled={saving}>{saving ? "Saving..." : form.id ? "Update item" : "Add item"}</button>
-          <button type="button" onClick={resetForm}>Clear</button>
+          <button disabled={saving}>
+            {saving ? "Saving..." : form.id ? "Update item" : "Add item"}
+          </button>
+          <button type="button" onClick={resetForm}>
+            Clear
+          </button>
         </div>
       </form>
 
       <section className="admin-list">
         <h2>CRUD items sorted by category</h2>
+
         {CATEGORY_NAMES.map((category) => (
           <div className="admin-category" key={category}>
             <h3>{category}</h3>
+
             {groupedProjects[category]?.length ? (
               groupedProjects[category].map((project) => (
                 <article className="admin-project-row" key={project.id}>
-                  <div className="row-image">{project.image_url ? <img src={project.image_url} alt={project.name} /> : <span>No image</span>}</div>
+                  <div className="row-image">
+                    {project.card_image_url || project.image_url ? (
+                      <img src={project.card_image_url || project.image_url} alt={project.name} />
+                    ) : (
+                      <span>No card image</span>
+                    )}
+                  </div>
+
                   <div>
                     <strong>{project.name}</strong>
-                    <p>{project.type || "No type"} - ${Number(project.price || 0).toFixed(2)}</p>
+                    <p>{project.type || "No type"}</p>
                     <small>{project.description}</small>
                   </div>
+
                   <div className="row-actions">
                     <button onClick={() => editProject(project)}>Edit</button>
-                    <button className="danger" onClick={() => handleDelete(project)}>Delete</button>
+                    <button className="danger" onClick={() => handleDelete(project)}>
+                      Delete
+                    </button>
                   </div>
                 </article>
               ))
