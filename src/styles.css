@@ -5318,7 +5318,7 @@ body:has(.coded-projects-landing)::before {
   content: none !important;
   background-image: none !important;
 }
-/* FINAL LOGO: OLD FONT, SMALLER, SAME WIDTH, ALL WHITE */
+/* FINAL LOGO: SAME LETTER SPACING + SAME END LINE */
 
 .coded-logo,
 .hero-nav-layer .coded-logo,
@@ -5327,54 +5327,44 @@ body:has(.coded-projects-landing)::before {
 .coded-collaborate-page .coded-logo,
 .detail-page .coded-logo {
   display: grid !important;
-  width: clamp(128px, 12vw, 205px) !important;
-  min-width: clamp(128px, 12vw, 205px) !important;
+  width: clamp(145px, 13.5vw, 230px) !important;
+  min-width: clamp(145px, 13.5vw, 230px) !important;
   gap: 2px !important;
 
   color: #ffffff !important;
   text-decoration: none !important;
 
   font-family: Arial, Helvetica, sans-serif !important;
-  font-size: clamp(15px, 1.18vw, 24px) !important;
+  font-size: clamp(17px, 1.35vw, 28px) !important;
   font-weight: 950 !important;
   line-height: 0.86 !important;
   text-transform: uppercase !important;
 }
 
 .coded-logo span,
-.coded-logo strong,
-.hero-nav-layer .coded-logo span,
-.hero-nav-layer .coded-logo strong,
-.coded-projects-landing .coded-logo span,
-.coded-projects-landing .coded-logo strong,
-.coded-category-page .coded-logo span,
-.coded-category-page .coded-logo strong,
-.coded-collaborate-page .coded-logo span,
-.coded-collaborate-page .coded-logo strong,
-.detail-page .coded-logo span,
-.detail-page .coded-logo strong {
+.coded-logo strong {
   display: block !important;
-  width: 100% !important;
-
   color: #ffffff !important;
   font-family: inherit !important;
   font-size: inherit !important;
   font-weight: inherit !important;
   line-height: inherit !important;
+  letter-spacing: -0.035em !important;
 }
 
-/* top word: normal old font */
+/* first line normal */
 .coded-logo span {
-  letter-spacing: -0.045em !important;
+  width: 100% !important;
 }
 
-/* bottom word: stretched only a little so last O aligns with S */
+/* second line same spacing, but stretched as one word */
 .coded-logo strong {
-  letter-spacing: 0.105em !important;
+  width: max-content !important;
+  transform: scaleX(1.235) !important;
+  transform-origin: left center !important;
 }
 
-/* remove every old red logo rule */
-.coded-logo strong,
+/* remove old red logo */
 .hero-nav-layer .coded-logo strong,
 .coded-projects-landing .coded-logo strong,
 .coded-category-page .coded-logo strong,
@@ -5390,12 +5380,12 @@ body:has(.coded-projects-landing)::before {
   .coded-category-page .coded-logo,
   .coded-collaborate-page .coded-logo,
   .detail-page .coded-logo {
-    width: 128px !important;
-    min-width: 128px !important;
-    font-size: 15px !important;
+    width: 145px !important;
+    min-width: 145px !important;
+    font-size: 17px !important;
   }
 
   .coded-logo strong {
-    letter-spacing: 0.1em !important;
+    transform: scaleX(1.235) !important;
   }
 }
