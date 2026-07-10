@@ -4522,4 +4522,131 @@ body:has(.coded-projects-landing)::before {
     left: -150px !important;
     bottom: -135px !important;
   }
+}/* COLLABORATE FINAL: PHOTO HAS TEXT, FORM ONLY ON RIGHT */
+
+.route-transition:has(.coded-collaborate-page) {
+  animation: none !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+.coded-collaborate-page {
+  --collab-nav-height: 120px;
+  --collab-gap-under-nav: 0px;
+
+  position: relative;
+  min-height: 100vh;
+  background: #111 !important;
+  color: #fff;
+  overflow: hidden !important;
+  isolation: isolate;
+}
+
+/* background photo directly under navbar */
+.coded-collaborate-page::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--collab-nav-height) + var(--collab-gap-under-nav));
+  bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  background-image: var(--collab-bg) !important;
+  background-size: contain !important;
+  background-position: left top !important;
+  background-repeat: no-repeat !important;
+  background-color: #111 !important;
+}
+
+/* keep navbar above background */
+.coded-collaborate-page .coded-nav {
+  position: relative;
+  z-index: 30;
+}
+
+/* remove any old duplicated text panel / red circle */
+.coded-collaborate-page .contact-panel-left,
+.coded-collaborate-page .collab-red-orb {
+  display: none !important;
+}
+
+/* form only, on the right */
+.coded-collab-layout {
+  position: relative;
+  z-index: 5;
+
+  width: 100%;
+  max-width: none;
+  margin: 0;
+
+  min-height: calc(100vh - var(--collab-nav-height));
+
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: flex-end !important;
+
+  padding:
+    clamp(42px, 5vw, 80px)
+    clamp(24px, 6vw, 95px)
+    90px
+    clamp(22px, 4vw, 70px);
+}
+
+/* form style */
+.coded-contact-form {
+  position: relative;
+  z-index: 8;
+
+  width: min(100%, 620px);
+  margin-left: auto;
+
+  gap: clamp(16px, 2vw, 28px) !important;
+  padding: clamp(20px, 2.6vw, 40px) !important;
+}
+
+/* smaller send button */
+.coded-send-button {
+  font-size: clamp(14px, 1.15vw, 20px) !important;
+  padding: 9px 20px !important;
+  min-width: 95px !important;
+  justify-self: end !important;
+}
+
+/* tablet */
+@media (max-width: 900px) {
+  .coded-collaborate-page::before {
+    background-position: center top !important;
+    background-size: contain !important;
+  }
+
+  .coded-collab-layout {
+    justify-content: flex-end !important;
+    align-items: flex-start !important;
+    padding: 40px 26px 95px;
+  }
+
+  .coded-contact-form {
+    width: min(100%, 600px);
+  }
+}
+
+/* phone */
+@media (max-width: 560px) {
+  .coded-collab-layout {
+    justify-content: center !important;
+    padding: 34px 16px 90px;
+  }
+
+  .coded-contact-form {
+    width: 100%;
+    padding: 18px !important;
+  }
+
+  .coded-send-button {
+    font-size: 13px !important;
+    padding: 8px 16px !important;
+    min-width: 85px !important;
+  }
 }
