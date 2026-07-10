@@ -26,6 +26,8 @@ const db = createClient(supabaseUrl, serviceRoleKey, {
 });
 
 const allowedOrigins = [
+  "https://jeannettekhouryportfolio.com",
+  "https://www.jeannettekhouryportfolio.com",
   "https://haidarwalidmsheik.github.io",
   "http://localhost:5173",
   "http://localhost:5174",
@@ -36,7 +38,7 @@ function corsHeaders(request: Request) {
 
   const allowedOrigin = allowedOrigins.includes(origin)
     ? origin
-    : "https://haidarwalidmsheik.github.io";
+    : "https://jeannettekhouryportfolio.com";
 
   return {
     "Access-Control-Allow-Origin": allowedOrigin,
