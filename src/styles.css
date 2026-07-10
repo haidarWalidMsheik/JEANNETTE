@@ -5522,3 +5522,37 @@ html:has(.coded-projects-landing) {
   height: calc(100vh - var(--projects-nav-height)) !important;
   overflow: hidden !important;
 }
+/* HOME PAGE: SPACE BETWEEN PHOTOS ONLY, NOT BETWEEN NAVBAR AND FIRST PHOTO */
+
+.photo-home-page {
+  gap: clamp(18px, 2.5vw, 42px) !important;
+  background: #111 !important;
+}
+
+/* navbar and first photo stay attached */
+.hero-photo-section {
+  gap: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.hero-nav-layer {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.hero-nav-layer .coded-nav {
+  margin: 0 !important;
+}
+
+.hero-photo-section .photo-section-image {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* all photo sections clean */
+.photo-home-section {
+  margin: 0 !important;
+  padding: 0 !important;
+}
