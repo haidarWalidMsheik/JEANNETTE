@@ -4895,3 +4895,75 @@ body:has(.coded-projects-landing)::before {
     bottom: 10px;
   }
 }
+
+/* SAME HOME NAVBAR STYLE ON MAIN PAGES */
+
+.coded-projects-landing .coded-nav,
+.coded-category-page .coded-nav,
+.coded-collaborate-page .coded-nav,
+.detail-page .coded-nav {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+
+  padding: clamp(12px, 1.8vw, 22px) clamp(18px, 4vw, 64px) !important;
+
+  background: rgba(0, 0, 0, 0.94) !important;
+  border-bottom: 2px solid rgba(239, 29, 40, 0.55) !important;
+  box-shadow: none !important;
+
+  color: #fff !important;
+  position: relative !important;
+  z-index: 50 !important;
+}
+
+/* logo colors same as home */
+.coded-projects-landing .coded-logo,
+.coded-category-page .coded-logo,
+.coded-collaborate-page .coded-logo,
+.detail-page .coded-logo,
+.coded-projects-landing .coded-nav a,
+.coded-category-page .coded-nav a,
+.coded-collaborate-page .coded-nav a,
+.detail-page .coded-nav a {
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
+.coded-projects-landing .coded-logo strong,
+.coded-category-page .coded-logo strong,
+.coded-collaborate-page .coded-logo strong,
+.detail-page .coded-logo strong {
+  color: #ef1d28 !important;
+}
+
+/* active and hover links same as home */
+.coded-projects-landing .animated-nav-link:hover,
+.coded-projects-landing .animated-nav-link.is-active,
+.coded-category-page .animated-nav-link:hover,
+.coded-category-page .animated-nav-link.is-active,
+.coded-collaborate-page .animated-nav-link:hover,
+.coded-collaborate-page .animated-nav-link.is-active,
+.detail-page .animated-nav-link:hover,
+.detail-page .animated-nav-link.is-active {
+  color: #ef1d28 !important;
+}
+
+/* responsive navbar same behavior */
+@media (max-width: 900px) {
+  .coded-projects-landing .coded-nav,
+  .coded-category-page .coded-nav,
+  .coded-collaborate-page .coded-nav,
+  .detail-page .coded-nav {
+    padding: 12px 24px !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .coded-projects-landing .coded-nav,
+  .coded-category-page .coded-nav,
+  .coded-collaborate-page .coded-nav,
+  .detail-page .coded-nav {
+    padding: 10px 16px !important;
+  }
+}
