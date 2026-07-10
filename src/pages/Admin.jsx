@@ -198,10 +198,13 @@ export default function Admin() {
     }
   }
 
-  async function logout() {
-    if (hasSupabase && supabase) await supabase.auth.signOut();
-    navigate("/");
+ async function logout() {
+  if (hasSupabase && supabase) {
+    await supabase.auth.signOut();
   }
+
+  navigate("/admin-login", { replace: true });
+}
 
   if (!ready) {
     return (
