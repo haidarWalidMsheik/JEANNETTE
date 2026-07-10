@@ -3534,7 +3534,7 @@ body {
   min-height: 100vh;
   background:
     linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
-    url("/JEANNETTE/design/projects-bg.jpeg");
+    url("/JEANNETTE/design/projects-bg.png");
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
@@ -3622,7 +3622,7 @@ body {
   z-index: 0;
   background:
     linear-gradient(rgba(0, 0, 0, 0.30), rgba(0, 0, 0, 0.30)),
-    url("/JEANNETTE/design/projects-bg.jpeg");
+    url("/JEANNETTE/design/projects-bg.png");
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
@@ -3659,7 +3659,7 @@ body:has(.coded-projects-landing)::before {
   pointer-events: none;
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.22)),
-    url("../design/projects-bg.jpeg");
+    url("../design/projects-bg.png");
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
@@ -3732,7 +3732,7 @@ body:has(.coded-projects-landing)::before {
 
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.20), rgba(0, 0, 0, 0.20)),
-    url("/JEANNETTE/design/projects-bg.jpeg");
+    url("/JEANNETTE/design/projects-bg.png");
 
   background-size: contain;
   background-position: center top;
@@ -4043,7 +4043,7 @@ body:has(.coded-projects-landing)::before {
 
 /* remove dark fade/gradient from the fixed background */
 .projects-screen-bg {
-  background-image: url("/JEANNETTE/design/projects-bg.jpeg") !important;
+  background-image: url("/JEANNETTE/design/projects-bg.png") !important;
 }
 /* PROJECTS FINAL FIX: NO FADE + PHOTO LOWER THAN NAVBAR */
 
@@ -4091,7 +4091,7 @@ body:has(.coded-projects-landing)::before {
   z-index: 0;
   pointer-events: none;
 
-  background-image: url("/JEANNETTE/design/projects-bg.jpeg") !important;
+  background-image: url("/JEANNETTE/design/projects-bg.png") !important;
   background-size: contain !important;
   background-position: center top !important;
   background-repeat: no-repeat !important;
@@ -5233,5 +5233,42 @@ body:has(.coded-projects-landing)::before {
   .projects-bg-title {
     text-align: center;
     font-size: clamp(34px, 12vw, 56px);
+  }
+}
+/* FINAL OVERRIDE: FORCE NEW PROJECTS BACKGROUND PNG */
+
+.coded-projects-landing::before,
+body:has(.coded-projects-landing)::before {
+  display: none !important;
+  content: none !important;
+  background-image: none !important;
+}
+
+.coded-projects-landing .project-motion-bg,
+.projects-fixed-bg-image {
+  display: none !important;
+}
+
+.projects-screen-bg {
+  background-image: url("/JEANNETTE/design/projects-bg.png") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-color: #111 !important;
+}
+
+@media (max-width: 900px) {
+  .projects-screen-bg {
+    background-image: url("/JEANNETTE/design/projects-bg.png") !important;
+    background-size: cover !important;
+    background-position: center center !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .projects-screen-bg {
+    background-image: url("/JEANNETTE/design/projects-bg.png") !important;
+    background-size: cover !important;
+    background-position: center center !important;
   }
 }
