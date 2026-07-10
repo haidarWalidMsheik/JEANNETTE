@@ -12,9 +12,7 @@ function fileSizeLabel(bytes) {
 const blankProject = {
   id: "",
   name: "",
-  price: "",
   category: "Branding",
-  type: "",
   description: "",
   sort_order: 0,
 
@@ -112,7 +110,6 @@ export default function Admin() {
     setForm({
       ...blankProject,
       ...project,
-      price: String(project.price ?? ""),
       card_image_url: project.card_image_url || project.image_url || "",
       card_image_path: project.card_image_path || project.image_path || "",
       detail_image_url: project.detail_image_url || project.image_url || "",
@@ -253,18 +250,6 @@ export default function Admin() {
           </label>
 
           <label>
-            Price
-            <input
-              value={form.price}
-              onChange={(e) => updateField("price", e.target.value)}
-              type="number"
-              min="0"
-              step="0.01"
-              required
-            />
-          </label>
-
-          <label>
             Category
             <select
               value={form.category}
@@ -274,15 +259,6 @@ export default function Admin() {
                 <option key={category}>{category}</option>
               ))}
             </select>
-          </label>
-
-          <label>
-            Type
-            <input
-              value={form.type}
-              onChange={(e) => updateField("type", e.target.value)}
-              placeholder="Logo, carousel, website..."
-            />
           </label>
 
           <label>
@@ -380,7 +356,7 @@ export default function Admin() {
 
                   <div>
                     <strong>{project.name}</strong>
-                    <p>{project.type || "No type"}</p>
+                    <p>Order: {Number(project.sort_order || 0)}</p>
                     <small>{project.description}</small>
                   </div>
 
