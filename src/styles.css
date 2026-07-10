@@ -5556,3 +5556,89 @@ html:has(.coded-projects-landing) {
   margin: 0 !important;
   padding: 0 !important;
 }
+/* FIX PROJECT LANDING: KEEP CIRCLES BIG ON MOBILE */
+
+@media (max-width: 900px) {
+  .coded-projects-landing {
+    --projects-nav-height: 132px;
+  }
+
+  .coded-projects-landing .projects-landing-layout {
+    justify-content: center !important;
+    align-items: flex-end !important;
+
+    padding-top: 90px !important;
+    padding-bottom: 32px !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .coded-projects-landing .category-tiles {
+    width: min(100%, 620px) !important;
+    max-width: 620px !important;
+    gap: 12px !important;
+  }
+
+  .coded-projects-landing .category-tile {
+    width: clamp(135px, 25vw, 165px) !important;
+    height: clamp(135px, 25vw, 165px) !important;
+    padding: 14px !important;
+  }
+
+  .coded-projects-landing .category-tile span {
+    font-size: clamp(30px, 7vw, 46px) !important;
+  }
+
+  .coded-projects-landing .category-tile strong {
+    font-size: clamp(12px, 3vw, 17px) !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .coded-projects-landing {
+    --projects-nav-height: 142px;
+  }
+
+  .coded-projects-landing .projects-landing-layout {
+    justify-content: center !important;
+    align-items: flex-end !important;
+
+    /* this moves circles away from navbar */
+    padding-top: 105px !important;
+    padding-bottom: 26px !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  .coded-projects-landing .category-tiles {
+    width: min(100%, 380px) !important;
+    max-width: 380px !important;
+    gap: 8px !important;
+  }
+
+  /* keep circles big, not 92px */
+  .coded-projects-landing .category-tile {
+    width: 118px !important;
+    height: 118px !important;
+    padding: 12px !important;
+  }
+
+  .coded-projects-landing .category-tile span {
+    font-size: 30px !important;
+  }
+
+  .coded-projects-landing .category-tile strong {
+    font-size: 12px !important;
+    line-height: 1 !important;
+  }
+}
+/* DESKTOP PROJECT BACKGROUND: NOT TOO ZOOMED */
+
+@media (min-width: 901px) {
+  .projects-screen-bg {
+    background-image: var(--projects-bg-desktop) !important;
+    background-size: 100% 100% !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+  }
+}
