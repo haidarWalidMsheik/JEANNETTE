@@ -4790,3 +4790,108 @@ body:has(.coded-projects-landing)::before {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
 }
+/* COLLABORATE: SMALL ANIMATED RED CIRCLE INSIDE FORM */
+
+.coded-contact-form {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* keep all inputs above the circle */
+.coded-contact-form > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* small red animated circle */
+.coded-contact-form::after {
+  content: "";
+  position: absolute;
+  left: clamp(12px, 1.5vw, 24px);
+  bottom: clamp(10px, 1.4vw, 22px);
+
+  width: clamp(42px, 4.2vw, 78px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+
+  background: #ee2126;
+  z-index: 1;
+  pointer-events: none;
+
+  box-shadow:
+    0 0 22px rgba(238, 33, 38, 0.45),
+    0 0 48px rgba(238, 33, 38, 0.22);
+
+  animation: collabSmallCircleMove 3.2s ease-in-out infinite;
+}
+
+/* soft pulse ring */
+.coded-contact-form::before {
+  content: "";
+  position: absolute;
+  left: clamp(12px, 1.5vw, 24px);
+  bottom: clamp(10px, 1.4vw, 22px);
+
+  width: clamp(42px, 4.2vw, 78px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+
+  border: 1px solid rgba(238, 33, 38, 0.65);
+  z-index: 1;
+  pointer-events: none;
+
+  animation: collabSmallCirclePulse 3.2s ease-in-out infinite;
+}
+
+@keyframes collabSmallCircleMove {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(8px, -8px) scale(1.08);
+  }
+
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes collabSmallCirclePulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.65;
+  }
+
+  50% {
+    transform: scale(1.55);
+    opacity: 0.12;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0.65;
+  }
+}
+
+/* big screens: keep form clean and responsive */
+@media (min-width: 1400px) {
+  .coded-contact-form {
+    width: min(100%, 680px) !important;
+  }
+
+  .coded-contact-form::after,
+  .coded-contact-form::before {
+    width: 82px;
+  }
+}
+
+/* phone: make circle smaller */
+@media (max-width: 560px) {
+  .coded-contact-form::after,
+  .coded-contact-form::before {
+    width: 38px;
+    left: 12px;
+    bottom: 10px;
+  }
+}
