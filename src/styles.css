@@ -5389,3 +5389,10 @@ body:has(.coded-projects-landing)::before {
     transform: scaleX(1.235) !important;
   }
 }
+/* TINY FIX: MAKE PORTFOLIO A LITTLE SMALLER */
+
+.coded-logo strong {
+  font-size: 0.94em !important;
+  transform: scaleX(1.235) !important;
+  transform-origin: left center !important;
+}
