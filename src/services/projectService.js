@@ -13,16 +13,15 @@ function sortProjects(projects) {
     const bySort = Number(a.sort_order || 0) - Number(b.sort_order || 0);
     if (bySort !== 0) return bySort;
 
-    const byType = String(a.type || "").localeCompare(String(b.type || ""));
-    if (byType !== 0) return byType;
-
     return String(a.name || "").localeCompare(String(b.name || ""));
   });
 }
 
 function requireSupabase() {
   if (!hasSupabase || !supabase) {
-    throw new Error("Supabase is not connected. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY first.");
+    throw new Error(
+      "Supabase is not connected. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY first."
+    );
   }
 
   return supabase;
@@ -45,8 +44,11 @@ function canvasToBlob(canvas, quality) {
   return new Promise((resolve, reject) => {
     canvas.toBlob(
       (blob) => {
-        if (!blob) reject(new Error("Could not compress image. Please try another photo."));
-        else resolve(blob);
+        if (!blob) {
+          reject(new Error("Could not compress image. Please try another photo."));
+        } else {
+          resolve(blob);
+        }
       },
       "image/jpeg",
       quality
@@ -56,7 +58,10 @@ function canvasToBlob(canvas, quality) {
 
 async function prepareImageForUpload(file) {
   if (!file) return null;
-  if (!file.type.startsWith("image/")) throw new Error("Only image files are allowed.");
+
+  if (!file.type.startsWith("image/")) {
+    throw new Error("Only image files are allowed.");
+  }
 
   if (file.size > MAX_ORIGINAL_IMAGE_SIZE) {
     throw new Error("This photo is too huge. Please choose a photo smaller than 25 MB.");
@@ -64,7 +69,9 @@ async function prepareImageForUpload(file) {
 
   if (file.type === "image/gif") {
     if (file.size > MAX_UPLOAD_IMAGE_SIZE) {
-      throw new Error("GIF images must be smaller than 5 MB. Use JPG, PNG, or WEBP for large project photos.");
+      throw new Error(
+        "GIF images must be smaller than 5 MB. Use JPG, PNG, or WEBP for large project photos."
+      );
     }
 
     return file;
@@ -82,7 +89,11 @@ async function prepareImageForUpload(file) {
     const width = Math.max(1, Math.round(img.width * scale));
     const height = Math.max(1, Math.round(img.height * scale));
 
-    if (scale === 1 && file.size <= MAX_UPLOAD_IMAGE_SIZE && /image\/(jpeg|jpg|webp)/.test(file.type)) {
+    if (
+      scale === 1 &&
+      file.size <= MAX_UPLOAD_IMAGE_SIZE &&
+      /image\/(jpeg|jpg|webp)/.test(file.type)
+    ) {
       return file;
     }
 
@@ -127,7 +138,11 @@ async function uploadProjectImage(db, file, folderName) {
   const preparedImage = await prepareImageForUpload(file);
 
   if (preparedImage.size > MAX_UPLOAD_IMAGE_SIZE) {
-    throw new Error(`Image must be smaller than 5 MB after compression. Current size: ${formatMb(preparedImage.size)}.`);
+    throw new Error(
+      `Image must be smaller than 5 MB after compression. Current size: ${formatMb(
+        preparedImage.size
+      )}.`
+    );
   }
 
   const safeName = preparedImage.name.replace(/[^a-zA-Z0-9._-]/g, "-");
@@ -159,7 +174,6 @@ export async function listProjects() {
     .select("*")
     .order("category", { ascending: true })
     .order("sort_order", { ascending: true })
-    .order("type", { ascending: true })
     .order("name", { ascending: true });
 
   if (error) throw error;
@@ -188,9 +202,7 @@ export async function saveProject(project, cardImageFile, detailImageFile) {
 
   const cleaned = {
     name: String(project.name || "").trim(),
-    price: Number(project.price || 0),
     category: project.category,
-    type: String(project.type || "").trim(),
     description: String(project.description || "").trim(),
     sort_order: Number(project.sort_order || 0),
 
@@ -206,21 +218,19 @@ export async function saveProject(project, cardImageFile, detailImageFile) {
 
   if (!cleaned.name) throw new Error("Project name is required.");
   if (!cleaned.category) throw new Error("Category is required.");
-  if (!Number.isFinite(cleaned.price) || cleaned.price < 0) {
-    throw new Error("Price must be a positive number.");
-  }
 
   const cardUpload = await uploadProjectImage(db, cardImageFile, "card");
+
   if (cardUpload) {
     cleaned.card_image_url = cardUpload.url;
     cleaned.card_image_path = cardUpload.path;
 
-    // old fallback column, so old pages do not break
     cleaned.image_url = cardUpload.url;
     cleaned.image_path = cardUpload.path;
   }
 
   const detailUpload = await uploadProjectImage(db, detailImageFile, "detail");
+
   if (detailUpload) {
     cleaned.detail_image_url = detailUpload.url;
     cleaned.detail_image_path = detailUpload.path;
@@ -256,6 +266,7 @@ export async function deleteProject(project) {
   const db = requireSupabase();
 
   const { error } = await db.from("projects").delete().eq("id", project.id);
+
   if (error) throw error;
 
   const paths = [
