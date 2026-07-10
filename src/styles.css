@@ -5318,36 +5318,56 @@ body:has(.coded-projects-landing)::before {
   content: none !important;
   background-image: none !important;
 }
-/* FINAL LOGO FIX: SAME SIZE + SAME LENGTH + ALL WHITE */
+/* FINAL NAV LOGO: SAME START + SAME END + ALL WHITE */
 
-.coded-logo {
+.coded-logo,
+.hero-nav-layer .coded-logo,
+.coded-projects-landing .coded-logo,
+.coded-category-page .coded-logo,
+.coded-collaborate-page .coded-logo,
+.detail-page .coded-logo {
+  width: clamp(175px, 17vw, 305px) !important;
+  min-width: clamp(175px, 17vw, 305px) !important;
+  max-width: 305px !important;
+
   display: grid !important;
-  gap: 2px !important;
+  gap: 4px !important;
+
   color: #ffffff !important;
   text-decoration: none !important;
-  font-size: clamp(22px, 2.4vw, 42px) !important;
-  line-height: 0.88 !important;
-  font-weight: 950 !important;
-  letter-spacing: 0.02em !important;
-  text-transform: uppercase !important;
-  min-width: clamp(170px, 18vw, 300px) !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
 }
 
-.coded-logo span,
-.coded-logo strong {
-  color: #ffffff !important;
-  display: block !important;
+.coded-logo .logo-line {
   width: 100% !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+
+  color: #ffffff !important;
+  font-size: clamp(18px, 1.55vw, 31px) !important;
+  font-weight: 950 !important;
+  line-height: 0.9 !important;
+  letter-spacing: 0 !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+
+.coded-logo .logo-line > span {
+  color: #ffffff !important;
+  display: inline-flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+
   font-size: inherit !important;
   font-weight: inherit !important;
   line-height: inherit !important;
-  letter-spacing: inherit !important;
-  text-align: justify !important;
-  text-align-last: justify !important;
 }
 
-/* remove red logo color everywhere */
+/* kill old red logo styling */
 .coded-logo strong,
+.coded-logo span,
 .hero-nav-layer .coded-logo strong,
 .coded-projects-landing .coded-logo strong,
 .coded-category-page .coded-logo strong,
@@ -5356,10 +5376,18 @@ body:has(.coded-projects-landing)::before {
   color: #ffffff !important;
 }
 
-/* mobile */
 @media (max-width: 560px) {
-  .coded-logo {
-    font-size: 22px !important;
-    min-width: 165px !important;
+  .coded-logo,
+  .hero-nav-layer .coded-logo,
+  .coded-projects-landing .coded-logo,
+  .coded-category-page .coded-logo,
+  .coded-collaborate-page .coded-logo,
+  .detail-page .coded-logo {
+    width: 175px !important;
+    min-width: 175px !important;
+  }
+
+  .coded-logo .logo-line {
+    font-size: 19px !important;
   }
 }
