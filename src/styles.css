@@ -5637,7 +5637,7 @@ html:has(.coded-projects-landing) {
 @media (min-width: 901px) {
   .projects-screen-bg {
     background-image: var(--projects-bg-desktop) !important;
-    background-size: 100% 100% !important;
+    background-size: cover !important;
     background-position: center center !important;
     background-repeat: no-repeat !important;
   }
@@ -5772,7 +5772,7 @@ body:has(.coded-projects-landing) {
   pointer-events: none !important;
 
   background-image: var(--projects-bg-desktop) !important;
-  background-size: 100% 100% !important;
+  background-size: cover !important;
   background-position: center center !important;
   background-repeat: no-repeat !important;
   background-color: #111 !important;
@@ -5944,7 +5944,7 @@ body:has(.coded-projects-landing)::before {
 @media (max-width: 900px) {
   .projects-screen-bg {
     background-image: var(--projects-bg-mobile) !important;
-    background-size: 100% 100% !important;
+    background-size: cover !important;
   }
 
   .projects-table-title {
@@ -6031,3 +6031,159 @@ body:has(.coded-projects-landing)::before {
     top: 55% !important;
   }
 }
+/* FINAL FIX: PROJECT LANDING PHOTO DISPLAY CORRECTLY */
+
+.coded-projects-landing {
+  --projects-nav-height: 90px;
+
+  height: 100svh !important;
+  min-height: 100svh !important;
+  overflow: hidden !important;
+  background: #111 !important;
+  position: relative !important;
+}
+
+.coded-projects-landing .coded-nav {
+  position: relative !important;
+  z-index: 50 !important;
+  margin: 0 !important;
+}
+
+/* area under navbar */
+.projects-hero-stage {
+  position: relative !important;
+  width: 100% !important;
+  height: calc(100svh - var(--projects-nav-height)) !important;
+  overflow: hidden !important;
+  background: #111 !important;
+}
+
+/* background photo: no stretching */
+.projects-screen-bg {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+
+  background-image: var(--projects-bg-desktop) !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-color: #111 !important;
+}
+
+/* mobile uses mobile photo, also no stretching */
+@media (max-width: 700px) {
+  .projects-screen-bg {
+    background-image: var(--projects-bg-mobile) !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+  }
+}
+
+/* keep text and circles above photo */
+.projects-table-title,
+.coded-projects-landing .category-tiles,
+.coded-projects-landing .category-tile {
+  position: absolute !important;
+  z-index: 5 !important;
+}
+
+/* remove old wrong background layers */
+.coded-projects-landing::before,
+body:has(.coded-projects-landing)::before,
+.coded-projects-landing .project-motion-bg,
+.projects-fixed-bg-image {
+  display: none !important;
+  content: none !important;
+  background-image: none !important;
+}
+
+/* =========================================================
+   FINAL PROJECT LANDING PHOTO SAFE OVERRIDE
+   This is the last rule on purpose.
+   It stops the background from stretching wrong on desktop/mobile.
+   ========================================================= */
+
+.route-transition:has(.coded-projects-landing) {
+  animation: none !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+html:has(.coded-projects-landing),
+body:has(.coded-projects-landing) {
+  overflow: hidden !important;
+}
+
+.coded-projects-landing {
+  --projects-nav-height: 90px;
+
+  position: relative !important;
+  height: 100svh !important;
+  min-height: 100svh !important;
+  overflow: hidden !important;
+  background: #111 !important;
+  color: #fff !important;
+}
+
+.coded-projects-landing .coded-nav {
+  position: relative !important;
+  z-index: 80 !important;
+  margin: 0 !important;
+}
+
+.projects-hero-stage {
+  position: relative !important;
+  width: 100% !important;
+  height: calc(100svh - var(--projects-nav-height)) !important;
+  min-height: calc(100svh - var(--projects-nav-height)) !important;
+  overflow: hidden !important;
+  background: #111 !important;
+}
+
+/* The photo fills the area without squeezing/stretching. */
+.projects-screen-bg {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+
+  background-image: var(--projects-bg-desktop) !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-color: #111 !important;
+}
+
+/* Hide all old duplicate project backgrounds. */
+.coded-projects-landing::before,
+body:has(.coded-projects-landing)::before,
+.coded-projects-landing .project-motion-bg,
+.projects-fixed-bg-image {
+  display: none !important;
+  content: none !important;
+  background-image: none !important;
+}
+
+/* Keep coded title/circles over the photo. */
+.projects-table-title,
+.coded-projects-landing .category-tiles,
+.coded-projects-landing .category-tile {
+  z-index: 10 !important;
+}
+
+/* Mobile uses the mobile image, also with cover to avoid wrong stretching. */
+@media (max-width: 700px) {
+  .coded-projects-landing {
+    --projects-nav-height: 142px;
+  }
+
+  .projects-screen-bg {
+    background-image: var(--projects-bg-mobile) !important;
+    background-size: cover !important;
+    background-position: center center !important;
+  }
+}
+
