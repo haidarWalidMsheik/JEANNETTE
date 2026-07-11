@@ -6905,3 +6905,86 @@ body:has(.coded-projects-landing)::before,
   width: clamp(116px, 9.6vw, 158px) !important;
   height: clamp(116px, 9.6vw, 158px) !important;
 }
+/* FINAL: MOVE PROJECT CIRCLES RIGHT + ADD CLEAR GAP */
+
+/* LAPTOP / DESKTOP */
+@media (min-width: 701px) {
+  .coded-projects-landing .category-tile {
+    width: clamp(120px, 10vw, 160px) !important;
+    height: clamp(120px, 10vw, 160px) !important;
+    padding: 13px !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .coded-projects-landing .category-tile:hover {
+    transform: translate(-50%, -50%) scale(1.04) !important;
+  }
+
+  /* top row */
+  .coded-projects-landing .category-tile:nth-child(1) {
+    left: 67% !important;
+    top: 30% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(2) {
+    left: 84% !important;
+    top: 30% !important;
+  }
+
+  /* bottom row */
+  .coded-projects-landing .category-tile:nth-child(3) {
+    left: 59% !important;
+    top: 72% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(4) {
+    left: 75% !important;
+    top: 72% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(5) {
+    left: 91% !important;
+    top: 72% !important;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+  .coded-projects-landing .category-tile {
+    width: 100px !important;
+    height: 100px !important;
+    padding: 10px !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .coded-projects-landing .category-tile:hover {
+    transform: translate(-50%, -50%) scale(1.03) !important;
+  }
+
+  /* top row moved right with gap */
+  .coded-projects-landing .category-tile:nth-child(1) {
+    left: 44% !important;
+    top: 18% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(2) {
+    left: 76% !important;
+    top: 18% !important;
+  }
+
+  /* bottom row with space between circles */
+  .coded-projects-landing .category-tile:nth-child(3) {
+    left: 23% !important;
+    top: 72% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(4) {
+    left: 55% !important;
+    top: 72% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(5) {
+    left: 86% !important;
+    top: 72% !important;
+  }
+}
