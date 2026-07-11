@@ -5642,75 +5642,93 @@ html:has(.coded-projects-landing) {
     background-repeat: no-repeat !important;
   }
 }
-/* COLLABORATE PAGE: BACKGROUND FILLS ALL PAGE */
+/* FIX COLLABORATE: BACKGROUND FULL PAGE, NO SCREEN LOCK, NAVBAR VISIBLE */
 
-.coded-collaborate-page {
-  --collab-nav-height: 90px;
-
-  position: relative !important;
-  min-height: 100vh !important;
-  background: #111 !important;
+html:has(.coded-collaborate-page),
+body:has(.coded-collaborate-page) {
   overflow-x: hidden !important;
+  overflow-y: auto !important;
 }
 
-/* background starts below navbar and fills the rest */
-.coded-collaborate-page::before {
-  content: "" !important;
-  position: absolute !important;
+.coded-collaborate-page {
+  position: relative !important;
+  min-height: 100svh !important;
+  height: auto !important;
 
-  left: 0 !important;
-  right: 0 !important;
-  top: var(--collab-nav-height) !important;
-  bottom: 0 !important;
-
-  z-index: 0 !important;
-  pointer-events: none !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
 
   background-image: var(--collab-bg) !important;
   background-size: cover !important;
-  background-position: center center !important;
+  background-position: center top !important;
   background-repeat: no-repeat !important;
   background-color: #111 !important;
 }
 
-/* keep navbar and form above background */
-.coded-collaborate-page .coded-nav,
-.coded-collaborate-page .coded-collab-layout,
-.coded-collaborate-page .coded-contact-form {
-  position: relative !important;
-  z-index: 5 !important;
+/* remove the old background layer that was locking/covering things */
+.coded-collaborate-page::before {
+  display: none !important;
+  content: none !important;
+  background-image: none !important;
 }
 
-/* layout fills screen under navbar */
+/* navbar always visible */
+.coded-collaborate-page .coded-nav {
+  position: relative !important;
+  z-index: 100 !important;
+  margin: 0 !important;
+}
+
+/* form area can scroll normally */
 .coded-collab-layout {
-  min-height: calc(100vh - var(--collab-nav-height)) !important;
-  height: calc(100vh - var(--collab-nav-height)) !important;
+  position: relative !important;
+  z-index: 5 !important;
+
+  min-height: calc(100svh - var(--collab-nav-height, 90px)) !important;
+  height: auto !important;
+
+  overflow: visible !important;
 
   display: flex !important;
   align-items: center !important;
   justify-content: flex-end !important;
 
   padding:
-    clamp(24px, 4vw, 70px)
-    clamp(22px, 6vw, 95px)
-    clamp(24px, 4vw, 70px)
-    clamp(18px, 4vw, 70px) !important;
+    clamp(34px, 5vw, 80px)
+    clamp(24px, 6vw, 95px)
+    clamp(60px, 7vw, 100px)
+    clamp(22px, 4vw, 70px) !important;
 }
 
-/* mobile */
+/* mobile: keep navbar, allow page scroll, background fills */
 @media (max-width: 700px) {
   .coded-collaborate-page {
-    --collab-nav-height: 130px;
+    min-height: 100svh !important;
+    height: auto !important;
+    overflow-y: auto !important;
+
+    background-size: cover !important;
+    background-position: center top !important;
   }
 
-  .coded-collaborate-page::before {
-    background-size: cover !important;
-    background-position: center center !important;
+  .coded-collaborate-page .coded-nav {
+    position: relative !important;
+    z-index: 100 !important;
   }
 
   .coded-collab-layout {
-    align-items: flex-end !important;
+    min-height: auto !important;
+    height: auto !important;
+
+    align-items: flex-start !important;
     justify-content: center !important;
-    padding: 30px 16px 34px !important;
+
+    padding: 34px 16px 70px !important;
+    overflow: visible !important;
+  }
+
+  .coded-contact-form {
+    width: 100% !important;
+    max-width: 560px !important;
   }
 }
