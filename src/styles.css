@@ -6999,3 +6999,211 @@ body:has(.coded-projects-landing)::before,
   visibility: hidden !important;
   content: none !important;
 }
+/* FINAL MOBILE RESPONSIVE PROJECT LANDING */
+
+@media (max-width: 700px) {
+  html:has(.coded-projects-landing),
+  body:has(.coded-projects-landing) {
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+  }
+
+  .coded-projects-landing {
+    height: 100svh !important;
+    min-height: 100svh !important;
+    overflow: hidden !important;
+    background: #111 !important;
+  }
+
+  .projects-hero-stage {
+    position: relative !important;
+    width: 100vw !important;
+    height: calc(100svh - var(--projects-nav-height, 135px)) !important;
+    min-height: calc(100svh - var(--projects-nav-height, 135px)) !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .projects-screen-bg {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+
+    background-image:
+      linear-gradient(90deg, rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.42)),
+      var(--projects-bg-mobile) !important;
+
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    z-index: 0 !important;
+  }
+
+  /* remove rectangle / triangle above circles */
+  .coded-projects-landing .tile-arrow,
+  .coded-projects-landing .tile-triangle,
+  .coded-projects-landing .category-tile::before,
+  .coded-projects-landing .category-tile::after {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    content: none !important;
+  }
+
+  /* professional mobile title */
+  .projects-table-title {
+    position: absolute !important;
+    z-index: 12 !important;
+
+    left: 16px !important;
+    top: 28% !important;
+
+    max-width: 255px !important;
+    margin: 0 !important;
+    padding-left: 10px !important;
+
+    font-family: "Arial Black", Impact, Arial, sans-serif !important;
+    font-size: clamp(31px, 8.7vw, 43px) !important;
+    font-weight: 900 !important;
+    line-height: 0.95 !important;
+    letter-spacing: -0.04em !important;
+
+    color: #fff !important;
+    text-transform: uppercase !important;
+    text-align: left !important;
+
+    border-left: 5px solid #ee2126 !important;
+
+    text-shadow:
+      0 3px 0 rgba(0, 0, 0, 0.35),
+      0 12px 24px rgba(0, 0, 0, 0.85) !important;
+  }
+
+  .projects-table-title::after {
+    content: "" !important;
+    display: block !important;
+    width: 84px !important;
+    height: 3px !important;
+    margin-top: 11px !important;
+    background: #ee2126 !important;
+    border-radius: 999px !important;
+    box-shadow: 0 0 18px rgba(238, 33, 38, 0.55) !important;
+  }
+
+  .coded-projects-landing .category-tiles {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 15 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    pointer-events: none !important;
+  }
+
+  .coded-projects-landing .category-tile {
+    position: absolute !important;
+    pointer-events: auto !important;
+
+    width: 94px !important;
+    height: 94px !important;
+    padding: 9px !important;
+
+    border-radius: 50% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .coded-projects-landing .category-tile:hover {
+    transform: translate(-50%, -50%) scale(1.03) !important;
+  }
+
+  /* mobile circle positions: left + clear gap, no touching */
+  .coded-projects-landing .category-tile:nth-child(1) {
+    left: 39% !important;
+    top: 18% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(2) {
+    left: 72% !important;
+    top: 18% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(3) {
+    left: 18% !important;
+    top: 73% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(4) {
+    left: 50% !important;
+    top: 73% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(5) {
+    left: 80% !important;
+    top: 73% !important;
+  }
+
+  .coded-projects-landing .category-tile span {
+    font-family: "Arial Black", Impact, Arial, sans-serif !important;
+    font-weight: 900 !important;
+    font-size: 30px !important;
+    line-height: 0.9 !important;
+    color: #fff !important;
+  }
+
+  .coded-projects-landing .category-tile strong {
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-weight: 850 !important;
+    font-size: 9px !important;
+    line-height: 0.95 !important;
+    color: #fff !important;
+  }
+}
+
+/* VERY SMALL PHONES */
+@media (max-width: 380px) {
+  .projects-table-title {
+    top: 30% !important;
+    max-width: 230px !important;
+    font-size: 30px !important;
+  }
+
+  .coded-projects-landing .category-tile {
+    width: 86px !important;
+    height: 86px !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(1) {
+    left: 38% !important;
+    top: 18% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(2) {
+    left: 72% !important;
+    top: 18% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(3) {
+    left: 17% !important;
+    top: 74% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(4) {
+    left: 50% !important;
+    top: 74% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(5) {
+    left: 82% !important;
+    top: 74% !important;
+  }
+
+  .coded-projects-landing .category-tile span {
+    font-size: 27px !important;
+  }
+
+  .coded-projects-landing .category-tile strong {
+    font-size: 8px !important;
+  }
+}
