@@ -6822,4 +6822,82 @@ body:has(.coded-projects-landing)::before,
     font-size: 9.5px !important;
     line-height: 0.95 !important;
   }
+}/* ===== DESKTOP / LAPTOP ===== */
+@media (min-width: 701px) {
+  .coded-projects-landing .category-tile {
+    width: clamp(122px, 10vw, 166px) !important;
+    height: clamp(122px, 10vw, 166px) !important;
+    padding: 14px !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .coded-projects-landing .category-tile:hover {
+    transform: translate(-50%, -50%) scale(1.04) !important;
+  }
+
+  /* more gap between circles */
+  .coded-projects-landing .category-tile:nth-child(1) {
+    left: 63% !important;
+    top: 28% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(2) {
+    left: 81% !important;
+    top: 28% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(3) {
+    left: 53% !important;
+    top: 73% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(4) {
+    left: 72% !important;
+    top: 73% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(5) {
+    left: 90% !important;
+    top: 73% !important;
+  }
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 700px) {
+  .coded-projects-landing .category-tile {
+    width: 104px !important;
+    height: 104px !important;
+    padding: 10px !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .coded-projects-landing .category-tile:hover {
+    transform: translate(-50%, -50%) scale(1.03) !important;
+  }
+
+  /* more gap between circles on mobile too */
+  .coded-projects-landing .category-tile:nth-child(1) {
+    left: 40% !important;
+    top: 18% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(2) {
+    left: 76% !important;
+    top: 18% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(3) {
+    left: 20% !important;
+    top: 72% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(4) {
+    left: 54% !important;
+    top: 72% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(5) {
+    left: 88% !important;
+    top: 72% !important;
+  }
 }
