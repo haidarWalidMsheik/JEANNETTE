@@ -7387,3 +7387,276 @@ body:has(.coded-projects-landing)::before,
     font-size: 6.5px !important;
   }
 }
+
+/* FINAL CATEGORY PAGE: VERTICAL PROJECT CARDS + SAME MOBILE DESIGN */
+
+.coded-category-page {
+  min-height: 100svh !important;
+  background: #f3f0eb !important;
+  color: #111 !important;
+  overflow-x: hidden !important;
+}
+
+.coded-category-page .coded-nav {
+  background: #070707 !important;
+  border-bottom: 1px solid rgba(238, 33, 38, 0.8) !important;
+}
+
+.category-type-hero {
+  width: min(1180px, calc(100% - 36px)) !important;
+  margin: clamp(36px, 5vw, 70px) auto clamp(26px, 4vw, 54px) !important;
+  text-align: center !important;
+  display: grid !important;
+  justify-items: center !important;
+  gap: 12px !important;
+}
+
+.category-type-hero p {
+  margin: 0 !important;
+  color: #ee2126 !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.16em !important;
+  font-size: clamp(13px, 1.2vw, 18px) !important;
+}
+
+.category-type-hero h1 {
+  margin: 0 !important;
+  color: #111 !important;
+  font-family: "Arial Black", Impact, Arial, sans-serif !important;
+  font-size: clamp(42px, 6vw, 96px) !important;
+  font-weight: 900 !important;
+  line-height: 0.88 !important;
+  letter-spacing: -0.06em !important;
+  text-transform: uppercase !important;
+  max-width: 980px !important;
+}
+
+.category-type-hero span {
+  display: block !important;
+  max-width: 820px !important;
+  color: rgba(17, 17, 17, 0.72) !important;
+  font-size: clamp(15px, 1.35vw, 20px) !important;
+  line-height: 1.5 !important;
+  font-weight: 600 !important;
+}
+
+/* cards go right-to-left, but each card content stays normal */
+.project-type-card-grid {
+  width: min(1220px, calc(100% - 34px)) !important;
+  margin: 0 auto clamp(60px, 7vw, 110px) !important;
+
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 350px)) !important;
+  gap: clamp(22px, 3vw, 42px) !important;
+  justify-content: center !important;
+
+  direction: rtl !important;
+}
+
+.project-type-card {
+  direction: ltr !important;
+  width: 100% !important;
+  min-height: 430px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  background: #111 !important;
+  color: #fff !important;
+  text-decoration: none !important;
+
+  border-radius: 26px !important;
+  overflow: hidden !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow:
+    0 22px 50px rgba(0, 0, 0, 0.18),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04) !important;
+
+  transform: none !important;
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease !important;
+}
+
+.project-type-card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow:
+    0 34px 70px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(238, 33, 38, 0.28) !important;
+}
+
+.project-type-photo {
+  width: 100% !important;
+  height: 270px !important;
+  background: #d7d7d7 !important;
+  overflow: hidden !important;
+}
+
+.project-type-photo img {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  object-fit: cover !important;
+  transition: transform 0.45s ease !important;
+}
+
+.project-type-card:hover .project-type-photo img {
+  transform: scale(1.045) !important;
+}
+
+/* CRUD sentence below photo inside same card */
+.project-type-copy {
+  flex: 1 !important;
+  padding: 22px 22px 26px !important;
+  background: #111 !important;
+  color: #fff !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  gap: 10px !important;
+  text-align: left !important;
+}
+
+.project-type-copy h2 {
+  margin: 0 !important;
+  color: #fff !important;
+  font-family: "Arial Black", Impact, Arial, sans-serif !important;
+  font-size: clamp(24px, 2.1vw, 38px) !important;
+  font-weight: 900 !important;
+  line-height: 0.95 !important;
+  letter-spacing: -0.04em !important;
+  text-transform: uppercase !important;
+}
+
+.project-type-copy p {
+  margin: 0 !important;
+  color: rgba(255, 255, 255, 0.72) !important;
+  font-size: 14.5px !important;
+  line-height: 1.45 !important;
+  font-weight: 500 !important;
+}
+
+.project-type-empty {
+  width: 100% !important;
+  height: 100% !important;
+  display: grid !important;
+  place-items: center !important;
+  color: #111 !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+}
+
+.category-status {
+  width: min(900px, calc(100% - 36px)) !important;
+  margin: 30px auto !important;
+  text-align: center !important;
+  color: #111 !important;
+  font-weight: 800 !important;
+}
+
+/* keep mobile same design as desktop */
+@media (max-width: 700px) {
+  .category-type-hero {
+    width: min(100% - 26px, 620px) !important;
+    margin: 34px auto 28px !important;
+    text-align: center !important;
+    justify-items: center !important;
+  }
+
+  .category-type-hero h1 {
+    font-size: clamp(42px, 13vw, 66px) !important;
+    line-height: 0.88 !important;
+    text-align: center !important;
+  }
+
+  .category-type-hero span {
+    max-width: 92% !important;
+    text-align: center !important;
+    font-size: 15px !important;
+  }
+
+  .project-type-card-grid {
+    width: min(100% - 28px, 430px) !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    justify-content: center !important;
+    gap: 26px !important;
+    direction: rtl !important;
+  }
+
+  .project-type-card {
+    min-height: 410px !important;
+    border-radius: 24px !important;
+  }
+
+  .project-type-photo {
+    height: 250px !important;
+  }
+
+  .project-type-copy {
+    text-align: left !important;
+    padding: 20px 20px 24px !important;
+  }
+
+  .project-type-copy h2 {
+    font-size: 30px !important;
+  }
+
+  .project-type-copy p {
+    font-size: 14px !important;
+  }
+}
+
+/* PROJECT DETAILS: ONLY NAVBAR + BIG PHOTO */
+
+.project-photo-only-page {
+  min-height: 100svh !important;
+  background: #050505 !important;
+  color: #fff !important;
+  overflow-x: hidden !important;
+}
+
+.project-photo-only-page .coded-nav {
+  background: #050505 !important;
+  border-bottom: 1px solid rgba(238, 33, 38, 0.7) !important;
+}
+
+.project-photo-only-stage {
+  width: min(1400px, calc(100% - 34px)) !important;
+  margin: clamp(28px, 4vw, 60px) auto clamp(50px, 6vw, 90px) !important;
+
+  display: grid !important;
+  place-items: center !important;
+}
+
+.project-photo-only-stage img {
+  width: 100% !important;
+  max-height: calc(100svh - 180px) !important;
+  object-fit: contain !important;
+  display: block !important;
+
+  border-radius: 22px !important;
+  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.45) !important;
+}
+
+.project-photo-status {
+  width: min(900px, calc(100% - 34px)) !important;
+  margin: 50px auto !important;
+  text-align: center !important;
+  color: #fff !important;
+  font-weight: 800 !important;
+}
+
+@media (max-width: 700px) {
+  .project-photo-only-stage {
+    width: calc(100% - 20px) !important;
+    margin: 22px auto 50px !important;
+  }
+
+  .project-photo-only-stage img {
+    max-height: calc(100svh - 170px) !important;
+    border-radius: 16px !important;
+  }
+}

@@ -1,82 +1,43 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import SiteNav from "../components/SiteNav";
-import { CATEGORIES, getCategoryBySlug } from "../config/categories";
+import { CATEGORIES } from "../config/categories";
 import { listProjects } from "../services/projectService";
 
-const categoryCopy = {
-  branding: {
+const CATEGORY_TEXT = {
+  Branding: {
     title: "MEET THE BRANDS.",
     text: "Logos, colors, typography, packaging, every detail has a job to do. Here's a collection of brands crafted to be bold, memorable, and impossible to ignore.",
   },
-  "social-media": {
-    title: "FEED WORTHY.",
-    text: "From static posts and carousels to reels, stories, and campaigns, every piece is designed to grab attention and spark engagement.",
+  "Social Media": {
+    title: "SOCIAL THAT SPEAKS.",
+    text: "Posts, campaigns, visuals, and digital stories designed to stop the scroll and make every brand feel alive online.",
   },
-  "web-design": {
-    title: "CLICK AROUND.",
-    text: "Every screen is designed with intention, balancing aesthetics, usability, and seamless experiences that look great and feel even better.",
+  "Web Design": {
+    title: "DIGITAL FIRST IMPRESSIONS.",
+    text: "Clean, expressive, and functional IMPRESSIONS.",
+    text: "Clean web visuals created to guide the eye and make every click feel intentional.",
   },
-  illustrations: {
-    title: "DRAWN TO CREATE.",
-    text: "From playful sketches to polished illustrations, every piece starts with a blank canvas and ends with more personality, color, and imagination.",
+  Illustrations: {
+    title: "DRAWN WITH CHARACTER.",
+    text: "Illustrations and digital drawings shaped with personality, emotion, and a strong visual identity.",
   },
-  layouts: {
-    title: "PAGE BY PAGE.",
-    text: "Behind every great publication is a thoughtful layout, bringing typography, imagery, and composition into pages that flow effortlessly.",
+  Layouts: {
+    title: "EVERY DETAIL IN PLACE.",
+    text: "Editorial layouts, posters, and compositions designed with balance, rhythm, and strong visual structure.",
   },
 };
 
-function ProjectTypeOrbit({ activeSlug }) {
-  const activeIndex = Math.max(0, CATEGORIES.findIndex((item) => item.slug === activeSlug));
-  const activeAngle = CATEGORIES[activeIndex]?.angle ?? -90;
-
-  return (
-    <nav
-      className="project-type-orbit"
-      aria-label="Project types"
-      style={{
-        "--active-angle": `${activeAngle}deg`,
-        "--from-angle": `${activeAngle}deg`,
-      }}
-    >
-      <span className="orbit-glow" aria-hidden="true" />
-      <span className="orbit-ring" aria-hidden="true" />
-      <span className="orbit-track-light" aria-hidden="true" />
-      <span className="orbit-needle" aria-hidden="true" />
-      <span className="orbit-active-dot" aria-hidden="true" />
-      <span className="orbit-top-triangle" aria-hidden="true" />
-
-      <Link className="orbit-center" to="/projects" aria-label="Open projects overview">
-        <small>PROJECT</small>
-        <strong>TYPE</strong>
-      </Link>
-
-      {CATEGORIES.map((item) => (
-        <Link
-          key={item.slug}
-          to={`/category/${item.slug}`}
-          className={`orbit-category${item.slug === activeSlug ? " active" : ""}`}
-          style={{
-            "--angle": `${item.angle}deg`,
-            "--counter-angle": `${-item.angle}deg`,
-          }}
-        >
-          {item.name}
-        </Link>
-      ))}
-    </nav>
-  );
-}
-
 export default function CategoryPage() {
   const { slug } = useParams();
-  const category = getCategoryBySlug(slug);
-  const copy = categoryCopy[category.slug] || categoryCopy.branding;
+
+  const category = useMemo(() => {
+    return CATEGORIES.find((item) => item.slug === slug) || CATEGORIES[0];
+  }, [slug]);
 
   const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let active = true;
@@ -86,7 +47,12 @@ export default function CategoryPage() {
     listProjects()
       .then((items) => {
         if (!active) return;
-        setProjects(items);
+
+        const filtered = items.filter(
+          (project) => project.category === category.name
+        );
+
+        setProjects(filtered);
         setError("");
       })
       .catch((err) => {
@@ -100,70 +66,67 @@ export default function CategoryPage() {
     return () => {
       active = false;
     };
-  }, []);
+  }, [category.name]);
 
-  const categoryProjects = useMemo(
-    () => projects.filter((project) => project.category === category.name),
-    [projects, category.name]
-  );
+  const copy = CATEGORY_TEXT[category.name] || {
+    title: `MEET THE ${category.name}.`,
+    text: "A curated selection of creative work added from the admin dashboard.",
+  };
 
   return (
-    <main className={`coded-category-page category-theme-${category.slug}`}>
-      <SiteNav dark={false} />
+    <main className="coded-category-page">
+      <SiteNav />
 
-      <section className="coded-category-layout">
-        <aside className="category-intro-copy">
-          <p className="category-kicker">{category.name}</p>
-          <h1>{copy.title}</h1>
-          <p>{copy.text}</p>
-        </aside>
+      <section className="category-type-hero">
+        <p>{category.name}</p>
+        <h1>{copy.title}</h1>
+        <span>{copy.text}</span>
+      </section>
 
-        <div className="category-work-area">
-          <ProjectTypeOrbit activeSlug={category.slug} />
+      {loading && <p className="category-status">Loading projects...</p>}
 
-          {loading && <p className="category-message">Loading projects...</p>}
-          {error && <p className="category-message error-text">{error}</p>}
+      {error && <p className="category-status error-text">{error}</p>}
 
-          {!loading && !error && categoryProjects.length === 0 && (
-            <div className="category-empty-state">
-              <strong>No items yet.</strong>
-              <span>
-                The design is ready. Add items from the admin CRUD page and they
-                will appear here automatically.
-              </span>
-            </div>
-          )}
-
-          <div className="coded-project-grid linkedin-project-list">
-            {categoryProjects.map((project) => {
-              const cardImage = project.card_image_url || project.image_url;
+      {!loading && !error && (
+        <section className="project-type-card-grid">
+          {projects.length === 0 ? (
+            <p className="category-status">
+              No projects added yet in this category.
+            </p>
+          ) : (
+            projects.map((project) => {
+              const cardImage =
+                project.card_image_url ||
+                project.image_url ||
+                project.detail_image_url;
 
               return (
                 <Link
-                  className="coded-project-card linkedin-project-card"
                   key={project.id}
+                  className="project-type-card"
                   to={`/project/${project.id}`}
                 >
-                  <div className="coded-project-image linkedin-project-image">
+                  <div className="project-type-photo">
                     {cardImage ? (
                       <img src={cardImage} alt={project.name} />
                     ) : (
-                      <span>Add card photo from CRUD</span>
+                      <div className="project-type-empty">No Image</div>
                     )}
-                    <i />
                   </div>
 
-                  <div className="coded-project-info linkedin-project-info">
-                    <small>{project.type || "Project item"}</small>
+                  <div className="project-type-copy">
                     <h2>{project.name}</h2>
-                    <p>{project.description || "Open this project to see more."}</p>
+
+                    {project.description && (
+                      <p>{project.description}</p>
+                    )}
                   </div>
                 </Link>
               );
-            })}
-          </div>
-        </div>
-      </section>
+            })
+          )}
+        </section>
+      )}
     </main>
   );
 }
