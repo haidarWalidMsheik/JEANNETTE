@@ -67,7 +67,7 @@ export default function ProjectsLanding() {
               key={category.slug}
               to={`/category/${category.slug}`}
             >
-              <i className="tile-arrow" aria-hidden="true" />
+           
 
               <span>{String(index + 1).padStart(2, "0")}</span>
 

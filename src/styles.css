@@ -6988,3 +6988,14 @@ body:has(.coded-projects-landing)::before,
     top: 72% !important;
   }
 }
+/* REMOVE RECTANGLE / TRIANGLE ABOVE PROJECT CIRCLES */
+
+.coded-projects-landing .tile-arrow,
+.coded-projects-landing .tile-triangle,
+.coded-projects-landing .category-tile .tile-arrow,
+.coded-projects-landing .category-tile .tile-triangle {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  content: none !important;
+}
