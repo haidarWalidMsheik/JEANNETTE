@@ -7269,3 +7269,121 @@ body:has(.coded-projects-landing)::before,
     font-size: 7px !important;
   }
 }
+/* FINAL FIX: PROJECT LANDING CIRCLES WITH REAL GAP */
+
+/* LAPTOP / DESKTOP */
+@media (min-width: 701px) {
+  .coded-projects-landing .category-tile {
+    width: clamp(112px, 9vw, 150px) !important;
+    height: clamp(112px, 9vw, 150px) !important;
+    padding: 12px !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .coded-projects-landing .category-tile:hover {
+    transform: translate(-50%, -50%) scale(1.04) !important;
+  }
+
+  /* top row: clear gap */
+  .coded-projects-landing .category-tile:nth-child(1) {
+    left: 60% !important;
+    top: 29% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(2) {
+    left: 80% !important;
+    top: 29% !important;
+  }
+
+  /* bottom row: clear gap */
+  .coded-projects-landing .category-tile:nth-child(3) {
+    left: 52% !important;
+    top: 73% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(4) {
+    left: 70% !important;
+    top: 73% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(5) {
+    left: 88% !important;
+    top: 73% !important;
+  }
+
+  .coded-projects-landing .category-tile span {
+    font-size: clamp(34px, 3.2vw, 56px) !important;
+  }
+
+  .coded-projects-landing .category-tile strong {
+    font-size: clamp(9px, 0.75vw, 13px) !important;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+  .coded-projects-landing .category-tile {
+    width: 76px !important;
+    height: 76px !important;
+    padding: 7px !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .coded-projects-landing .category-tile:hover {
+    transform: translate(-50%, -50%) scale(1.03) !important;
+  }
+
+  /* top row: smaller circles + gap */
+  .coded-projects-landing .category-tile:nth-child(1) {
+    left: 37% !important;
+    top: 18% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(2) {
+    left: 70% !important;
+    top: 18% !important;
+  }
+
+  /* bottom row: smaller circles + gap */
+  .coded-projects-landing .category-tile:nth-child(3) {
+    left: 18% !important;
+    top: 74% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(4) {
+    left: 50% !important;
+    top: 74% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(5) {
+    left: 81% !important;
+    top: 74% !important;
+  }
+
+  .coded-projects-landing .category-tile span {
+    font-size: 22px !important;
+    line-height: 0.9 !important;
+  }
+
+  .coded-projects-landing .category-tile strong {
+    font-size: 7px !important;
+    line-height: 0.95 !important;
+  }
+}
+
+/* EXTRA SMALL PHONES */
+@media (max-width: 380px) {
+  .coded-projects-landing .category-tile {
+    width: 68px !important;
+    height: 68px !important;
+    padding: 6px !important;
+  }
+
+  .coded-projects-landing .category-tile span {
+    font-size: 20px !important;
+  }
+
+  .coded-projects-landing .category-tile strong {
+    font-size: 6.5px !important;
+  }
+}
