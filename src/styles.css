@@ -7207,3 +7207,65 @@ body:has(.coded-projects-landing)::before,
     font-size: 8px !important;
   }
 }
+/* MOBILE: MAKE PROJECT CIRCLES SMALLER */
+@media (max-width: 700px) {
+  .coded-projects-landing .category-tile {
+    width: 82px !important;
+    height: 82px !important;
+    padding: 8px !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .coded-projects-landing .category-tile span {
+    font-size: 25px !important;
+    line-height: 0.9 !important;
+  }
+
+  .coded-projects-landing .category-tile strong {
+    font-size: 8px !important;
+    line-height: 0.95 !important;
+  }
+
+  /* keep good spacing after making them smaller */
+  .coded-projects-landing .category-tile:nth-child(1) {
+    left: 39% !important;
+    top: 18% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(2) {
+    left: 71% !important;
+    top: 18% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(3) {
+    left: 19% !important;
+    top: 73% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(4) {
+    left: 50% !important;
+    top: 73% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(5) {
+    left: 79% !important;
+    top: 73% !important;
+  }
+}
+
+/* EXTRA SMALL PHONES */
+@media (max-width: 380px) {
+  .coded-projects-landing .category-tile {
+    width: 74px !important;
+    height: 74px !important;
+    padding: 7px !important;
+  }
+
+  .coded-projects-landing .category-tile span {
+    font-size: 22px !important;
+  }
+
+  .coded-projects-landing .category-tile strong {
+    font-size: 7px !important;
+  }
+}
