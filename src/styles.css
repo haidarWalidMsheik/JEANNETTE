@@ -5642,3 +5642,75 @@ html:has(.coded-projects-landing) {
     background-repeat: no-repeat !important;
   }
 }
+/* COLLABORATE PAGE: BACKGROUND FILLS ALL PAGE */
+
+.coded-collaborate-page {
+  --collab-nav-height: 90px;
+
+  position: relative !important;
+  min-height: 100vh !important;
+  background: #111 !important;
+  overflow-x: hidden !important;
+}
+
+/* background starts below navbar and fills the rest */
+.coded-collaborate-page::before {
+  content: "" !important;
+  position: absolute !important;
+
+  left: 0 !important;
+  right: 0 !important;
+  top: var(--collab-nav-height) !important;
+  bottom: 0 !important;
+
+  z-index: 0 !important;
+  pointer-events: none !important;
+
+  background-image: var(--collab-bg) !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-color: #111 !important;
+}
+
+/* keep navbar and form above background */
+.coded-collaborate-page .coded-nav,
+.coded-collaborate-page .coded-collab-layout,
+.coded-collaborate-page .coded-contact-form {
+  position: relative !important;
+  z-index: 5 !important;
+}
+
+/* layout fills screen under navbar */
+.coded-collab-layout {
+  min-height: calc(100vh - var(--collab-nav-height)) !important;
+  height: calc(100vh - var(--collab-nav-height)) !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+
+  padding:
+    clamp(24px, 4vw, 70px)
+    clamp(22px, 6vw, 95px)
+    clamp(24px, 4vw, 70px)
+    clamp(18px, 4vw, 70px) !important;
+}
+
+/* mobile */
+@media (max-width: 700px) {
+  .coded-collaborate-page {
+    --collab-nav-height: 130px;
+  }
+
+  .coded-collaborate-page::before {
+    background-size: cover !important;
+    background-position: center center !important;
+  }
+
+  .coded-collab-layout {
+    align-items: flex-end !important;
+    justify-content: center !important;
+    padding: 30px 16px 34px !important;
+  }
+}
