@@ -7784,3 +7784,72 @@ body:has(.coded-projects-landing)::before,
 .detail-link {
   display: none !important;
 }
+/* FINAL PROJECT OPEN PAGE: FULL WIDTH PROJECT IMAGE, NO BAD ZOOM */
+
+.detail-page,
+.project-photo-only-page {
+  min-height: 100svh !important;
+  height: auto !important;
+  background: #000 !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+
+  display: block !important;
+}
+
+.detail-page .coded-nav,
+.project-photo-only-page .coded-nav {
+  position: relative !important;
+  z-index: 50 !important;
+}
+
+/* project image starts directly under navbar */
+.project-photo-only-stage,
+.detail-hero,
+.detail-image-card {
+  width: 100vw !important;
+  height: auto !important;
+  min-height: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  display: block !important;
+  position: relative !important;
+
+  overflow: visible !important;
+  background: #000 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* full-width image, keeps full design, scrollable vertically */
+.project-photo-only-stage img,
+.detail-hero img,
+.detail-image-card img {
+  position: static !important;
+  inset: auto !important;
+
+  width: 100vw !important;
+  height: auto !important;
+
+  max-width: none !important;
+  max-height: none !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+
+  object-fit: contain !important;
+  object-position: center top !important;
+
+  display: block !important;
+  margin: 0 auto !important;
+
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* remove old text/details */
+.detail-copy,
+.detail-link {
+  display: none !important;
+}
