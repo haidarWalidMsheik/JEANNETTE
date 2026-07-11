@@ -6187,3 +6187,26 @@ body:has(.coded-projects-landing)::before,
   }
 }
 
+/* DESKTOP PROJECT PHOTO FIX: SHOW FULL PHOTO ON LAPTOP */
+
+@media (min-width: 701px) {
+  .projects-screen-bg {
+    background-image: var(--projects-bg-desktop) !important;
+
+    /* laptop/desktop: no zoom, no wrong crop */
+    background-size: contain !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-color: #111 !important;
+  }
+}
+
+/* keep mobile working */
+@media (max-width: 700px) {
+  .projects-screen-bg {
+    background-image: var(--projects-bg-mobile) !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+  }
+}
