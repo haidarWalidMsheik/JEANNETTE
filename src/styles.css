@@ -7716,59 +7716,71 @@ body:has(.coded-projects-landing)::before,
     object-fit: contain !important;
   }
 }
-/* FINAL PROJECT DETAILS: FULL SCREEN CLEAN BIG PHOTO */
+/* FORCE PROJECT OPEN PAGE IMAGE TO FILL THE SCREEN */
 
+.detail-page,
 .project-photo-only-page {
-  min-height: 100svh !important;
   height: 100svh !important;
-  background: #050505 !important;
+  min-height: 100svh !important;
+  background: #000 !important;
   overflow: hidden !important;
+
+  display: flex !important;
+  flex-direction: column !important;
 }
 
+.detail-page .coded-nav,
 .project-photo-only-page .coded-nav {
+  flex: 0 0 auto !important;
   position: relative !important;
-  z-index: 20 !important;
-  background: #050505 !important;
-  border-bottom: 1px solid rgba(238, 33, 38, 0.65) !important;
+  z-index: 50 !important;
 }
 
-/* photo takes all remaining screen under navbar */
-.project-photo-only-stage {
+/* full screen area under navbar */
+.project-photo-only-stage,
+.detail-hero,
+.detail-image-card {
+  flex: 1 1 auto !important;
   width: 100vw !important;
-  height: calc(100svh - var(--projects-nav-height, 92px)) !important;
+  height: 100% !important;
+  min-height: 0 !important;
+
   margin: 0 !important;
   padding: 0 !important;
 
-  display: grid !important;
-  place-items: center !important;
+  display: block !important;
+  position: relative !important;
 
-  background: #050505 !important;
   overflow: hidden !important;
+  background: #000 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
-/* clean full-screen image without noisy stretch */
-.project-photo-only-stage img {
+/* make the actual project photo fill all the screen */
+.project-photo-only-stage img,
+.detail-hero img,
+.detail-image-card img {
+  position: absolute !important;
+  inset: 0 !important;
+
   width: 100% !important;
   height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
 
-  object-fit: contain !important;
-  object-position: center center !important;
+  object-fit: cover !important;
+  object-position: center top !important;
 
   display: block !important;
   border-radius: 0 !important;
   box-shadow: none !important;
-  background: #050505 !important;
 }
 
-/* mobile full screen */
-@media (max-width: 700px) {
-  .project-photo-only-stage {
-    height: calc(100svh - var(--projects-nav-height, 135px)) !important;
-  }
-
-  .project-photo-only-stage img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: contain !important;
-  }
+/* remove old text/details if old ProjectDetails code is still there */
+.detail-copy,
+.detail-link {
+  display: none !important;
 }
