@@ -6901,3 +6901,7 @@ body:has(.coded-projects-landing)::before,
     top: 72% !important;
   }
 }
+.coded-projects-landing .category-tile {
+  width: clamp(116px, 9.6vw, 158px) !important;
+  height: clamp(116px, 9.6vw, 158px) !important;
+}
