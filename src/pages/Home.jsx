@@ -39,7 +39,7 @@ export default function Home() {
           alt="Jeannette skills and belief section"
         />
 
-        <Link className="red-pill-button magnetic-button photo-collab-button" to="/projects">
+        <Link className="red-pill-button magnetic-button photo-collab-button" to="/collaborate">
           Let’s Collaborate
         </Link>
       </section>
