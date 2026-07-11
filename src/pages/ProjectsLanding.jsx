@@ -3,6 +3,12 @@ import { Link } from "react-router-dom";
 import SiteNav from "../components/SiteNav";
 import { CATEGORIES } from "../config/categories";
 
+function splitCategoryName(name) {
+  if (name === "Social Media") return ["SOCIAL", "MEDIA"];
+  if (name === "Web Design") return ["WEB", "DESIGN"];
+  return [name.toUpperCase()];
+}
+
 export default function ProjectsLanding() {
   const pageRef = useRef(null);
   const base = import.meta.env.BASE_URL;
@@ -45,9 +51,15 @@ export default function ProjectsLanding() {
     >
       <SiteNav />
 
-      <div className="projects-screen-bg" aria-hidden="true" />
+      <section className="projects-hero-stage">
+        <div className="projects-screen-bg" aria-hidden="true" />
 
-      <section className="projects-landing-layout">
+        <h1 className="projects-table-title">
+          WHAT I BRING TO
+          <br />
+          THE TABLE.
+        </h1>
+
         <div className="category-tiles">
           {CATEGORIES.map((category, index) => (
             <Link
@@ -55,8 +67,15 @@ export default function ProjectsLanding() {
               key={category.slug}
               to={`/category/${category.slug}`}
             >
+              <i className="tile-arrow" aria-hidden="true" />
+
               <span>{String(index + 1).padStart(2, "0")}</span>
-              <strong>{category.name}</strong>
+
+              <strong>
+                {splitCategoryName(category.name).map((part) => (
+                  <small key={part}>{part}</small>
+                ))}
+              </strong>
             </Link>
           ))}
         </div>
