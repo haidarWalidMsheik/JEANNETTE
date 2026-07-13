@@ -9422,4 +9422,31 @@ body:has(.coded-projects-landing)::before,
     rgba(0, 0, 0, 0.75) 95%,
     transparent 100%
   );
+}/* Project Landing buttons use the same color as Collaborate send button */
+.coded-projects-landing .category-tile {
+  background:
+    linear-gradient(
+      110deg,
+      #111 0%,
+      #4a0709 35%,
+      #ee2126 50%,
+      #1a1a1a 72%,
+      #111 100%
+    ) !important;
+
+  background-size: 220% 100% !important;
+  background-position: 0% 50% !important;
+
+  transition:
+    background-position 0.45s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease !important;
+}
+
+.coded-projects-landing .category-tile:hover,
+.coded-projects-landing .category-tile:focus-visible {
+  background-position: 100% 50% !important;
+
+  box-shadow:
+    0 14px 30px rgba(238, 33, 38, 0.24) !important;
 }
