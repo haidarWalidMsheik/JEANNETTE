@@ -8896,3 +8896,222 @@ body:has(.coded-projects-landing)::before,
     transition: none !important;
   }
 }
+
+/* ===== FINAL MOBILE PROJECT FLOW FIX ===== */
+@media (max-width: 700px) {
+  html,
+  body,
+  #root {
+    width: 100% !important;
+    min-height: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .coded-projects-landing {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 100svh !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+  }
+
+  .coded-projects-landing .projects-screen-bg,
+  .coded-projects-landing .project-motion-bg {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+  }
+
+  .coded-projects-landing .projects-hero-stage {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 24px 14px 48px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    gap: 26px !important;
+    overflow: visible !important;
+    z-index: 2 !important;
+  }
+
+  .coded-projects-landing .projects-table-title {
+    position: relative !important;
+    inset: auto !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 4px !important;
+    transform: none !important;
+    z-index: 4 !important;
+  }
+
+  .coded-projects-landing .projects-table-title::before,
+  .coded-projects-landing .projects-table-title::after {
+    width: 100% !important;
+    max-width: 100% !important;
+    font-size: clamp(31px, 9.5vw, 44px) !important;
+    line-height: .88 !important;
+    white-space: nowrap !important;
+  }
+
+  .coded-projects-landing .category-tiles {
+    position: relative !important;
+    inset: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 14px !important;
+    transform: none !important;
+    overflow: visible !important;
+    pointer-events: none !important;
+    z-index: 4 !important;
+  }
+
+  .coded-projects-landing .category-tile,
+  .coded-projects-landing .category-tile:nth-child(1),
+  .coded-projects-landing .category-tile:nth-child(2),
+  .coded-projects-landing .category-tile:nth-child(3),
+  .coded-projects-landing .category-tile:nth-child(4),
+  .coded-projects-landing .category-tile:nth-child(5) {
+    position: relative !important;
+    inset: auto !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    flex: 0 0 auto !important;
+    height: 62px !important;
+    min-height: 62px !important;
+    max-height: 62px !important;
+    margin: 0 !important;
+    padding: 0 34px 0 14px !important;
+    gap: 10px !important;
+    transform: none !important;
+    pointer-events: auto !important;
+
+    background-image: linear-gradient(
+      110deg,
+      #050505 0%,
+      #161616 18%,
+      #4c070a 34%,
+      #ee2126 48%,
+      #70090d 60%,
+      #171717 78%,
+      #050505 100%
+    ) !important;
+    background-size: 320% 100% !important;
+    background-position: 100% 50% !important;
+    animation: mobileProjectGradient 5s linear infinite !important;
+
+    clip-path: polygon(
+      0 0,
+      calc(100% - 24px) 0,
+      100% 50%,
+      calc(100% - 24px) 100%,
+      0 100%
+    ) !important;
+    -webkit-clip-path: polygon(
+      0 0,
+      calc(100% - 24px) 0,
+      100% 50%,
+      calc(100% - 24px) 100%,
+      0 100%
+    ) !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(1) { width: 68% !important; }
+  .coded-projects-landing .category-tile:nth-child(2) { width: 76% !important; }
+  .coded-projects-landing .category-tile:nth-child(3) { width: 84% !important; }
+  .coded-projects-landing .category-tile:nth-child(4) { width: 92% !important; }
+  .coded-projects-landing .category-tile:nth-child(5) { width: 100% !important; }
+
+  .coded-projects-landing .category-tile:hover,
+  .coded-projects-landing .category-tile:focus-visible {
+    transform: translateX(-3px) !important;
+    animation: mobileProjectGradientHover 1s linear infinite !important;
+  }
+
+  .coded-projects-landing .category-tile:active {
+    transform: scale(.98) !important;
+  }
+
+  .coded-projects-landing .category-tile span {
+    flex: 0 0 34px !important;
+    min-width: 34px !important;
+    font-size: 23px !important;
+  }
+
+  .coded-projects-landing .category-tile strong {
+    min-width: 0 !important;
+    font-size: clamp(10px, 3vw, 13px) !important;
+    letter-spacing: .035em !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .coded-projects-landing .projects-hero-stage {
+    padding-inline: 10px !important;
+    gap: 22px !important;
+  }
+
+  .coded-projects-landing .projects-table-title::before,
+  .coded-projects-landing .projects-table-title::after {
+    font-size: clamp(28px, 9.2vw, 38px) !important;
+  }
+
+  .coded-projects-landing .category-tiles {
+    gap: 12px !important;
+  }
+
+  .coded-projects-landing .category-tile,
+  .coded-projects-landing .category-tile:nth-child(1),
+  .coded-projects-landing .category-tile:nth-child(2),
+  .coded-projects-landing .category-tile:nth-child(3),
+  .coded-projects-landing .category-tile:nth-child(4),
+  .coded-projects-landing .category-tile:nth-child(5) {
+    height: 56px !important;
+    min-height: 56px !important;
+    max-height: 56px !important;
+    padding: 0 30px 0 11px !important;
+  }
+
+  .coded-projects-landing .category-tile span {
+    flex-basis: 30px !important;
+    min-width: 30px !important;
+    font-size: 20px !important;
+  }
+
+  .coded-projects-landing .category-tile strong {
+    font-size: 9px !important;
+  }
+}
+
+@keyframes mobileProjectGradient {
+  from { background-position: 100% 50%; }
+  to   { background-position: -130% 50%; }
+}
+
+@keyframes mobileProjectGradientHover {
+  from { background-position: 100% 50%; }
+  to   { background-position: -220% 50%; }
+}
