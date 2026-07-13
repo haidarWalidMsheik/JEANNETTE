@@ -2,6 +2,14 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: "Acumin ExtraCondensed Black";
+  src: url("/fonts/AcuminVariableConcept-ExtraCondensedBlack.woff2")
+    format("woff2");
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+}
 html,
 body,
 #root {
@@ -7852,4 +7860,416 @@ body:has(.coded-projects-landing)::before,
 .detail-copy,
 .detail-link {
   display: none !important;
+}
+/* =========================================================
+   FINAL WEBSITE OVERRIDES
+   ========================================================= */
+
+/* ---------- ACUMIN FONT ---------- */
+
+.projects-table-title,
+.category-type-hero h1,
+.project-type-copy h2,
+.coded-logo,
+.animated-nav-link,
+.admin-access-pill {
+  font-family:
+    "Acumin ExtraCondensed Black",
+    "Arial Narrow",
+    Impact,
+    sans-serif !important;
+}
+
+/* ---------- HOME: NAVBAR ATTACHED TO FIRST IMAGE ---------- */
+
+.photo-home-page {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.hero-photo-section {
+  position: relative !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 0 !important;
+  line-height: 0 !important;
+}
+
+.hero-photo-section .photo-section-image {
+  display: block !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.hero-nav-layer {
+  position: absolute !important;
+  inset: 0 0 auto 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: normal !important;
+}
+
+.hero-nav-layer .coded-nav {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* ---------- COLLABORATE: NOTHING VISIBLE BEHIND FORM ---------- */
+
+.coded-contact-form {
+  position: relative !important;
+  isolation: isolate !important;
+
+  background: #0d0d0d !important;
+  background-image: none !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.13) !important;
+  border-radius: 24px !important;
+
+  box-shadow:
+    0 30px 70px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+
+  overflow: hidden !important;
+}
+
+.coded-contact-form::before,
+.coded-contact-form::after {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+}
+
+.coded-contact-form label,
+.coded-contact-form input,
+.coded-contact-form textarea,
+.coded-contact-form button,
+.coded-contact-form .contact-error-coded {
+  position: relative !important;
+  z-index: 3 !important;
+}
+
+/* ---------- PROJECT LANDING TITLE: REMOVE LEFT LINE ---------- */
+
+.projects-table-title {
+  padding-left: 0 !important;
+  border-left: 0 !important;
+
+  font-family:
+    "Acumin ExtraCondensed Black",
+    "Arial Narrow",
+    Impact,
+    sans-serif !important;
+
+  font-weight: 900 !important;
+  letter-spacing: -0.025em !important;
+}
+
+.projects-table-title::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* remove circle top shapes too */
+.coded-projects-landing .tile-arrow,
+.coded-projects-landing .tile-triangle {
+  display: none !important;
+}
+
+/* ---------- PROJECT CIRCLES: DESKTOP ---------- */
+
+@media (min-width: 701px) {
+  .coded-projects-landing .category-tile {
+    width: clamp(112px, 9.2vw, 150px) !important;
+    height: clamp(112px, 9.2vw, 150px) !important;
+    padding: 11px !important;
+
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .coded-projects-landing .category-tile:hover {
+    transform: translate(-50%, -50%) scale(1.035) !important;
+  }
+
+  /* top row: moved left with safe gap */
+  .coded-projects-landing .category-tile:nth-child(1) {
+    left: 58% !important;
+    top: 28% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(2) {
+    left: 76% !important;
+    top: 28% !important;
+  }
+
+  /* bottom row: moved left with safe gap */
+  .coded-projects-landing .category-tile:nth-child(3) {
+    left: 50% !important;
+    top: 72% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(4) {
+    left: 68% !important;
+    top: 72% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(5) {
+    left: 86% !important;
+    top: 72% !important;
+  }
+}
+
+/* ---------- PROJECT CIRCLES: MOBILE ---------- */
+
+@media (max-width: 700px) {
+  .coded-projects-landing .category-tile {
+    width: 72px !important;
+    height: 72px !important;
+    padding: 6px !important;
+
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .coded-projects-landing .category-tile:hover {
+    transform: translate(-50%, -50%) scale(1.025) !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(1) {
+    left: 36% !important;
+    top: 18% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(2) {
+    left: 68% !important;
+    top: 18% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(3) {
+    left: 17% !important;
+    top: 73% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(4) {
+    left: 48% !important;
+    top: 73% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(5) {
+    left: 78% !important;
+    top: 73% !important;
+  }
+
+  .coded-projects-landing .category-tile span {
+    font-size: 21px !important;
+  }
+
+  .coded-projects-landing .category-tile strong {
+    font-size: 6.5px !important;
+  }
+
+  .projects-table-title {
+    padding-left: 0 !important;
+    border-left: 0 !important;
+  }
+}
+
+/* ---------- PROJECT DETAIL: REMOVE LARGE BLACK SPACE ---------- */
+
+.detail-page,
+.project-photo-only-page {
+  min-height: 100svh !important;
+  height: auto !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background: #000 !important;
+
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+
+  display: block !important;
+}
+
+.project-photo-only-stage,
+.detail-image-card,
+.detail-hero {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background: #000 !important;
+
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+
+.project-photo-only-stage img,
+.detail-image-card img,
+.detail-hero img {
+  position: static !important;
+
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+
+  max-width: none !important;
+  max-height: none !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+
+  margin: 0 !important;
+
+  object-fit: contain !important;
+  object-position: center top !important;
+
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.detail-copy,
+.detail-link {
+  display: none !important;
+}
+
+/* reduce any remaining black area under image */
+.project-photo-only-page {
+  padding-bottom: 0 !important;
+}
+
+.project-photo-only-stage {
+  margin-bottom: 0 !important;
+}
+
+.project-photo-only-stage img {
+  vertical-align: bottom !important;
+}
+
+/* ---------- NAVBAR: SAME ANIMATION ON EVERY PAGE ---------- */
+
+.coded-nav {
+  position: relative !important;
+  overflow: visible !important;
+
+  animation: finalNavbarEnter 700ms cubic-bezier(.18, .88, .24, 1) both !important;
+
+  border-radius: 0 !important;
+
+  transition:
+    background 0.35s ease,
+    transform 0.35s ease,
+    box-shadow 0.35s ease !important;
+}
+
+@keyframes finalNavbarEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(-18px);
+    filter: blur(8px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* loading line on every navbar */
+.coded-nav::after {
+  content: "" !important;
+
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+
+  height: 3px !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      #ee2126 32%,
+      #ffffff 50%,
+      #ee2126 68%,
+      transparent 100%
+    ) !important;
+
+  background-size: 220% 100% !important;
+
+  box-shadow:
+    0 0 10px rgba(238, 33, 38, 0.8),
+    0 0 22px rgba(238, 33, 38, 0.35) !important;
+
+  animation: finalNavbarLine 2.1s linear infinite !important;
+
+  pointer-events: none !important;
+}
+
+@keyframes finalNavbarLine {
+  from {
+    background-position: 220% 0;
+  }
+
+  to {
+    background-position: -220% 0;
+  }
+}
+
+/* project detail navbar: completely straight edges */
+.detail-page .coded-nav,
+.project-photo-only-page .coded-nav,
+.detail-page .coded-nav-glass,
+.project-photo-only-page .coded-nav-glass {
+  width: 100% !important;
+  max-width: none !important;
+
+  margin: 0 !important;
+
+  border-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+
+  background: #050505 !important;
+
+  box-shadow: none !important;
+}
+
+/* navbar link motion */
+.animated-nav-link {
+  transition:
+    color 0.28s ease,
+    transform 0.32s cubic-bezier(.18, .88, .24, 1),
+    letter-spacing 0.32s ease !important;
+}
+
+.animated-nav-link:hover,
+.animated-nav-link:focus-visible,
+.animated-nav-link.is-active {
+  transform: translateY(-3px) scale(1.06) !important;
+}
+
+/* keep navbar straight on mobile project detail */
+@media (max-width: 760px) {
+  .detail-page .coded-nav,
+  .project-photo-only-page .coded-nav,
+  .detail-page .coded-nav-glass,
+  .project-photo-only-page .coded-nav-glass {
+    width: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
 }
