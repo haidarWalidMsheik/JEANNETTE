@@ -8559,3 +8559,340 @@ body:has(.coded-projects-landing)::before,
   object-fit: contain !important;
   image-rendering: auto !important;
 }
+/* =========================================================
+   FINAL EDIT — 2026-07-13
+   1) About image fully visible on mobile
+   2) Project types become horizontal, thin, stacked bars
+   3) Every lower bar is longer than the bar above it
+   4) Sharp pointed finish at the end of every bar
+   5) "WHAT I BRING TO / THE TABLE." is always two lines
+   Keep this block at the very end of styles.css.
+   ========================================================= */
+
+/* ---------- ABOUT: FULL PHOTO ON MOBILE ---------- */
+@media (max-width: 700px) {
+  .coded-about-section {
+    grid-template-columns: minmax(0, 1fr) !important;
+    align-items: start !important;
+    overflow: visible !important;
+  }
+
+  .coded-about-section .about-girl-stage {
+    width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    place-items: center !important;
+  }
+
+  .coded-about-section .girl-second-photo,
+  .coded-about-section .rotate-second-girl-once {
+    position: relative !important;
+    inset: auto !important;
+    display: block !important;
+
+    width: min(100%, 430px) !important;
+    height: auto !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: 100% !important;
+    max-height: none !important;
+
+    margin: 0 auto !important;
+    object-fit: contain !important;
+    object-position: center top !important;
+
+    clip-path: none !important;
+    -webkit-clip-path: none !important;
+    transform: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* ---------- PROJECT LANDING: TWO-LINE TITLE ---------- */
+.projects-table-title {
+  width: auto !important;
+  max-width: none !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  line-height: 1 !important;
+  text-shadow: none !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+.projects-table-title::before,
+.projects-table-title::after {
+  position: static !important;
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: #fff !important;
+  background: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  font-family:
+    "Acumin ExtraCondensed Black",
+    "Arial Narrow",
+    Impact,
+    sans-serif !important;
+  font-size: clamp(42px, 4.35vw, 78px) !important;
+  font-weight: 900 !important;
+  line-height: 0.86 !important;
+  letter-spacing: -0.035em !important;
+  white-space: nowrap !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 14px 30px rgba(0, 0, 0, 0.72) !important;
+}
+
+.projects-table-title::before {
+  content: "WHAT I BRING TO" !important;
+}
+
+.projects-table-title::after {
+  content: "THE TABLE." !important;
+}
+
+/* ---------- PROJECT LANDING: SHARED BAR STYLE ---------- */
+.coded-projects-landing .category-tiles {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none !important;
+  z-index: 15 !important;
+}
+
+.coded-projects-landing .category-tile {
+  position: absolute !important;
+  left: auto !important;
+  bottom: auto !important;
+  pointer-events: auto !important;
+
+  height: clamp(50px, 4.7vw, 68px) !important;
+  min-height: 0 !important;
+  aspect-ratio: auto !important;
+  padding: 0 clamp(30px, 3vw, 48px) 0 clamp(15px, 1.6vw, 24px) !important;
+
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: clamp(12px, 1.25vw, 22px) !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  border-radius: 0 !important;
+  background:
+    linear-gradient(90deg, rgba(238, 33, 38, 0.92) 0 5px, transparent 5px),
+    linear-gradient(100deg, rgba(14, 14, 14, 0.94), rgba(50, 50, 50, 0.82)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 14px 34px rgba(0, 0, 0, 0.34) !important;
+
+  clip-path: polygon(
+    0 0,
+    calc(100% - 28px) 0,
+    100% 50%,
+    calc(100% - 28px) 100%,
+    0 100%
+  ) !important;
+  -webkit-clip-path: polygon(
+    0 0,
+    calc(100% - 28px) 0,
+    100% 50%,
+    calc(100% - 28px) 100%,
+    0 100%
+  ) !important;
+
+  overflow: hidden !important;
+  text-align: left !important;
+  transform: translateY(-50%) !important;
+  transition:
+    transform 320ms cubic-bezier(.2, .86, .2, 1),
+    filter 320ms ease,
+    box-shadow 320ms ease !important;
+}
+
+.coded-projects-landing .category-tile::before,
+.coded-projects-landing .category-tile::after,
+.coded-projects-landing .tile-arrow,
+.coded-projects-landing .tile-triangle {
+  display: none !important;
+  content: none !important;
+}
+
+.coded-projects-landing .category-tile:hover,
+.coded-projects-landing .category-tile:focus-visible {
+  transform: translateY(-50%) translateX(-9px) !important;
+  filter: brightness(1.12) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 20px 42px rgba(0, 0, 0, 0.44),
+    0 0 0 3px rgba(238, 33, 38, 0.13) !important;
+  outline: none !important;
+}
+
+.coded-projects-landing .category-tile span {
+  flex: 0 0 auto !important;
+  align-self: auto !important;
+  min-width: 1.2em !important;
+
+  color: rgba(255, 255, 255, 0.62) !important;
+  font-family:
+    "Acumin ExtraCondensed Black",
+    "Arial Narrow",
+    Impact,
+    sans-serif !important;
+  font-size: clamp(25px, 2.45vw, 42px) !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  letter-spacing: -0.04em !important;
+  text-align: center !important;
+  text-shadow: none !important;
+}
+
+.coded-projects-landing .category-tile strong {
+  position: relative !important;
+  flex: 1 1 auto !important;
+  max-width: none !important;
+
+  color: #fff !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: clamp(13px, 1.18vw, 20px) !important;
+  font-weight: 850 !important;
+  line-height: 1 !important;
+  letter-spacing: 0.065em !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  text-shadow: 0 6px 16px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* ---------- DESKTOP / LAPTOP BAR POSITIONS ---------- */
+@media (min-width: 701px) {
+  .projects-table-title {
+    position: absolute !important;
+    left: clamp(28px, 4.7vw, 86px) !important;
+    top: 35% !important;
+    z-index: 16 !important;
+  }
+
+  .coded-projects-landing .category-tile {
+    right: clamp(26px, 4.2vw, 76px) !important;
+  }
+
+  /* Each bar becomes longer from top to bottom. */
+  .coded-projects-landing .category-tile:nth-child(1) {
+    top: 16% !important;
+    width: clamp(270px, 27vw, 420px) !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(2) {
+    top: 30% !important;
+    width: clamp(310px, 31vw, 480px) !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(3) {
+    top: 44% !important;
+    width: clamp(350px, 35vw, 540px) !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(4) {
+    top: 58% !important;
+    width: clamp(390px, 39vw, 600px) !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(5) {
+    top: 72% !important;
+    width: clamp(430px, 43vw, 660px) !important;
+  }
+}
+
+/* ---------- MOBILE BAR POSITIONS ---------- */
+@media (max-width: 700px) {
+  .coded-projects-landing {
+    overflow: hidden !important;
+  }
+
+  .projects-table-title {
+    position: absolute !important;
+    left: 18px !important;
+    top: 4% !important;
+    z-index: 16 !important;
+  }
+
+  .projects-table-title::before,
+  .projects-table-title::after {
+    font-size: clamp(31px, 8.7vw, 45px) !important;
+    line-height: 0.88 !important;
+  }
+
+  .coded-projects-landing .category-tile {
+    right: 14px !important;
+    height: 46px !important;
+    padding: 0 31px 0 13px !important;
+    gap: 10px !important;
+
+    clip-path: polygon(
+      0 0,
+      calc(100% - 22px) 0,
+      100% 50%,
+      calc(100% - 22px) 100%,
+      0 100%
+    ) !important;
+    -webkit-clip-path: polygon(
+      0 0,
+      calc(100% - 22px) 0,
+      100% 50%,
+      calc(100% - 22px) 100%,
+      0 100%
+    ) !important;
+  }
+
+  .coded-projects-landing .category-tile span {
+    font-size: 23px !important;
+  }
+
+  .coded-projects-landing .category-tile strong {
+    font-size: clamp(10px, 3vw, 13px) !important;
+    letter-spacing: 0.045em !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(1) {
+    top: 35% !important;
+    width: 64vw !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(2) {
+    top: 47% !important;
+    width: 70vw !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(3) {
+    top: 59% !important;
+    width: 76vw !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(4) {
+    top: 71% !important;
+    width: 82vw !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(5) {
+    top: 83% !important;
+    width: 88vw !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coded-projects-landing .category-tile {
+    transition: none !important;
+  }
+}
