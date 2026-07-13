@@ -9115,3 +9115,130 @@ body:has(.coded-projects-landing)::before,
   from { background-position: 100% 50%; }
   to   { background-position: -220% 50%; }
 }
+/* =========================================================
+   FINAL HOME FIRST IMAGE — FULL DISPLAY ON EVERY SCREEN
+   Paste this at the absolute end of styles.css
+   ========================================================= */
+
+.photo-home-page {
+  width: 100% !important;
+  min-height: 100svh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+}
+
+/* The navbar and first image belong to the same section */
+.photo-home-page .hero-photo-section {
+  position: relative !important;
+  inset: auto !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 0 !important;
+
+  overflow: visible !important;
+  background: #050505 !important;
+  line-height: 0 !important;
+}
+
+/* Navbar stays ABOVE the image — never over it */
+.photo-home-page .hero-nav-layer {
+  position: relative !important;
+  inset: auto !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+
+  order: 1 !important;
+
+  width: 100% !important;
+  height: auto !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  transform: none !important;
+  line-height: normal !important;
+  z-index: 50 !important;
+}
+
+/* No space below navbar */
+.photo-home-page .hero-nav-layer .coded-nav {
+  position: relative !important;
+
+  width: 100% !important;
+  max-width: none !important;
+
+  margin: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* First Home image: show the COMPLETE image */
+.photo-home-page .hero-photo-section > .photo-section-image,
+.photo-home-page .hero-photo-section .photo-section-image {
+  position: relative !important;
+  inset: auto !important;
+
+  order: 2 !important;
+
+  display: block !important;
+
+  width: 100% !important;
+  height: auto !important;
+
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 100% !important;
+  max-height: none !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  object-fit: contain !important;
+  object-position: center top !important;
+
+  clip-path: none !important;
+  -webkit-clip-path: none !important;
+
+  transform: none !important;
+  vertical-align: top !important;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .photo-home-page .hero-photo-section {
+    width: 100vw !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  .photo-home-page .hero-nav-layer .coded-nav {
+    padding:
+      max(10px, env(safe-area-inset-top))
+      14px
+      10px !important;
+  }
+
+  .photo-home-page .hero-photo-section > .photo-section-image,
+  .photo-home-page .hero-photo-section .photo-section-image {
+    width: 100vw !important;
+    height: auto !important;
+
+    max-width: 100vw !important;
+    max-height: none !important;
+
+    object-fit: contain !important;
+    object-position: center top !important;
+  }
+}
