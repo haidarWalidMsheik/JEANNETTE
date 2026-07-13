@@ -9323,3 +9323,103 @@ body:has(.coded-projects-landing)::before,
     background: #1a1a1a !important;
   }
 }
+/* Collaborate inputs: subtle red/black animation only */
+.coded-contact-form input,
+.coded-contact-form textarea {
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background-position 0.45s ease,
+    transform 0.25s ease;
+}
+
+.coded-contact-form input:hover,
+.coded-contact-form textarea:hover,
+.coded-contact-form input:focus,
+.coded-contact-form textarea:focus {
+  background:
+    linear-gradient(
+      110deg,
+      #151515 0%,
+      #260405 35%,
+      #ee2126 50%,
+      #1a1a1a 72%,
+      #111 100%
+    );
+  background-size: 220% 100%;
+  background-position: 100% 50%;
+
+  border-color: #ee2126;
+  box-shadow:
+    0 0 0 3px rgba(238, 33, 38, 0.12),
+    0 12px 26px rgba(0, 0, 0, 0.3);
+
+  transform: translateY(-1px);
+}
+
+/* Collaborate send button: same shape, only color animation */
+.coded-send-button {
+  background:
+    linear-gradient(
+      110deg,
+      #111 0%,
+      #4a0709 35%,
+      #ee2126 50%,
+      #1a1a1a 72%,
+      #111 100%
+    );
+  background-size: 220% 100%;
+  transition:
+    background-position 0.45s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.coded-send-button:hover,
+.coded-send-button:focus-visible {
+  background-position: 100% 50%;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(238, 33, 38, 0.24);
+}
+
+/* Project buttons: keep original design, only make them slightly longer */
+@media (min-width: 1101px) {
+  .coded-projects-landing .category-tile:nth-child(1) {
+    width: 31vw;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(2) {
+    width: 35vw;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(3) {
+    width: 39vw;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(4) {
+    width: 43vw;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(5) {
+    width: 47vw;
+  }
+}
+
+/* Small fade only at the pointed end */
+.coded-projects-landing .category-tile {
+  mask-image: linear-gradient(
+    90deg,
+    #000 0%,
+    #000 88%,
+    rgba(0, 0, 0, 0.75) 95%,
+    transparent 100%
+  );
+
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    #000 0%,
+    #000 88%,
+    rgba(0, 0, 0, 0.75) 95%,
+    transparent 100%
+  );
+}
