@@ -8549,3 +8549,13 @@ body:has(.coded-projects-landing)::before,
     max-width: 760px !important;
   }
 }
+
+.project-photo-only-stage img {
+  display: block !important;
+  width: auto !important;
+  max-width: min(92vw, 1400px) !important;
+  height: auto !important;
+  margin: 0 auto !important;
+  object-fit: contain !important;
+  image-rendering: auto !important;
+}
