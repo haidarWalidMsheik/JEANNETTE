@@ -8273,3 +8273,279 @@ body:has(.coded-projects-landing)::before,
     border-radius: 0 !important;
   }
 }
+/* =========================================================
+   FINAL FIXES:
+   1) MOBILE HOME FIRST PHOTO FULLY VISIBLE
+   2) PROJECT CIRCLES WITH CLEAR GAP
+   3) SOLID COLLABORATE FORM
+   4) PROJECT DETAIL IMAGE LESS PIXELATED
+   ========================================================= */
+
+
+/* ---------- 1. MOBILE HOME FIRST PHOTO ---------- */
+
+@media (max-width: 700px) {
+  .hero-photo-section {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+
+    background: #111 !important;
+  }
+
+  .hero-photo-section .photo-section-image {
+    position: static !important;
+
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+
+    max-width: none !important;
+    max-height: none !important;
+
+    object-fit: contain !important;
+    object-position: center top !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .hero-nav-layer {
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
+
+    width: 100% !important;
+    z-index: 30 !important;
+  }
+}
+
+
+/* ---------- 2. PROJECT LANDING CIRCLE GAP ---------- */
+
+/* desktop and laptop */
+@media (min-width: 701px) {
+  .coded-projects-landing .category-tile {
+    width: clamp(108px, 8.8vw, 145px) !important;
+    height: clamp(108px, 8.8vw, 145px) !important;
+
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .coded-projects-landing .category-tile:hover {
+    transform: translate(-50%, -50%) scale(1.035) !important;
+  }
+
+  /* top row */
+  .coded-projects-landing .category-tile:nth-child(1) {
+    left: 58% !important;
+    top: 27% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(2) {
+    left: 77% !important;
+    top: 27% !important;
+  }
+
+  /* bottom row */
+  .coded-projects-landing .category-tile:nth-child(3) {
+    left: 49% !important;
+    top: 72% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(4) {
+    left: 68% !important;
+    top: 72% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(5) {
+    left: 87% !important;
+    top: 72% !important;
+  }
+}
+
+/* mobile */
+@media (max-width: 700px) {
+  .coded-projects-landing .category-tile {
+    width: 66px !important;
+    height: 66px !important;
+    padding: 6px !important;
+
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .coded-projects-landing .category-tile:hover {
+    transform: translate(-50%, -50%) scale(1.025) !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(1) {
+    left: 35% !important;
+    top: 18% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(2) {
+    left: 68% !important;
+    top: 18% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(3) {
+    left: 15% !important;
+    top: 73% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(4) {
+    left: 48% !important;
+    top: 73% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(5) {
+    left: 80% !important;
+    top: 73% !important;
+  }
+
+  .coded-projects-landing .category-tile span {
+    font-size: 19px !important;
+  }
+
+  .coded-projects-landing .category-tile strong {
+    font-size: 6px !important;
+  }
+}
+
+
+/* ---------- 3. COLLABORATE FORM: NOTHING BEHIND INPUTS ---------- */
+
+.coded-contact-form {
+  position: relative !important;
+  isolation: isolate !important;
+
+  background: #0b0b0b !important;
+  background-image: none !important;
+
+  opacity: 1 !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.13) !important;
+  border-radius: 24px !important;
+
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, 0.62),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+
+  overflow: hidden !important;
+}
+
+.coded-contact-form::before,
+.coded-contact-form::after {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+}
+
+.coded-contact-form label,
+.coded-contact-form input,
+.coded-contact-form textarea,
+.coded-contact-form button,
+.coded-contact-form .contact-error-coded {
+  position: relative !important;
+  z-index: 3 !important;
+}
+
+.coded-contact-form input,
+.coded-contact-form textarea {
+  background: #151515 !important;
+  background-image: none !important;
+
+  color: #fff !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 14px !important;
+
+  box-shadow: none !important;
+}
+
+
+/* ---------- 4. PROJECT DETAIL: SHARPER, SLIGHTLY SMALLER IMAGE ---------- */
+
+.project-photo-only-page,
+.detail-page {
+  min-height: 100svh !important;
+  height: auto !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+
+  background: #000 !important;
+
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+.project-photo-only-stage,
+.detail-image-card,
+.detail-hero {
+  width: 100% !important;
+  height: auto !important;
+
+  margin: 0 !important;
+  padding: clamp(14px, 2vw, 28px) !important;
+
+  display: grid !important;
+  place-items: start center !important;
+
+  background: #000 !important;
+
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+.project-photo-only-stage img,
+.detail-image-card img,
+.detail-hero img {
+  position: static !important;
+
+  display: block !important;
+
+  width: min(92vw, 1180px) !important;
+  height: auto !important;
+
+  max-width: 1180px !important;
+  max-height: none !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+
+  margin: 0 auto !important;
+
+  object-fit: contain !important;
+  object-position: center top !important;
+
+  image-rendering: auto !important;
+
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* smaller on mobile to preserve sharpness */
+@media (max-width: 700px) {
+  .project-photo-only-stage,
+  .detail-image-card,
+  .detail-hero {
+    padding: 10px !important;
+  }
+
+  .project-photo-only-stage img,
+  .detail-image-card img,
+  .detail-hero img {
+    width: min(96vw, 760px) !important;
+    max-width: 760px !important;
+  }
+}
