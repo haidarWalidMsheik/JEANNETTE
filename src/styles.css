@@ -9323,3 +9323,483 @@ body:has(.coded-projects-landing)::before,
     background: #1a1a1a !important;
   }
 }
+/* =========================================================
+   FINAL COLLABORATE + PROJECT BUTTON DESIGN
+   Keep this block at the absolute bottom of styles.css
+   ========================================================= */
+
+/* =========================================================
+   1. COLLABORATE INPUTS
+   Animated red/black gradient on hover and focus
+   ========================================================= */
+
+.coded-collaborate-page .coded-contact-form input,
+.coded-collaborate-page .coded-contact-form textarea,
+.coded-collaborate-page .coded-contact-form select {
+  position: relative !important;
+
+  width: 100% !important;
+  color: #fff !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 16px !important;
+
+  background:
+    linear-gradient(
+      110deg,
+      #111 0%,
+      #1d1d1d 28%,
+      #350507 48%,
+      #171717 70%,
+      #111 100%
+    ) !important;
+
+  background-size: 260% 100% !important;
+  background-position: 100% 50% !important;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 12px 28px rgba(0, 0, 0, 0.28) !important;
+
+  outline: none !important;
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    filter 0.3s ease !important;
+}
+
+/* Input hover */
+
+.coded-collaborate-page .coded-contact-form input:hover,
+.coded-collaborate-page .coded-contact-form textarea:hover,
+.coded-collaborate-page .coded-contact-form select:hover {
+  border-color: rgba(238, 33, 38, 0.6) !important;
+
+  background:
+    linear-gradient(
+      110deg,
+      #080808 0%,
+      #280405 28%,
+      #ee2126 48%,
+      #430608 65%,
+      #080808 100%
+    ) !important;
+
+  background-size: 300% 100% !important;
+
+  animation: collaborateInputFlow 2.4s linear infinite !important;
+
+  transform: translateY(-2px) !important;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 16px 34px rgba(0, 0, 0, 0.4),
+    0 0 18px rgba(238, 33, 38, 0.14) !important;
+}
+
+/* Input focus */
+
+.coded-collaborate-page .coded-contact-form input:focus,
+.coded-collaborate-page .coded-contact-form textarea:focus,
+.coded-collaborate-page .coded-contact-form select:focus {
+  border-color: #ee2126 !important;
+
+  background:
+    linear-gradient(
+      110deg,
+      #050505 0%,
+      #450709 25%,
+      #ee2126 47%,
+      #5f080b 64%,
+      #050505 100%
+    ) !important;
+
+  background-size: 320% 100% !important;
+
+  animation: collaborateInputFlow 1.15s linear infinite !important;
+
+  transform: translateY(-3px) scale(1.01) !important;
+
+  box-shadow:
+    0 0 0 3px rgba(238, 33, 38, 0.14),
+    0 18px 38px rgba(0, 0, 0, 0.46),
+    0 0 25px rgba(238, 33, 38, 0.22) !important;
+}
+
+.coded-collaborate-page .coded-contact-form input::placeholder,
+.coded-collaborate-page .coded-contact-form textarea::placeholder {
+  color: rgba(255, 255, 255, 0.58) !important;
+  transition: color 0.25s ease !important;
+}
+
+.coded-collaborate-page .coded-contact-form input:focus::placeholder,
+.coded-collaborate-page .coded-contact-form textarea:focus::placeholder {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+
+/* =========================================================
+   2. COLLABORATE SEND BUTTON
+   Red/black moving gradient
+   ========================================================= */
+
+.coded-collaborate-page .coded-send-button {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: hidden !important;
+
+  color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+
+  background:
+    linear-gradient(
+      110deg,
+      #050505 0%,
+      #320506 25%,
+      #ee2126 48%,
+      #4e0709 66%,
+      #050505 100%
+    ) !important;
+
+  background-size: 300% 100% !important;
+  background-position: 100% 50% !important;
+
+  animation: collaborateButtonIdle 5s linear infinite !important;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 18px 38px rgba(0, 0, 0, 0.42),
+    0 0 20px rgba(238, 33, 38, 0.16) !important;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    filter 0.3s ease !important;
+}
+
+.coded-collaborate-page .coded-send-button:hover,
+.coded-collaborate-page .coded-send-button:focus-visible {
+  animation: collaborateButtonHover 1s linear infinite !important;
+
+  transform: translateY(-5px) scale(1.035) !important;
+  filter: brightness(1.14) saturate(1.2) !important;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.26),
+    0 24px 46px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(238, 33, 38, 0.34) !important;
+
+  outline: none !important;
+}
+
+.coded-collaborate-page .coded-send-button:active {
+  transform: scale(0.96) !important;
+  filter: brightness(1.28) saturate(1.3) !important;
+}
+
+/* =========================================================
+   3. PROJECT LANDING BUTTONS
+   Longer X-axis shape with fading pointed end
+   ========================================================= */
+
+.coded-projects-landing .category-tile {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: hidden !important;
+
+  min-height: 74px !important;
+
+  background:
+    linear-gradient(
+      105deg,
+      #050505 0%,
+      #181818 24%,
+      #390507 44%,
+      #ee2126 58%,
+      #4b0608 70%,
+      #090909 100%
+    ) !important;
+
+  background-size: 300% 100% !important;
+  background-position: 100% 50% !important;
+
+  animation: projectButtonSlowFlow 6s linear infinite !important;
+
+  clip-path: polygon(
+    0 0,
+    calc(100% - 42px) 0,
+    100% 50%,
+    calc(100% - 42px) 100%,
+    0 100%
+  ) !important;
+
+  -webkit-clip-path: polygon(
+    0 0,
+    calc(100% - 42px) 0,
+    100% 50%,
+    calc(100% - 42px) 100%,
+    0 100%
+  ) !important;
+
+  box-shadow:
+    inset 7px 0 0 #ee2126,
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 18px 38px rgba(0, 0, 0, 0.42) !important;
+}
+
+/* Soft fade at the pointed end */
+
+.coded-projects-landing .category-tile::after {
+  content: "" !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+
+  width: 42% !important;
+
+  pointer-events: none !important;
+  z-index: 1 !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(238, 33, 38, 0.08) 32%,
+      rgba(238, 33, 38, 0.34) 62%,
+      rgba(238, 33, 38, 0.08) 82%,
+      transparent 100%
+    ) !important;
+
+  filter: blur(8px) !important;
+
+  transform: translateX(18%) !important;
+
+  animation: projectTipFade 2.8s ease-in-out infinite alternate !important;
+}
+
+/* Thin highlight line fading toward the pointed end */
+
+.coded-projects-landing .category-tile::before {
+  content: "" !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+
+  position: absolute !important;
+  left: 12px !important;
+  right: 42px !important;
+  bottom: 8px !important;
+
+  width: auto !important;
+  height: 2px !important;
+
+  pointer-events: none !important;
+  z-index: 2 !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ee2126 0%,
+      rgba(238, 33, 38, 0.75) 35%,
+      rgba(238, 33, 38, 0.2) 72%,
+      transparent 100%
+    ) !important;
+
+  transform: none !important;
+}
+
+/* Keep text above effects */
+
+.coded-projects-landing .category-tile > * {
+  position: relative !important;
+  z-index: 4 !important;
+}
+
+/* Project hover */
+
+.coded-projects-landing .category-tile:hover,
+.coded-projects-landing .category-tile:focus-visible {
+  animation: projectButtonFastFlow 1.1s linear infinite !important;
+
+  filter: brightness(1.15) saturate(1.2) !important;
+
+  box-shadow:
+    inset 10px 0 0 #ee2126,
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 24px 48px rgba(0, 0, 0, 0.5),
+    0 0 32px rgba(238, 33, 38, 0.3) !important;
+}
+
+/* Desktop widths — longer on X axis */
+
+@media (min-width: 1101px) {
+  .coded-projects-landing .category-tile:nth-child(1) {
+    width: clamp(360px, 32vw, 520px) !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(2) {
+    width: clamp(410px, 37vw, 590px) !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(3) {
+    width: clamp(460px, 42vw, 660px) !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(4) {
+    width: clamp(510px, 47vw, 730px) !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(5) {
+    width: clamp(560px, 52vw, 800px) !important;
+  }
+}
+
+/* Tablet */
+
+@media (min-width: 701px) and (max-width: 1100px) {
+  .coded-projects-landing .category-tile {
+    min-height: 72px !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(1) {
+    width: 64% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(2) {
+    width: 72% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(3) {
+    width: 80% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(4) {
+    width: 88% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(5) {
+    width: 96% !important;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+  .coded-projects-landing .category-tile {
+    min-height: 62px !important;
+    height: 62px !important;
+
+    clip-path: polygon(
+      0 0,
+      calc(100% - 25px) 0,
+      100% 50%,
+      calc(100% - 25px) 100%,
+      0 100%
+    ) !important;
+
+    -webkit-clip-path: polygon(
+      0 0,
+      calc(100% - 25px) 0,
+      100% 50%,
+      calc(100% - 25px) 100%,
+      0 100%
+    ) !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(1) {
+    width: 70% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(2) {
+    width: 77% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(3) {
+    width: 84% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(4) {
+    width: 91% !important;
+  }
+
+  .coded-projects-landing .category-tile:nth-child(5) {
+    width: 100% !important;
+  }
+
+  .coded-projects-landing .category-tile::after {
+    width: 34% !important;
+    filter: blur(5px) !important;
+  }
+}
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes collaborateInputFlow {
+  from {
+    background-position: 100% 50%;
+  }
+
+  to {
+    background-position: -140% 50%;
+  }
+}
+
+@keyframes collaborateButtonIdle {
+  from {
+    background-position: 100% 50%;
+  }
+
+  to {
+    background-position: -120% 50%;
+  }
+}
+
+@keyframes collaborateButtonHover {
+  from {
+    background-position: 100% 50%;
+  }
+
+  to {
+    background-position: -210% 50%;
+  }
+}
+
+@keyframes projectButtonSlowFlow {
+  from {
+    background-position: 100% 50%;
+  }
+
+  to {
+    background-position: -130% 50%;
+  }
+}
+
+@keyframes projectButtonFastFlow {
+  from {
+    background-position: 100% 50%;
+  }
+
+  to {
+    background-position: -220% 50%;
+  }
+}
+
+@keyframes projectTipFade {
+  from {
+    opacity: 0.3;
+    transform: translateX(24%) scaleX(0.9);
+  }
+
+  to {
+    opacity: 0.9;
+    transform: translateX(8%) scaleX(1.08);
+  }
+}
