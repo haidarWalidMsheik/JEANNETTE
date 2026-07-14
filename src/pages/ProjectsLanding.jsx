@@ -3,11 +3,28 @@ import { Link } from "react-router-dom";
 import SiteNav from "../components/SiteNav";
 import { CATEGORIES } from "../config/categories";
 
-function splitCategoryName(name) {
-  if (name === "Social Media") return ["SOCIAL", "MEDIA"];
-  if (name === "Web Design") return ["WEB", "DESIGN"];
-  return [name.toUpperCase()];
-}
+const CATEGORY_DETAILS = {
+  Branding: {
+    title: "Brand Design",
+    subtitle: "Identity, packaging and visual systems",
+  },
+  "Social Media": {
+    title: "Social Media",
+    subtitle: "Campaigns, posts and digital content",
+  },
+  "Web Design": {
+    title: "Web Design",
+    subtitle: "Responsive interfaces and web experiences",
+  },
+  Illustrations: {
+    title: "Illustration Design",
+    subtitle: "Original drawings and visual storytelling",
+  },
+  Layouts: {
+    title: "Layout Design",
+    subtitle: "Editorial, posters and balanced compositions",
+  },
+};
 
 export default function ProjectsLanding() {
   const pageRef = useRef(null);
@@ -54,30 +71,40 @@ export default function ProjectsLanding() {
       <section className="projects-hero-stage">
         <div className="projects-screen-bg" aria-hidden="true" />
 
-        <h1 className="projects-table-title">
-          WHAT I BRING TO
-          <br />
-          THE TABLE.
-        </h1>
+        <div className="projects-heading-block">
+          <span className="projects-heading-kicker">Selected creative services</span>
+          <h1 className="projects-table-title">
+            WHAT I BRING TO
+            <br />
+            THE TABLE.
+          </h1>
+        </div>
 
         <div className="category-tiles">
-          {CATEGORIES.map((category, index) => (
-            <Link
-              className="category-tile magnetic-tile"
-              key={category.slug}
-              to={`/category/${category.slug}`}
-            >
-           
+          {CATEGORIES.map((category, index) => {
+            const detail = CATEGORY_DETAILS[category.name] || {
+              title: category.name,
+              subtitle: "Creative design service",
+            };
 
-              <span>{String(index + 1).padStart(2, "0")}</span>
+            return (
+              <Link
+                className="category-tile magnetic-tile"
+                key={category.slug}
+                to={`/category/${category.slug}`}
+              >
+                <span className="category-tile-number">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
 
-              <strong>
-                {splitCategoryName(category.name).map((part) => (
-                  <small key={part}>{part}</small>
-                ))}
-              </strong>
-            </Link>
-          ))}
+                <span className="category-tile-copy">
+                  <strong>{detail.title}</strong>
+                  <small>{detail.subtitle}</small>
+                  <i aria-hidden="true" />
+                </span>
+              </Link>
+            );
+          })}
         </div>
       </section>
     </main>
