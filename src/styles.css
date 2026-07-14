@@ -10122,3 +10122,212 @@ body:has(.coded-projects-landing)::before,
     animation: none !important;
   }
 }
+
+/* ======================================================================
+   FINAL SMALL NAV + SCROLLABLE PROJECTS + HOME TOP FIX
+   ====================================================================== */
+
+.coded-nav {
+  width: 100% !important;
+  min-height: 76px !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.coded-nav-inner {
+  width: min(100%, var(--site-nav-max)) !important;
+  min-height: 76px !important;
+  margin: 0 auto !important;
+  padding: 10px clamp(16px, 3.2vw, 48px) !important;
+  grid-template-columns: minmax(150px, 0.62fr) minmax(0, 1.38fr) !important;
+  gap: clamp(14px, 3vw, 48px) !important;
+}
+
+.coded-logo {
+  font-size: clamp(19px, 2vw, 32px) !important;
+  line-height: 0.8 !important;
+}
+
+.coded-nav-links {
+  gap: clamp(10px, 1.6vw, 26px) !important;
+}
+
+.animated-nav-link {
+  font-size: clamp(11px, 1.1vw, 17px) !important;
+  padding: 6px 0 9px !important;
+}
+
+.admin-access-pill {
+  min-height: 36px !important;
+  padding: 8px 16px !important;
+  font-size: clamp(11px, 1vw, 15px) !important;
+}
+
+/* Home/About: remove any space above navbar and before first image */
+.photo-home-page,
+.photo-home-page .hero-photo-section {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.photo-home-page .hero-photo-section {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.photo-home-page .hero-load-line {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  left: 0 !important;
+  z-index: 120 !important;
+  height: 3px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  pointer-events: none !important;
+}
+
+.photo-home-page .hero-nav-layer {
+  position: relative !important;
+  inset: auto !important;
+  order: 1 !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+}
+
+.photo-home-page .hero-nav-layer .coded-nav {
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+
+.photo-home-page .hero-photo-section > .photo-section-image {
+  position: relative !important;
+  inset: auto !important;
+  order: 2 !important;
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  object-fit: contain !important;
+  object-position: center top !important;
+  vertical-align: top !important;
+}
+
+/* Project Landing scrolls normally */
+html:has(.coded-projects-landing),
+body:has(.coded-projects-landing),
+#root:has(.coded-projects-landing) {
+  height: auto !important;
+  min-height: 100% !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+.coded-projects-landing {
+  position: relative !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 100svh !important;
+  overflow-x: hidden !important;
+  overflow-y: visible !important;
+}
+
+.coded-projects-landing .projects-hero-stage {
+  position: relative !important;
+  height: auto !important;
+  min-height: auto !important;
+  padding-top: clamp(34px, 5vw, 68px) !important;
+  padding-bottom: clamp(54px, 7vw, 96px) !important;
+  align-items: start !important;
+  overflow: visible !important;
+}
+
+.coded-projects-landing .projects-screen-bg {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+}
+
+@media (max-width: 1050px) {
+  .coded-nav-inner {
+    min-height: auto !important;
+    padding-block: 10px !important;
+    gap: 10px !important;
+  }
+
+  .coded-logo {
+    font-size: clamp(20px, 3.5vw, 29px) !important;
+  }
+
+  .coded-projects-landing .projects-hero-stage {
+    height: auto !important;
+    min-height: auto !important;
+    padding-top: 34px !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .coded-nav {
+    min-height: auto !important;
+  }
+
+  .coded-nav-inner {
+    min-height: auto !important;
+    padding: 9px 12px !important;
+    gap: 8px !important;
+  }
+
+  .coded-logo {
+    font-size: clamp(18px, 5.6vw, 25px) !important;
+  }
+
+  .coded-nav-links {
+    gap: 6px 10px !important;
+  }
+
+  .animated-nav-link {
+    font-size: clamp(9px, 2.8vw, 12px) !important;
+    padding: 5px 0 8px !important;
+  }
+
+  .admin-access-pill {
+    min-height: 32px !important;
+    padding: 7px 13px !important;
+    font-size: 11px !important;
+  }
+
+  .photo-home-page .hero-load-line {
+    height: 2px !important;
+  }
+
+  .coded-projects-landing {
+    height: auto !important;
+    min-height: 100svh !important;
+    overflow-y: visible !important;
+  }
+
+  .coded-projects-landing .projects-hero-stage {
+    height: auto !important;
+    min-height: auto !important;
+    padding: 24px 12px 52px !important;
+    overflow: visible !important;
+  }
+
+  .coded-projects-landing .category-tiles {
+    height: auto !important;
+    overflow: visible !important;
+  }
+}
