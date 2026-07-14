@@ -3,27 +3,12 @@ import { Link } from "react-router-dom";
 import SiteNav from "../components/SiteNav";
 import { CATEGORIES } from "../config/categories";
 
-const CATEGORY_DETAILS = {
-  Branding: {
-    title: "Brand Design",
-    subtitle: "Identity, packaging and visual systems",
-  },
-  "Social Media": {
-    title: "Social Media",
-    subtitle: "Campaigns, posts and digital content",
-  },
-  "Web Design": {
-    title: "Web Design",
-    subtitle: "Responsive interfaces and web experiences",
-  },
-  Illustrations: {
-    title: "Illustration Design",
-    subtitle: "Original drawings and visual storytelling",
-  },
-  Layouts: {
-    title: "Layout Design",
-    subtitle: "Editorial, posters and balanced compositions",
-  },
+const CARD_COPY = {
+  Branding: { title: "Brand Design", subtitle: "Identity and packaging" },
+  "Social Media": { title: "Social Media", subtitle: "Campaigns and digital content" },
+  "Web Design": { title: "Web Design", subtitle: "Responsive digital experiences" },
+  Illustrations: { title: "Illustration Design", subtitle: "Original visual storytelling" },
+  Layouts: { title: "Layout Design", subtitle: "Editorial and composition" },
 };
 
 export default function ProjectsLanding() {
@@ -71,20 +56,17 @@ export default function ProjectsLanding() {
       <section className="projects-hero-stage">
         <div className="projects-screen-bg" aria-hidden="true" />
 
-        <div className="projects-heading-block">
-          <span className="projects-heading-kicker">Selected creative services</span>
-          <h1 className="projects-table-title">
-            WHAT I BRING TO
-            <br />
-            THE TABLE.
-          </h1>
-        </div>
+        <h1 className="projects-table-title">
+          WHAT I BRING TO
+          <br />
+          THE TABLE.
+        </h1>
 
         <div className="category-tiles">
           {CATEGORIES.map((category, index) => {
-            const detail = CATEGORY_DETAILS[category.name] || {
+            const copy = CARD_COPY[category.name] || {
               title: category.name,
-              subtitle: "Creative design service",
+              subtitle: "Creative design",
             };
 
             return (
@@ -93,15 +75,14 @@ export default function ProjectsLanding() {
                 key={category.slug}
                 to={`/category/${category.slug}`}
               >
-                <span className="category-tile-number">
+                <span className="project-card-number">
                   {String(index + 1).padStart(2, "0")}
                 </span>
 
-                <span className="category-tile-copy">
-                  <strong>{detail.title}</strong>
-                  <small>{detail.subtitle}</small>
-                  <i aria-hidden="true" />
-                </span>
+                <div className="project-card-copy">
+                  <strong>{copy.title}</strong>
+                  <small>{copy.subtitle}</small>
+                </div>
               </Link>
             );
           })}
