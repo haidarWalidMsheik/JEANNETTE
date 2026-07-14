@@ -10796,4 +10796,161 @@ body:has(.coded-projects-landing) {
   .photo-home-page .hero-load-line{
     display:none !important;
   }
+}/* =========================================================
+   HOME MOBILE — SAME NAVBAR OVERLAY AS DESKTOP
+   Navbar ends near the silver line in the first image
+   ========================================================= */
+
+@media (max-width: 700px) {
+  .photo-home-page .hero-photo-section {
+    position: relative !important;
+
+    display: block !important;
+
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    overflow: hidden !important;
+  }
+
+  /* Keep the complete first image */
+  .photo-home-page
+    .hero-photo-section
+    > .photo-section-image {
+    position: relative !important;
+    z-index: 1 !important;
+
+    display: block !important;
+
+    width: 100% !important;
+    height: auto !important;
+
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: 100% !important;
+    max-height: none !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    object-fit: contain !important;
+    object-position: center top !important;
+
+    transform: none !important;
+    clip-path: none !important;
+    -webkit-clip-path: none !important;
+  }
+
+  /* Navbar overlays the first image like desktop */
+  .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer {
+    position: absolute !important;
+
+    top: 0 !important;
+    right: 0 !important;
+    bottom: auto !important;
+    left: 0 !important;
+
+    z-index: 1000 !important;
+
+    display: block !important;
+
+    width: 100% !important;
+    height: auto !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    transform: none !important;
+  }
+
+  /* Responsive height so the navbar ends around the silver line */
+  .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer
+    > .coded-nav {
+    position: relative !important;
+
+    width: 100% !important;
+    max-width: none !important;
+
+    height: clamp(118px, 32vw, 164px) !important;
+    min-height: clamp(118px, 32vw, 164px) !important;
+
+    margin: 0 !important;
+    padding:
+      max(10px, env(safe-area-inset-top))
+      16px
+      10px !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: space-between !important;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.98) 0%,
+        rgba(0, 0, 0, 0.94) 72%,
+        rgba(0, 0, 0, 0.82) 100%
+      ) !important;
+
+    border-bottom:
+      1px solid rgba(220, 220, 220, 0.82) !important;
+
+    box-shadow: none !important;
+  }
+
+  .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer
+    .coded-nav-links {
+    width: 100% !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+  }
+
+  .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer
+    .animated-nav-link {
+    font-size: clamp(10px, 3.3vw, 14px) !important;
+    white-space: nowrap !important;
+  }
+
+  .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer
+    .admin-access-pill {
+    padding: 8px 16px !important;
+    font-size: 11px !important;
+  }
+
+  /* Loading line stays at the top and creates no space */
+  .photo-home-page .hero-load-line {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    left: 0 !important;
+
+    z-index: 1100 !important;
+
+    height: 2px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    pointer-events: none !important;
+  }
 }
