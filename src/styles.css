@@ -11040,12 +11040,10 @@ body:has(.coded-projects-landing) {
   .photo-home-page .hero-nav-layer::after {
     display: none !important;
   }
-}/* =========================================================
-   MOBILE: REMOVE SPACE BETWEEN NAVBAR AND FIRST PHOTO
-   ========================================================= */
-
+}
 @media (max-width: 700px) {
-  .photo-home-page .hero-photo-section {
+  /* The first image is the positioning reference */
+  body .photo-home-page .hero-photo-section {
     position: relative !important;
     display: block !important;
 
@@ -11060,47 +11058,12 @@ body:has(.coded-projects-landing) {
     overflow: hidden !important;
   }
 
-  /* Navbar stays over the top of the first photo */
-  .photo-home-page
-    .hero-photo-section
-    > .hero-nav-layer {
-    position: absolute !important;
-
-    top: 0 !important;
-    right: 0 !important;
-    bottom: auto !important;
-    left: 0 !important;
-
-    width: 100% !important;
-    height: auto !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
-
-    z-index: 1000 !important;
-    transform: none !important;
-  }
-
-  .photo-home-page
-    .hero-photo-section
-    > .hero-nav-layer
-    > .coded-nav {
-    width: 100% !important;
-
-    margin: 0 !important;
-    padding-bottom: 8px !important;
-
-    border-bottom: 0 !important;
-    box-shadow: none !important;
-  }
-
-  /* Photo starts at the very top behind navbar */
-  .photo-home-page
+  /* Image starts at y=0 behind the navbar */
+  body .photo-home-page
     .hero-photo-section
     > .photo-section-image {
     position: relative !important;
-    top: 0 !important;
-    left: 0 !important;
+    inset: auto !important;
 
     z-index: 1 !important;
 
@@ -11109,6 +11072,8 @@ body:has(.coded-projects-landing) {
     width: 100% !important;
     height: auto !important;
 
+    min-width: 0 !important;
+    min-height: 0 !important;
     max-width: 100% !important;
     max-height: none !important;
 
@@ -11118,13 +11083,168 @@ body:has(.coded-projects-landing) {
     object-fit: contain !important;
     object-position: center top !important;
 
+    transform: none !important;
     vertical-align: top !important;
-    transform: translateY(0) !important;
   }
 
-  /* Remove decorative elements that may look like spacing */
-  .photo-home-page .hero-load-line,
-  .photo-home-page .hero-nav-layer::after {
+  /* Navbar stays over the top of the first image */
+  body .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer {
+    position: absolute !important;
+
+    top: 0 !important;
+    right: 0 !important;
+    bottom: auto !important;
+    left: 0 !important;
+
+    z-index: 1000 !important;
+
+    display: block !important;
+
+    width: 100% !important;
+    height: 35vw !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    transform: none !important;
+    line-height: normal !important;
+  }
+
+  /*
+    35vw matches the vertical location of the silver line
+    because the source image scales proportionally with screen width.
+  */
+  body .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer
+    > .coded-nav {
+    position: relative !important;
+    inset: auto !important;
+
+    box-sizing: border-box !important;
+
+    width: 100% !important;
+    max-width: none !important;
+
+    height: 35vw !important;
+    min-height: 35vw !important;
+    max-height: 35vw !important;
+
+    margin: 0 !important;
+    padding:
+      max(8px, env(safe-area-inset-top))
+      16px
+      8px !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: space-between !important;
+
+    background: rgba(0, 0, 0, 0.96) !important;
+
+    border: 0 !important;
+    border-bottom: 1px solid rgba(220, 220, 220, 0.9) !important;
+    border-radius: 0 !important;
+
+    box-shadow: none !important;
+    overflow: hidden !important;
+  }
+
+  body .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer
+    .coded-logo {
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+    font-size: clamp(18px, 5.6vw, 27px) !important;
+  }
+
+  body .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer
+    .coded-nav-links {
+    flex: 1 1 auto !important;
+
+    width: 100% !important;
+
+    display: flex !important;
+    align-content: flex-end !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+
+    gap: 6px 10px !important;
+    margin: 0 !important;
+  }
+
+  body .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer
+    .animated-nav-link {
+    font-size: clamp(10px, 3.2vw, 14px) !important;
+    padding: 5px 0 8px !important;
+    white-space: nowrap !important;
+  }
+
+  body .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer
+    .admin-access-pill {
+    padding: 7px 14px !important;
+    font-size: 11px !important;
+  }
+
+  /* These elements must never create a gap */
+  body .photo-home-page .hero-load-line {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    left: 0 !important;
+
+    z-index: 1100 !important;
+
+    height: 2px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    pointer-events: none !important;
+  }
+
+  body .photo-home-page .hero-nav-layer::after {
     display: none !important;
+    content: none !important;
+  }
+}
+
+/* Very narrow phones: keep the same proportional alignment */
+@media (max-width: 390px) {
+  body .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer,
+  body .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer
+    > .coded-nav {
+    height: 36vw !important;
+    min-height: 36vw !important;
+    max-height: 36vw !important;
+  }
+
+  body .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer
+    .coded-nav-links {
+    gap: 4px 7px !important;
+  }
+
+  body .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer
+    .animated-nav-link {
+    font-size: 9px !important;
   }
 }
