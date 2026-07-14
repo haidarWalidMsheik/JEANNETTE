@@ -11248,3 +11248,229 @@ body:has(.coded-projects-landing) {
     font-size: 9px !important;
   }
 }
+/* =========================================================
+   FIX RUINED MOBILE NAVBAR
+   Remove the huge empty black area and keep navbar over image
+   Paste at the absolute end of src/styles.css
+   ========================================================= */
+
+@media (max-width: 700px) {
+  .photo-home-page .hero-photo-section {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* Keep first image full width behind the navbar */
+  .photo-home-page
+    .hero-photo-section
+    > .photo-section-image {
+    position: relative !important;
+    z-index: 1 !important;
+
+    display: block !important;
+
+    width: 100% !important;
+    height: auto !important;
+
+    max-width: 100% !important;
+    max-height: none !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    object-fit: contain !important;
+    object-position: center top !important;
+
+    transform: none !important;
+  }
+
+  /* Navbar stays over the image */
+  .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer {
+    position: absolute !important;
+
+    top: 0 !important;
+    right: 0 !important;
+    bottom: auto !important;
+    left: 0 !important;
+
+    z-index: 1000 !important;
+
+    width: 100% !important;
+    height: auto !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    transform: none !important;
+  }
+
+  /* IMPORTANT: remove the fixed 35vw height */
+  .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer
+    > .coded-nav {
+    position: relative !important;
+
+    width: 100% !important;
+    max-width: none !important;
+
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+
+    margin: 0 !important;
+    padding:
+      max(9px, env(safe-area-inset-top))
+      16px
+      10px !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+
+    gap: 12px !important;
+
+    background: rgba(0, 0, 0, 0.96) !important;
+
+    border: 0 !important;
+    border-bottom: 1px solid rgba(215, 215, 215, 0.85) !important;
+    border-radius: 0 !important;
+
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+
+  .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer
+    .coded-logo {
+    margin: 0 !important;
+
+    font-size: clamp(20px, 6vw, 28px) !important;
+    line-height: 0.82 !important;
+  }
+
+  .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer
+    .coded-nav-links {
+    width: 100% !important;
+
+    display: grid !important;
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, 0.85fr)
+      minmax(0, 1.2fr)
+      auto !important;
+
+    align-items: center !important;
+
+    gap: 8px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer
+    .animated-nav-link {
+    width: auto !important;
+
+    font-size: clamp(9px, 2.9vw, 13px) !important;
+    letter-spacing: 0.04em !important;
+
+    padding: 5px 0 8px !important;
+
+    text-align: left !important;
+    white-space: nowrap !important;
+  }
+
+  .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer
+    .admin-access-pill {
+    min-height: 0 !important;
+
+    padding: 7px 11px !important;
+
+    font-size: 10px !important;
+    white-space: nowrap !important;
+  }
+
+  /* Never allow old fixed-height rules to return */
+  .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer,
+  .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer
+    > .coded-nav {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+
+  .photo-home-page .hero-load-line {
+    position: absolute !important;
+
+    top: 0 !important;
+    right: 0 !important;
+    left: 0 !important;
+
+    z-index: 1100 !important;
+
+    height: 2px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    pointer-events: none !important;
+  }
+
+  .photo-home-page .hero-nav-layer::after {
+    display: none !important;
+    content: none !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer
+    > .coded-nav {
+    padding-inline: 12px !important;
+    gap: 10px !important;
+  }
+
+  .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer
+    .coded-nav-links {
+    gap: 6px !important;
+  }
+
+  .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer
+    .animated-nav-link {
+    font-size: 8.5px !important;
+  }
+
+  .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer
+    .admin-access-pill {
+    padding: 6px 9px !important;
+    font-size: 9px !important;
+  }
+}
