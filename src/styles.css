@@ -10431,3 +10431,143 @@ body:has(.coded-projects-landing) {
     height: 2px !important;
   }
 }
+
+/* ======================================================================
+   FINAL HOME NAV OVER FIRST IMAGE
+   Navbar is no longer between the first and second images.
+   ====================================================================== */
+
+.photo-home-page .hero-photo-section {
+  position: relative !important;
+  display: block !important;
+
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  overflow: hidden !important;
+  line-height: 0 !important;
+}
+
+/* Full first image, unchanged */
+.photo-home-page .hero-photo-section > .photo-section-image {
+  position: relative !important;
+  inset: auto !important;
+
+  display: block !important;
+
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: none !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  object-fit: contain !important;
+  object-position: center top !important;
+
+  transform: none !important;
+  clip-path: none !important;
+  -webkit-clip-path: none !important;
+
+  vertical-align: top !important;
+}
+
+/* Put the shared navbar over the TOP of the first image */
+.photo-home-page .hero-nav-layer {
+  position: absolute !important;
+
+  top: 0 !important;
+  right: 0 !important;
+  bottom: auto !important;
+  left: 0 !important;
+
+  z-index: 100 !important;
+
+  width: 100% !important;
+  height: auto !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  transform: none !important;
+  line-height: normal !important;
+  pointer-events: auto !important;
+}
+
+/* Use exactly the same navbar design as the other pages */
+.photo-home-page .hero-nav-layer .coded-nav {
+  position: relative !important;
+  inset: auto !important;
+
+  width: 100% !important;
+  max-width: none !important;
+
+  min-height: 0 !important;
+  height: auto !important;
+
+  margin: 0 !important;
+  padding: var(--shared-nav-pad-y) var(--shared-nav-pad-x) !important;
+
+  align-items: flex-start !important;
+  flex-direction: row !important;
+
+  color: #fff !important;
+  background: var(--shared-nav-bg) !important;
+
+  border: 0 !important;
+  border-bottom: 2px solid rgba(239, 29, 40, 0.55) !important;
+  border-radius: 0 !important;
+
+  box-shadow: none !important;
+
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Remove old Home-only divider */
+.photo-home-page .hero-nav-layer::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Loading line stays at top and takes no space */
+.photo-home-page .hero-load-line {
+  position: absolute !important;
+
+  top: 0 !important;
+  right: 0 !important;
+  left: 0 !important;
+
+  z-index: 120 !important;
+
+  width: 100% !important;
+  height: 3px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  pointer-events: none !important;
+}
+
+@media (max-width: 900px) {
+  .photo-home-page .hero-nav-layer .coded-nav {
+    padding: 12px 24px !important;
+    align-items: flex-start !important;
+    flex-direction: column !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .photo-home-page .hero-nav-layer .coded-nav {
+    padding: 10px 16px !important;
+  }
+
+  .photo-home-page .hero-load-line {
+    height: 2px !important;
+  }
+}
