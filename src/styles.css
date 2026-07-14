@@ -9450,3 +9450,22 @@ body:has(.coded-projects-landing)::before,
   box-shadow:
     0 14px 30px rgba(238, 33, 38, 0.24) !important;
 }
+/* Remove space between navbar and first About image */
+
+.photo-home-page .hero-nav-layer {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.photo-home-page .hero-photo-section {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    gap: 0 !important;
+}
+
+.photo-home-page .photo-section-image:first-child,
+.photo-home-page .hero-photo-section img:first-child {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    display: block !important;
+}
