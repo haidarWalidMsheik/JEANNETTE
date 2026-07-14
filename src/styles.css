@@ -9469,3 +9469,7 @@ body:has(.coded-projects-landing)::before,
     padding-top: 0 !important;
     display: block !important;
 }
+.photo-home-page .coded-nav {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
