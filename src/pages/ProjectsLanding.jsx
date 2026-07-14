@@ -57,9 +57,8 @@ export default function ProjectsLanding() {
         <div className="projects-screen-bg" aria-hidden="true" />
 
         <h1 className="projects-table-title">
-          WHAT I BRING TO
-          <br />
-          THE TABLE.
+          <span>WHAT I BRING TO</span>
+          <span>THE TABLE.</span>
         </h1>
 
         <div className="category-tiles">

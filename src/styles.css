@@ -9958,3 +9958,120 @@ body:has(.coded-projects-landing) {
     font-size: 11px !important;
   }
 }
+
+/* ======================================================================
+   FINAL SAME NAVBAR + FORMATTED PROJECT TITLE
+   Keeps the previous Project card design unchanged.
+   ====================================================================== */
+
+.coded-projects-landing > .coded-nav {
+  position: relative !important;
+  inset: auto !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: space-between !important;
+  width: min(100%, 1440px) !important;
+  max-width: none !important;
+  min-height: 0 !important;
+  margin: 0 auto !important;
+  padding: clamp(18px, 2.5vw, 36px) clamp(22px, 4vw, 64px) !important;
+  gap: 22px !important;
+  color: #f7f7f7 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transform: none !important;
+}
+
+.coded-projects-landing > .coded-nav .coded-logo {
+  align-self: auto !important;
+  justify-self: auto !important;
+  margin: 0 !important;
+}
+
+.coded-projects-landing > .coded-nav .coded-nav-links {
+  display: flex !important;
+  width: auto !important;
+  margin: 0 !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  flex-wrap: wrap !important;
+  gap: clamp(16px, 3.2vw, 56px) !important;
+}
+
+.coded-projects-landing > .coded-nav .animated-nav-link {
+  width: auto !important;
+  text-align: left !important;
+}
+
+.coded-projects-landing .projects-table-title {
+  display: grid !important;
+  gap: 0 !important;
+  width: max-content !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #fff !important;
+  font-family:
+    "Acumin ExtraCondensed Black",
+    "Arial Narrow",
+    Impact,
+    sans-serif !important;
+  font-size: clamp(54px, 7vw, 108px) !important;
+  font-weight: 900 !important;
+  line-height: 0.82 !important;
+  letter-spacing: -0.04em !important;
+  text-transform: uppercase !important;
+}
+
+.coded-projects-landing .projects-table-title > span {
+  display: block !important;
+  width: max-content !important;
+  max-width: 100% !important;
+  white-space: nowrap !important;
+}
+
+.coded-projects-landing .projects-table-title::before,
+.coded-projects-landing .projects-table-title::after {
+  display: none !important;
+  content: none !important;
+}
+
+@media (max-width: 900px) {
+  .coded-projects-landing > .coded-nav {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+  }
+
+  .coded-projects-landing > .coded-nav .coded-nav-links {
+    width: 100% !important;
+  }
+
+  .coded-projects-landing .projects-table-title {
+    font-size: clamp(46px, 10vw, 78px) !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .coded-projects-landing > .coded-nav {
+    padding-inline: 18px !important;
+  }
+
+  .coded-projects-landing > .coded-nav .coded-nav-links {
+    gap: 14px !important;
+  }
+
+  .coded-projects-landing .projects-table-title {
+    width: 100% !important;
+    font-size: clamp(38px, 11.5vw, 58px) !important;
+    letter-spacing: -0.035em !important;
+  }
+
+  .coded-projects-landing .projects-table-title > span {
+    width: 100% !important;
+    white-space: nowrap !important;
+  }
+}
