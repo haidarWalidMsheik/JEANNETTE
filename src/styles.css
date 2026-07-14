@@ -9473,3 +9473,82 @@ body:has(.coded-projects-landing)::before,
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
 }
+/* FINAL FIX: navbar directly above first photo — no gap, no overlap */
+
+.photo-home-page {
+  gap: 0 !important;
+}
+
+.photo-home-page .hero-photo-section {
+  display: flex !important;
+  flex-direction: column !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 0 !important;
+
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+
+.photo-home-page .hero-nav-layer {
+  position: relative !important;
+  inset: auto !important;
+
+  order: 1 !important;
+
+  width: 100% !important;
+  height: auto !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  transform: none !important;
+  z-index: 50 !important;
+}
+
+.photo-home-page .hero-nav-layer .coded-nav {
+  width: 100% !important;
+  max-width: none !important;
+
+  margin: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.photo-home-page .hero-photo-section .photo-section-image {
+  position: relative !important;
+  inset: auto !important;
+
+  order: 2 !important;
+
+  display: block !important;
+
+  width: 100% !important;
+  height: auto !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  object-fit: contain !important;
+  object-position: center top !important;
+
+  transform: none !important;
+  clip-path: none !important;
+  -webkit-clip-path: none !important;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .photo-home-page .hero-photo-section {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .photo-home-page .hero-photo-section .photo-section-image {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+}
