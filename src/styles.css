@@ -10331,3 +10331,113 @@ body:has(.coded-projects-landing),
     overflow: visible !important;
   }
 }
+/* =========================================================
+   FINAL FIX — NAVBAR TOUCHES THE FIRST PHOTO
+   No margin, padding, line, shadow, or empty space between them
+   ========================================================= */
+
+.photo-home-page .hero-photo-section {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 0 !important;
+
+  overflow: hidden !important;
+  background: #000 !important;
+}
+
+/* Navbar must stay first in normal document flow */
+.photo-home-page .hero-nav-layer {
+  position: relative !important;
+  inset: auto !important;
+  order: 1 !important;
+
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  line-height: normal !important;
+  transform: none !important;
+  z-index: 50 !important;
+}
+
+/* Remove anything below the navbar that looks like spacing */
+.photo-home-page .hero-nav-layer .coded-nav {
+  position: relative !important;
+
+  width: 100% !important;
+  max-width: none !important;
+
+  margin: 0 !important;
+  padding-bottom: 8px !important;
+
+  border: 0 !important;
+  border-bottom: 0 !important;
+  border-radius: 0 !important;
+
+  box-shadow: none !important;
+}
+
+/* Hide the loading line so it cannot appear between navbar and image */
+.photo-home-page .hero-load-line {
+  display: none !important;
+}
+
+/* First image begins immediately after navbar */
+.photo-home-page .hero-photo-section > .photo-section-image {
+  position: relative !important;
+  inset: auto !important;
+  order: 2 !important;
+
+  display: block !important;
+
+  width: 100% !important;
+  height: auto !important;
+
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 100% !important;
+  max-height: none !important;
+
+  /* -1px closes browser subpixel gaps */
+  margin: -1px 0 0 !important;
+  padding: 0 !important;
+
+  object-fit: contain !important;
+  object-position: center top !important;
+
+  border: 0 !important;
+  transform: none !important;
+  vertical-align: top !important;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .photo-home-page .hero-photo-section {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    gap: 0 !important;
+  }
+
+  .photo-home-page .hero-nav-layer .coded-nav {
+    margin: 0 !important;
+    padding-bottom: 7px !important;
+  }
+
+  .photo-home-page .hero-photo-section > .photo-section-image {
+    width: 100% !important;
+    height: auto !important;
+    margin-top: -1px !important;
+  }
+}
