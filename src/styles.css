@@ -9552,3 +9552,92 @@ body:has(.coded-projects-landing)::before,
     max-height: none !important;
   }
 }
+
+/* ===== FINAL VERIFIED NAVBAR-FIRST-PHOTO FIX ===== */
+/* Navbar remains in normal flow directly above the first image.
+   No overlap, no blank gap, and no changes to later sections. */
+
+.photo-home-page .hero-photo-section {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 0 !important;
+  overflow: visible !important;
+  line-height: 0 !important;
+}
+
+.photo-home-page .hero-photo-section .hero-nav-layer {
+  position: relative !important;
+  inset: auto !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  order: 1 !important;
+  width: 100% !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  line-height: normal !important;
+  z-index: 50 !important;
+}
+
+.photo-home-page .hero-photo-section .hero-nav-layer .coded-nav {
+  position: relative !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+}
+
+.photo-home-page .hero-photo-section > .photo-section-image,
+.photo-home-page .hero-photo-section .photo-section-image {
+  position: relative !important;
+  inset: auto !important;
+  order: 2 !important;
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 100% !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  object-fit: contain !important;
+  object-position: center top !important;
+  transform: none !important;
+  clip-path: none !important;
+  -webkit-clip-path: none !important;
+  vertical-align: top !important;
+}
+
+@media (max-width: 700px) {
+  .photo-home-page .hero-photo-section {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  .photo-home-page .hero-photo-section .hero-nav-layer {
+    position: relative !important;
+    inset: auto !important;
+  }
+
+  .photo-home-page .hero-photo-section > .photo-section-image,
+  .photo-home-page .hero-photo-section .photo-section-image {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: none !important;
+  }
+}
