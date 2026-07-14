@@ -7,17 +7,17 @@ export default function Home() {
   return (
     <main className="photo-home-page">
       <section className="photo-home-section hero-photo-section" id="about">
-        <div className="hero-nav-layer">
-          <SiteNav />
-        </div>
-
-        <div className="hero-load-line" aria-hidden="true" />
-
         <img
           className="photo-section-image"
           src={`${base}design/home-hero-bg.jpeg`}
           alt="Jeannette portfolio hero"
         />
+
+        <div className="hero-load-line" aria-hidden="true" />
+
+        <div className="hero-nav-layer">
+          <SiteNav />
+        </div>
       </section>
 
       <section className="photo-home-section about-photo-only-section">
