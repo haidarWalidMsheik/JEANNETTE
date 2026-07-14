@@ -10741,4 +10741,59 @@ body:has(.coded-projects-landing) {
     margin: 0 !important;
     padding: 0 !important;
   }
+}/* ==========================================================
+   HOME HERO MOBILE FIX
+   Show full first image under navbar (Mobile only)
+========================================================== */
+
+@media (max-width: 768px) {
+
+  .photo-home-page .hero-photo-section{
+    display:flex !important;
+    flex-direction:column !important;
+    margin:0 !important;
+    padding:0 !important;
+    overflow:visible !important;
+  }
+
+  /* Navbar first */
+  .photo-home-page .hero-nav-layer{
+    position:relative !important;
+    top:auto !important;
+    left:auto !important;
+    right:auto !important;
+    bottom:auto !important;
+    width:100% !important;
+    order:1 !important;
+    z-index:100 !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+
+  /* Keep the same navbar design */
+  .photo-home-page .hero-nav-layer .coded-nav{
+    margin:0 !important;
+    width:100% !important;
+  }
+
+  /* Hero image directly below navbar */
+  .photo-home-page .photo-section-image{
+    position:relative !important;
+    order:2 !important;
+    display:block !important;
+
+    width:100% !important;
+    height:auto !important;
+
+    margin:0 !important;
+    padding:0 !important;
+
+    object-fit:contain !important;
+    object-position:top center !important;
+  }
+
+  /* Loading line should not create spacing */
+  .photo-home-page .hero-load-line{
+    display:none !important;
+  }
 }
