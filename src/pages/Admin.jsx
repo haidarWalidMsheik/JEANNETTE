@@ -26,6 +26,12 @@ const blankProject = {
   detail_image_path: "",
 };
 
+const emptyVisitorStats = {
+  total_visits: 0,
+  unique_visitors: 0,
+  last_24_hours: 0,
+};
+
 function sortedProjects(projects) {
   return [...projects].sort((a, b) => {
     const byCategory = categoryOrder(a.category) - categoryOrder(b.category);
@@ -55,9 +61,17 @@ export default function Admin() {
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
 
+  const [visitorStats, setVisitorStats] = useState(emptyVisitorStats);
+  const [visitorStatsLoading, setVisitorStatsLoading] = useState(true);
+  const [visitorStatsError, setVisitorStatsError] = useState("");
+  const [visitorRealtimeConnected, setVisitorRealtimeConnected] =
+    useState(false);
+
   async function checkAdmin() {
     if (!hasSupabase || !supabase) {
-      setError("Supabase is not connected. Add your Supabase environment variables first.");
+      setError(
+        "Supabase is not connected. Add your Supabase environment variables first."
+      );
       return;
     }
 
@@ -87,6 +101,73 @@ export default function Admin() {
 
   useEffect(() => {
     if (ready) load();
+  }, [ready]);
+
+  useEffect(() => {
+    if (!ready || !hasSupabase || !supabase) return undefined;
+
+    let componentActive = true;
+
+    async function loadVisitorStats(showLoading = false) {
+      if (showLoading && componentActive) {
+        setVisitorStatsLoading(true);
+      }
+
+      const { data, error: statsError } = await supabase.rpc(
+        "get_website_stats"
+      );
+
+      if (!componentActive) return;
+
+      if (statsError) {
+        console.error("Could not load visitor statistics:", statsError);
+        setVisitorStatsError(
+          statsError.message || "Could not load visitor statistics."
+        );
+        setVisitorStatsLoading(false);
+        return;
+      }
+
+      setVisitorStats(data?.[0] ?? emptyVisitorStats);
+      setVisitorStatsError("");
+      setVisitorStatsLoading(false);
+    }
+
+    // Load current totals immediately when the Admin page opens.
+    loadVisitorStats(true);
+
+    // Receive every new visit while the Admin page stays open.
+    const visitorChannel = supabase
+      .channel("admin-live-website-visits")
+      .on(
+        "postgres_changes",
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "website_visits",
+        },
+        () => {
+          loadVisitorStats(false);
+        }
+      )
+      .subscribe((channelStatus) => {
+        if (!componentActive) return;
+
+        setVisitorRealtimeConnected(channelStatus === "SUBSCRIBED");
+
+        if (
+          channelStatus === "CHANNEL_ERROR" ||
+          channelStatus === "TIMED_OUT"
+        ) {
+          console.error("Visitor Realtime status:", channelStatus);
+        }
+      });
+
+    return () => {
+      componentActive = false;
+      setVisitorRealtimeConnected(false);
+      supabase.removeChannel(visitorChannel);
+    };
   }, [ready]);
 
   const groupedProjects = useMemo(() => {
@@ -143,7 +224,9 @@ export default function Admin() {
     const size = fileSizeLabel(file.size);
 
     if (file.size > 5 * 1024 * 1024) {
-      setCardImageInfo(`Selected card photo is ${size}. The website will auto-compress it before upload.`);
+      setCardImageInfo(
+        `Selected card photo is ${size}. The website will auto-compress it before upload.`
+      );
     } else {
       setCardImageInfo(`Selected card photo is ${size}. Ready to upload.`);
     }
@@ -160,9 +243,13 @@ export default function Admin() {
     const size = fileSizeLabel(file.size);
 
     if (file.size > 5 * 1024 * 1024) {
-      setDetailImageInfo(`Selected big project photo is ${size}. The website will auto-compress it before upload.`);
+      setDetailImageInfo(
+        `Selected big project photo is ${size}. The website will auto-compress it before upload.`
+      );
     } else {
-      setDetailImageInfo(`Selected big project photo is ${size}. Ready to upload.`);
+      setDetailImageInfo(
+        `Selected big project photo is ${size}. Ready to upload.`
+      );
     }
   }
 
@@ -176,7 +263,11 @@ export default function Admin() {
 
       await saveProject(form, cardImageFile, detailImageFile);
 
-      setStatus(form.id ? "Item updated and resorted." : "Item added to the correct category.");
+      setStatus(
+        form.id
+          ? "Item updated and resorted."
+          : "Item added to the correct category."
+      );
       resetForm();
       await load();
     } catch (err) {
@@ -198,13 +289,13 @@ export default function Admin() {
     }
   }
 
- async function logout() {
-  if (hasSupabase && supabase) {
-    await supabase.auth.signOut();
-  }
+  async function logout() {
+    if (hasSupabase && supabase) {
+      await supabase.auth.signOut();
+    }
 
-  navigate("/admin-login", { replace: true });
-}
+    navigate("/admin-login", { replace: true });
+  }
 
   if (!ready) {
     return (
@@ -235,9 +326,54 @@ export default function Admin() {
 
       {!hasSupabase && (
         <div className="setup-warning">
-          Supabase is not connected. CRUD is disabled until the database server is connected.
+          Supabase is not connected. CRUD is disabled until the database server
+          is connected.
         </div>
       )}
+
+      <section className="visitor-dashboard-box">
+        <div className="visitor-dashboard-heading">
+          <div>
+            <span>WEBSITE ANALYTICS</span>
+            <h2>Visitor Overview</h2>
+          </div>
+
+          <div
+            className={`visitor-live-status ${
+              visitorRealtimeConnected ? "is-connected" : ""
+            }`}
+          >
+            <i aria-hidden="true" />
+            {visitorRealtimeConnected ? "LIVE" : "CONNECTING"}
+          </div>
+        </div>
+
+        {visitorStatsLoading ? (
+          <p className="visitor-loading">Loading visitor statistics...</p>
+        ) : visitorStatsError ? (
+          <p className="visitor-stats-error">{visitorStatsError}</p>
+        ) : (
+          <div className="visitor-stat-grid">
+            <article className="visitor-stat-card">
+              <small>UNIQUE VISITORS</small>
+              <strong>{visitorStats.unique_visitors}</strong>
+              <p>Different browsers that visited the website</p>
+            </article>
+
+            <article className="visitor-stat-card">
+              <small>TOTAL VISITS</small>
+              <strong>{visitorStats.total_visits}</strong>
+              <p>Total website sessions recorded</p>
+            </article>
+
+            <article className="visitor-stat-card">
+              <small>LAST 24 HOURS</small>
+              <strong>{visitorStats.last_24_hours}</strong>
+              <p>Visits recorded during the last day</p>
+            </article>
+          </div>
+        )}
+      </section>
 
       <form className="crud-form" onSubmit={handleSubmit}>
         <h2>{form.id ? "Edit item" : "Add item"}</h2>
@@ -278,7 +414,9 @@ export default function Admin() {
             <input
               type="file"
               accept="image/png,image/jpeg,image/webp,image/gif"
-              onChange={(e) => handleCardImageChange(e.target.files?.[0] || null)}
+              onChange={(e) =>
+                handleCardImageChange(e.target.files?.[0] || null)
+              }
             />
             <small className="image-upload-note">
               This photo appears on the project card.
@@ -290,7 +428,9 @@ export default function Admin() {
             <input
               type="file"
               accept="image/png,image/jpeg,image/webp,image/gif"
-              onChange={(e) => handleDetailImageChange(e.target.files?.[0] || null)}
+              onChange={(e) =>
+                handleDetailImageChange(e.target.files?.[0] || null)
+              }
             />
             <small className="image-upload-note">
               This photo appears when the user opens the project.
@@ -307,21 +447,31 @@ export default function Admin() {
           />
         </label>
 
-        {cardImageInfo && <p className="image-upload-info">{cardImageInfo}</p>}
-        {detailImageInfo && <p className="image-upload-info">{detailImageInfo}</p>}
+        {cardImageInfo && (
+          <p className="image-upload-info">{cardImageInfo}</p>
+        )}
+        {detailImageInfo && (
+          <p className="image-upload-info">{detailImageInfo}</p>
+        )}
 
         <div className="admin-preview-grid">
           {(form.card_image_url || form.image_url) && (
             <div className="current-image-preview">
               <span>Current card photo:</span>
-              <img src={form.card_image_url || form.image_url} alt="Current card" />
+              <img
+                src={form.card_image_url || form.image_url}
+                alt="Current card"
+              />
             </div>
           )}
 
           {(form.detail_image_url || form.image_url) && (
             <div className="current-image-preview">
               <span>Current big photo:</span>
-              <img src={form.detail_image_url || form.image_url} alt="Current detail" />
+              <img
+                src={form.detail_image_url || form.image_url}
+                alt="Current detail"
+              />
             </div>
           )}
         </div>
@@ -331,7 +481,11 @@ export default function Admin() {
 
         <div className="form-actions">
           <button disabled={saving}>
-            {saving ? "Saving..." : form.id ? "Update item" : "Add item"}
+            {saving
+              ? "Saving..."
+              : form.id
+                ? "Update item"
+                : "Add item"}
           </button>
           <button type="button" onClick={resetForm}>
             Clear
@@ -351,7 +505,10 @@ export default function Admin() {
                 <article className="admin-project-row" key={project.id}>
                   <div className="row-image">
                     {project.card_image_url || project.image_url ? (
-                      <img src={project.card_image_url || project.image_url} alt={project.name} />
+                      <img
+                        src={project.card_image_url || project.image_url}
+                        alt={project.name}
+                      />
                     ) : (
                       <span>No card image</span>
                     )}
@@ -365,7 +522,10 @@ export default function Admin() {
 
                   <div className="row-actions">
                     <button onClick={() => editProject(project)}>Edit</button>
-                    <button className="danger" onClick={() => handleDelete(project)}>
+                    <button
+                      className="danger"
+                      onClick={() => handleDelete(project)}
+                    >
                       Delete
                     </button>
                   </div>
