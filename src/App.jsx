@@ -16,6 +16,7 @@ import Admin from "./pages/Admin";
 
 import BackToTop from "./components/BackToTop";
 import PullRefreshIndicator from "./components/PullRefreshIndicator";
+import NavbarFlowLine from "./components/NavbarFlowLine";
 
 export default function App() {
   const location = useLocation();
@@ -29,6 +30,7 @@ export default function App() {
 
   return (
     <>
+      <NavbarFlowLine />
       <PullRefreshIndicator />
 
       <div

@@ -5,7 +5,7 @@ export default function SiteNav() {
     `animated-nav-link${isActive ? " is-active" : ""}`;
 
   return (
-    <header className="coded-nav coded-nav-dark">
+    <header className="coded-nav coded-nav-dark site-nav-component">
       <NavLink
         to="/"
         className="coded-logo"
