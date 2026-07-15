@@ -10072,3 +10072,118 @@ body .reference-project-card:nth-child(5) {
     margin-top: 16px !important;
   }
 }
+
+/* ======================================================================
+   FINAL NAVBAR LOGO SIZE AND SOLID BACKGROUND
+   ====================================================================== */
+
+/* Solid normal navbar background on every page */
+body .coded-nav {
+  background: #102033 !important;
+  background-image: none !important;
+
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18) !important;
+  box-shadow: none !important;
+}
+
+/* Smaller fitted two-line logo */
+body .coded-nav .coded-logo {
+  display: grid !important;
+  grid-template-rows: auto auto !important;
+
+  width: clamp(118px, 11vw, 168px) !important;
+  min-width: 0 !important;
+  max-width: 168px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: #fff !important;
+  text-decoration: none !important;
+
+  font-family:
+    "Acumin ExtraCondensed Black",
+    "Arial Narrow",
+    Impact,
+    sans-serif !important;
+
+  font-weight: 900 !important;
+  line-height: 0.82 !important;
+  letter-spacing: 0 !important;
+
+  transform: none !important;
+}
+
+/* Both lines use the exact same box width */
+body .coded-nav .coded-logo span,
+body .coded-nav .coded-logo strong {
+  display: block !important;
+
+  width: 100% !important;
+  max-width: 100% !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: #fff !important;
+
+  text-align: center !important;
+  white-space: nowrap !important;
+
+  transform-origin: center !important;
+}
+
+/* Longer top line is slightly smaller */
+body .coded-nav .coded-logo span {
+  font-size: clamp(16px, 1.5vw, 23px) !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* Shorter bottom line is slightly wider so both lines match visually */
+body .coded-nav .coded-logo strong {
+  font-size: clamp(19px, 1.78vw, 27px) !important;
+  letter-spacing: 0.055em !important;
+}
+
+/* Keep hover small and clean */
+body .coded-nav .coded-logo:hover,
+body .coded-nav .coded-logo:focus-visible {
+  transform: translateY(-1px) scale(1.015) !important;
+  filter: none !important;
+  outline: none !important;
+}
+
+/* Mobile logo remains compact and aligned */
+@media (max-width: 700px) {
+  body .coded-nav .coded-logo {
+    width: 112px !important;
+    max-width: 112px !important;
+  }
+
+  body .coded-nav .coded-logo span {
+    font-size: 14px !important;
+  }
+
+  body .coded-nav .coded-logo strong {
+    font-size: 17px !important;
+    letter-spacing: 0.05em !important;
+  }
+}
+
+@media (max-width: 390px) {
+  body .coded-nav .coded-logo {
+    width: 102px !important;
+    max-width: 102px !important;
+  }
+
+  body .coded-nav .coded-logo span {
+    font-size: 13px !important;
+  }
+
+  body .coded-nav .coded-logo strong {
+    font-size: 16px !important;
+  }
+}
