@@ -1,22 +1,16 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-export default function SiteNav({ dark = true }) {
-  const location = useLocation();
-
+export default function SiteNav() {
   const navLinkClass = ({ isActive }) =>
     `animated-nav-link${isActive ? " is-active" : ""}`;
 
-  const isProjectSurface =
-    location.pathname.startsWith("/category/") ||
-    location.pathname.startsWith("/project/");
-
   return (
-    <header
-      className={`coded-nav ${dark ? "coded-nav-dark" : "coded-nav-light"}${
-        isProjectSurface ? " coded-nav-glass" : ""
-      }`}
-    >
-      <NavLink to="/" className="coded-logo" aria-label="Jeannette portfolio home">
+    <header className="coded-nav coded-nav-dark">
+      <NavLink
+        to="/"
+        className="coded-logo"
+        aria-label="Jeannette portfolio home"
+      >
         <span>JEANNETTE'S</span>
         <strong>PORTFOLIO</strong>
       </NavLink>
