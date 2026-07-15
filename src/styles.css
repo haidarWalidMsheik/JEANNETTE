@@ -2,7 +2,14 @@
   box-sizing: border-box;
 }
 
-
+@font-face {
+  font-family: "Acumin ExtraCondensed Black";
+  src: url("/fonts/AcuminVariableConcept-ExtraCondensedBlack.woff2")
+    format("woff2");
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+}
 html,
 body,
 #root {
@@ -2965,10 +2972,7 @@ body {
     inset 0 1px 0 rgba(255,255,255,.11) !important;
 }
 
-.contact-panel-left {
-  position: relative;
-  z-index: 2;
-}
+
 
 .collab-red-orb {
   opacity: .82;
@@ -3565,9 +3569,7 @@ body {
 }
 
 /* hide old moving animated background */
-.coded-projects-landing .project-motion-bg {
-  display: none !important;
-}
+
 
 /* keep all content above the fixed photo */
 .coded-projects-landing > * {
@@ -3681,11 +3683,7 @@ body:has(.coded-projects-landing)::before {
 }
 
 /* keep navbar and circles in front of background */
-.coded-projects-landing .coded-nav,
-.coded-projects-landing .projects-landing-layout {
-  position: relative;
-  z-index: 5;
-}
+
 
 /* space between nav and circles/background */
 .coded-projects-landing .projects-landing-layout {
@@ -3770,11 +3768,7 @@ body:has(.coded-projects-landing)::before {
 /* PROJECTS PAGE FINAL DESIGN */
 
 /* fix position fixed problem caused by route animation */
-.route-transition:has(.coded-projects-landing) {
-  animation: none !important;
-  transform: none !important;
-  filter: none !important;
-}
+
 
 /* main projects page */
 .coded-projects-landing {
@@ -3807,10 +3801,7 @@ body:has(.coded-projects-landing)::before {
 }
 
 /* remove old animated / duplicate backgrounds */
-.coded-projects-landing .project-motion-bg,
-.projects-fixed-bg-image {
-  display: none !important;
-}
+
 
 /* navbar same style as home page */
 .coded-projects-landing .coded-nav {
@@ -3880,26 +3871,16 @@ body:has(.coded-projects-landing)::before {
 }
 
 /* first row: 2 circles */
-.coded-projects-landing .category-tile:nth-child(1) {
-  grid-column: 2 / span 2;
-}
 
-.coded-projects-landing .category-tile:nth-child(2) {
-  grid-column: 4 / span 2;
-}
+
+
 
 /* second row: 3 circles */
-.coded-projects-landing .category-tile:nth-child(3) {
-  grid-column: 1 / span 2;
-}
 
-.coded-projects-landing .category-tile:nth-child(4) {
-  grid-column: 3 / span 2;
-}
 
-.coded-projects-landing .category-tile:nth-child(5) {
-  grid-column: 5 / span 2;
-}
+
+
+
 
 /* smaller text inside circles */
 .coded-projects-landing .category-tile span {
@@ -3982,11 +3963,7 @@ body:has(.coded-projects-landing)::before {
 /* PROJECTS FINAL FIX: NO FADE + PHOTO LOWER THAN NAVBAR */
 
 /* fixed background works correctly */
-.route-transition:has(.coded-projects-landing) {
-  animation: none !important;
-  transform: none !important;
-  filter: none !important;
-}
+
 
 /* page variables */
 .coded-projects-landing {
@@ -4095,11 +4072,7 @@ body:has(.coded-projects-landing)::before {
   }
 }/* FINAL: PHOTO DIRECTLY UNDER NAVBAR, NO GAP, NO OVERLAP */
 
-.route-transition:has(.coded-projects-landing) {
-  animation: none !important;
-  transform: none !important;
-  filter: none !important;
-}
+
 
 .coded-projects-landing {
   --projects-nav-real-height: 90px;
@@ -4143,22 +4116,10 @@ body:has(.coded-projects-landing)::before {
 }
 
 /* remove all old fake/fade backgrounds */
-.coded-projects-landing .project-motion-bg,
-.projects-fixed-bg-image,
-.coded-projects-landing::before,
-body:has(.coded-projects-landing)::before {
-  display: none !important;
-  content: none !important;
-}
+
 
 /* everything stays in front of the photo */
-.coded-projects-landing .coded-nav,
-.coded-projects-landing .projects-landing-layout,
-.coded-projects-landing .category-tiles,
-.coded-projects-landing .category-tile {
-  position: relative;
-  z-index: 5;
-}
+
 /* PROJECT LANDING: BIG RESPONSIVE CIRCLES */
 
 /* keep circles on the right */
@@ -4911,10 +4872,7 @@ body:has(.coded-projects-landing)::before {
 }
 /* COLLABORATE SEND CIRCLE BURST */
 
-.coded-contact-form {
-  position: relative !important;
-  overflow: hidden !important;
-}
+
 
 .coded-contact-form::before,
 .coded-contact-form::after {
@@ -4983,23 +4941,9 @@ body:has(.coded-projects-landing)::before {
 }
 /* PROJECT LANDING BACKGROUND PHOTO */
 
-.route-transition:has(.coded-projects-landing) {
-  animation: none !important;
-  transform: none !important;
-  filter: none !important;
-}
 
-.coded-projects-landing {
-  --projects-nav-real-height: 90px;
 
-  position: relative;
-  min-height: 160vh;
-  background: #111 !important;
-  color: #fff;
-  overflow-x: hidden;
-  overflow-y: visible !important;
-  isolation: auto !important;
-}
+
 
 /* navbar stays above */
 .coded-projects-landing .coded-nav {
@@ -5024,13 +4968,7 @@ body:has(.coded-projects-landing)::before {
 }
 
 /* remove old duplicate backgrounds */
-.coded-projects-landing .project-motion-bg,
-.projects-fixed-bg-image,
-.coded-projects-landing::before,
-body:has(.coded-projects-landing)::before {
-  display: none !important;
-  content: none !important;
-}
+
 
 /* circles stay above photo */
 .coded-projects-landing .projects-landing-layout,
@@ -5041,23 +4979,9 @@ body:has(.coded-projects-landing)::before {
 }
 /* PROJECT LANDING: FULL PHOTO BACKGROUND + RESPONSIVE TEXT */
 
-.route-transition:has(.coded-projects-landing) {
-  animation: none !important;
-  transform: none !important;
-  filter: none !important;
-}
 
-.coded-projects-landing {
-  --projects-nav-real-height: 90px;
 
-  position: relative;
-  min-height: 160vh;
-  background: #111 !important;
-  color: #fff;
-  overflow-x: hidden;
-  overflow-y: visible !important;
-  isolation: auto !important;
-}
+
 
 /* no black empty space: cover fills the whole view */
 .projects-screen-bg {
@@ -5086,13 +5010,7 @@ body:has(.coded-projects-landing)::before {
 }
 
 /* remove old/duplicate backgrounds */
-.coded-projects-landing .project-motion-bg,
-.projects-fixed-bg-image,
-.coded-projects-landing::before,
-body:has(.coded-projects-landing)::before {
-  display: none !important;
-  content: none !important;
-}
+
 
 /* layout */
 .coded-projects-landing .projects-landing-layout {
@@ -5178,10 +5096,7 @@ body:has(.coded-projects-landing)::before {
   background-image: none !important;
 }
 
-.coded-projects-landing .project-motion-bg,
-.projects-fixed-bg-image {
-  display: none !important;
-}
+
 
 .projects-screen-bg {
   background-image: url("/design/projects-bg.png") !important;
@@ -5298,11 +5213,7 @@ body:has(.coded-projects-landing)::before {
 }
 /* FINAL PROJECT LANDING BACKGROUND: BELOW NAVBAR, DESKTOP + MOBILE */
 
-.route-transition:has(.coded-projects-landing) {
-  animation: none !important;
-  transform: none !important;
-  filter: none !important;
-}
+
 
 .coded-projects-landing {
   --projects-nav-height: 90px;
@@ -5349,14 +5260,7 @@ body:has(.coded-projects-landing)::before {
 }
 
 /* remove old backgrounds */
-.coded-projects-landing .project-motion-bg,
-.projects-fixed-bg-image,
-.coded-projects-landing::before,
-body:has(.coded-projects-landing)::before {
-  display: none !important;
-  content: none !important;
-  background-image: none !important;
-}
+
 
 /* mobile photo */
 @media (max-width: 700px) {
@@ -5366,7 +5270,7 @@ body:has(.coded-projects-landing)::before {
     background-position: center center !important;
   }
 }
-/* FINAL HOME: NO SPACE BETWEEN NAVBAR AND FIRST PHOTO */
+
 
 
 
@@ -5799,14 +5703,7 @@ body:has(.coded-projects-landing) {
 }
 
 /* remove old project bg layers */
-.coded-projects-landing .project-motion-bg,
-.projects-fixed-bg-image,
-.coded-projects-landing::before,
-body:has(.coded-projects-landing)::before {
-  display: none !important;
-  content: none !important;
-  background-image: none !important;
-}
+
 
 /* tablet */
 @media (max-width: 900px) {
@@ -5911,11 +5808,7 @@ body:has(.coded-projects-landing)::before {
   position: relative !important;
 }
 
-.coded-projects-landing .coded-nav {
-  position: relative !important;
-  z-index: 50 !important;
-  margin: 0 !important;
-}
+
 
 /* area under navbar */
 .projects-hero-stage {
@@ -5927,18 +5820,7 @@ body:has(.coded-projects-landing)::before {
 }
 
 /* background photo: no stretching */
-.projects-screen-bg {
-  position: absolute !important;
-  inset: 0 !important;
-  z-index: 0 !important;
-  pointer-events: none !important;
 
-  background-image: var(--projects-bg-desktop) !important;
-  background-size: cover !important;
-  background-position: center center !important;
-  background-repeat: no-repeat !important;
-  background-color: #111 !important;
-}
 
 /* mobile uses mobile photo, also no stretching */
 @media (max-width: 700px) {
@@ -5974,16 +5856,9 @@ body:has(.coded-projects-landing)::before,
    It stops the background from stretching wrong on desktop/mobile.
    ========================================================= */
 
-.route-transition:has(.coded-projects-landing) {
-  animation: none !important;
-  transform: none !important;
-  filter: none !important;
-}
 
-html:has(.coded-projects-landing),
-body:has(.coded-projects-landing) {
-  overflow: hidden !important;
-}
+
+
 
 .coded-projects-landing {
   --projects-nav-height: 90px;
@@ -6012,28 +5887,10 @@ body:has(.coded-projects-landing) {
 }
 
 /* The photo fills the area without squeezing/stretching. */
-.projects-screen-bg {
-  position: absolute !important;
-  inset: 0 !important;
-  z-index: 0 !important;
-  pointer-events: none !important;
 
-  background-image: var(--projects-bg-desktop) !important;
-  background-size: cover !important;
-  background-position: center center !important;
-  background-repeat: no-repeat !important;
-  background-color: #111 !important;
-}
 
 /* Hide all old duplicate project backgrounds. */
-.coded-projects-landing::before,
-body:has(.coded-projects-landing)::before,
-.coded-projects-landing .project-motion-bg,
-.projects-fixed-bg-image {
-  display: none !important;
-  content: none !important;
-  background-image: none !important;
-}
+
 
 /* Keep coded title/circles over the photo. */
 .projects-table-title,
@@ -6070,14 +5927,7 @@ body:has(.coded-projects-landing)::before,
 }
 
 /* keep mobile working */
-@media (max-width: 700px) {
-  .projects-screen-bg {
-    background-image: var(--projects-bg-mobile) !important;
-    background-size: cover !important;
-    background-position: center center !important;
-    background-repeat: no-repeat !important;
-  }
-}
+
 /* FINAL LAPTOP/DESKTOP PROJECT LANDING FIX */
 
 @media (min-width: 701px) {
@@ -7717,10 +7567,7 @@ body:has(.coded-projects-landing)::before,
 }
 
 /* remove old text/details */
-.detail-copy,
-.detail-link {
-  display: none !important;
-}
+
 /* =========================================================
    FINAL WEBSITE OVERRIDES
    ========================================================= */
@@ -7972,10 +7819,7 @@ body:has(.coded-projects-landing)::before,
   box-shadow: none !important;
 }
 
-.detail-copy,
-.detail-link {
-  display: none !important;
-}
+
 
 /* reduce any remaining black area under image */
 .project-photo-only-page {
@@ -8238,21 +8082,9 @@ body:has(.coded-projects-landing)::before,
   overflow: hidden !important;
 }
 
-.coded-contact-form::before,
-.coded-contact-form::after {
-  display: none !important;
-  content: none !important;
-  background: none !important;
-}
 
-.coded-contact-form label,
-.coded-contact-form input,
-.coded-contact-form textarea,
-.coded-contact-form button,
-.coded-contact-form .contact-error-coded {
-  position: relative !important;
-  z-index: 3 !important;
-}
+
+
 
 .coded-contact-form input,
 .coded-contact-form textarea {
@@ -8910,10 +8742,7 @@ body:has(.coded-projects-landing)::before,
   from { background-position: 100% 50%; }
   to   { background-position: -220% 50%; }
 }
-/* =========================================================
-   FINAL HOME FIRST IMAGE — FULL DISPLAY ON EVERY SCREEN
-   Paste this at the absolute end of styles.css
-   ========================================================= */
+
 
 
 
@@ -9512,11 +9341,7 @@ body:has(.coded-projects-landing) {
   white-space: nowrap !important;
 }
 
-.coded-projects-landing .projects-table-title::before,
-.coded-projects-landing .projects-table-title::after {
-  display: none !important;
-  content: none !important;
-}
+
 
 @media (max-width: 900px) {
   .coded-projects-landing > .coded-nav {
@@ -9554,9 +9379,7 @@ body:has(.coded-projects-landing) {
   }
 }
 
-/* ======================================================================
-   FINAL COLLABORATE NAV EVERYWHERE + HOME SILVER LINE ALIGNMENT
-   ====================================================================== */
+
 
 :root {
   --shared-nav-red: #ef1d28;
@@ -9642,10 +9465,7 @@ body:has(.coded-projects-landing) {
 
 
 
-/* ======================================================================
-   FINAL HOME NAV OVER FIRST IMAGE
-   Navbar is no longer between the first and second images.
-   ====================================================================== */
+
 
 
 
@@ -9667,10 +9487,7 @@ body:has(.coded-projects-landing) {
 
 
 
-/* =========================================================
-   FINAL HOME NAVBAR POSITION FIX
-   Paste this at the absolute end of src/styles.css
-   ========================================================= */
+
 
 
 
@@ -9684,10 +9501,7 @@ body:has(.coded-projects-landing) {
 
 
 /* Decorative line never affects layout */
-/* =========================================================
-   MOBILE HOME FIX
-   Navbar above the full first photo — no overlap, no gap
-   ========================================================= */
+
 
 /* ==========================================================
    HOME HERO MOBILE FIX
@@ -9699,31 +9513,20 @@ body:has(.coded-projects-landing) {
    Navbar ends near the silver line in the first image
    ========================================================= */
 
-/* =========================================================
-   MOBILE: REMOVE SPACE BETWEEN NAVBAR AND FIRST PHOTO
-   ========================================================= */
+
 
 
 
 
 /* Very narrow phones: keep the same proportional alignment */
 
-/* =========================================================
-   FIX RUINED MOBILE NAVBAR
-   Remove the huge empty black area and keep navbar over image
-   Paste at the absolute end of src/styles.css
-   ========================================================= */
 
 
 
 
 
-/* ======================================================================
-   FINAL MOBILE FULL PHOTO — NAVBAR TOUCHES SILVER LINE
-   Desktop remains unchanged.
-   On mobile the navbar is in normal flow, followed immediately by the
-   complete first photo. The silver line is the navbar bottom border.
-   ====================================================================== */
+
+
 
 
 
@@ -10081,10 +9884,9 @@ body .reference-project-card:nth-child(5) {
   }
 }
 
-/* ======================================================================
-   FINAL SAFE HOME LAYOUT
-   All older Home navbar/photo rules were removed.
-   ====================================================================== */
+/* =========================
+   HOME PAGE LAYOUT
+   ========================= */
 
 .photo-home-page {
   width: 100%;
@@ -10103,6 +9905,7 @@ body .reference-project-card:nth-child(5) {
   padding: 0;
 }
 
+/* Desktop and tablet: navbar overlays the first image. */
 .photo-home-page .hero-photo-section {
   position: relative;
   display: block;
@@ -10122,7 +9925,6 @@ body .reference-project-card:nth-child(5) {
   width: 100%;
   height: auto;
   max-width: 100%;
-  max-height: none;
   margin: 0;
   padding: 0;
   object-fit: contain;
@@ -10132,11 +9934,9 @@ body .reference-project-card:nth-child(5) {
 
 .photo-home-page .hero-photo-section > .hero-nav-layer {
   position: absolute;
-  inset: 0 0 auto 0;
+  inset: 0 0 auto;
   z-index: 100;
-  display: block;
   width: 100%;
-  height: auto;
   margin: 0;
   padding: 0;
   line-height: normal;
@@ -10150,7 +9950,7 @@ body .reference-project-card:nth-child(5) {
 
 .photo-home-page .hero-photo-section > .hero-load-line {
   position: absolute;
-  inset: 0 0 auto 0;
+  inset: 0 0 auto;
   z-index: 110;
   height: 2px;
   margin: 0;
@@ -10158,6 +9958,7 @@ body .reference-project-card:nth-child(5) {
   pointer-events: none;
 }
 
+/* Responsive spacing only between the later Home images. */
 .photo-home-page .about-photo-only-section,
 .photo-home-page .bottom-photo-only-section {
   margin: clamp(26px, 3.5vw, 56px) 0 0;
@@ -10178,6 +9979,7 @@ body .reference-project-card:nth-child(5) {
   vertical-align: top;
 }
 
+/* Mobile: navbar above the complete first image, with normal scrolling. */
 @media (max-width: 700px) {
   html,
   body,
@@ -10212,21 +10014,17 @@ body .reference-project-card:nth-child(5) {
     position: relative !important;
     inset: auto !important;
     order: 1 !important;
-    z-index: 100 !important;
-    display: block !important;
     width: 100% !important;
     height: auto !important;
     min-height: 0 !important;
     max-height: none !important;
     margin: 0 !important;
     padding: 0 !important;
-    line-height: normal !important;
     transform: none !important;
   }
 
   .photo-home-page .hero-photo-section > .hero-nav-layer > .coded-nav {
     position: relative !important;
-    inset: auto !important;
     width: 100% !important;
     max-width: none !important;
     height: auto !important;
@@ -10241,7 +10039,6 @@ body .reference-project-card:nth-child(5) {
     position: relative !important;
     inset: auto !important;
     order: 2 !important;
-    z-index: 1 !important;
     display: block !important;
     width: 100% !important;
     height: auto !important;
