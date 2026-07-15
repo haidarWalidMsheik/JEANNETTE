@@ -11742,3 +11742,96 @@ body:has(.coded-projects-landing) {
     font-size: 9px !important;
   }
 }
+
+/* =========================================================
+   EMERGENCY MEMORY / CHROME CRASH FIX
+   Paste at the absolute end of src/styles.css
+   ========================================================= */
+
+/* Stop expensive full-page blur/filter animations */
+.route-transition {
+  animation: none !important;
+  filter: none !important;
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+/* Disable heavy backdrop filters that consume GPU memory */
+.coded-nav,
+.category-tile,
+.coded-contact-form,
+.project-reference-card,
+.project-overlay-card {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Stop large animated pseudo-elements */
+.motion-street-bg::before,
+.motion-street-bg::after,
+.project-motion-bg::before,
+.project-motion-bg::after,
+.design-canvas::after,
+.category-tile::before,
+.category-tile::after,
+.project-reference-card::before,
+.project-overlay-card::before,
+.project-shine {
+  animation: none !important;
+  filter: none !important;
+}
+
+/* Prevent continuous large-image animations */
+.home-girl-xyz,
+.home-girl-hero,
+.home-girl-about,
+.rotate-second-girl-once,
+.girl-second-photo,
+.project-reference-card,
+.category-tile {
+  animation: none !important;
+  will-change: auto !important;
+}
+
+/* Remove GPU-heavy filters from large images */
+.photo-section-image,
+.design-image,
+.home-girl-hero,
+.home-girl-about,
+.girl-face-fixed,
+.girl-second-photo,
+.detail-image-card,
+.detail-image-card img {
+  filter: none !important;
+  will-change: auto !important;
+  transform: none !important;
+}
+
+/* Keep hover effects lightweight */
+.project-overlay-card:hover,
+.project-overlay-card:focus-visible,
+.project-overlay-card:focus-within,
+.category-tile:hover,
+.category-tile:focus-visible,
+.project-reference-card:hover,
+.project-reference-card:focus-visible {
+  transform: translateY(-3px) !important;
+  filter: none !important;
+}
+
+/* Mobile: remove all expensive visual effects */
+@media (max-width: 900px) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+
+  .coded-nav,
+  .coded-contact-form,
+  .category-tile,
+  .project-reference-card {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
