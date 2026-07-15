@@ -12096,229 +12096,38 @@ body .reference-project-card:nth-child(5) {
 }
 
 /* ======================================================================
-   FINAL HOME PHOTO SPACING FIX
-   - No space between navbar and first photo on any screen
-   - Space only before the second and third About Me photos
+   FINAL MOBILE HOME NAV OVERLAY — NO BLACK BLOCK
+   The navbar occupies zero layout height and the first image starts at top.
    ====================================================================== */
 
-.photo-home-page {
-  display: block !important;
-  width: 100% !important;
+/* Desktop and all screens: first hero has no outer spacing. */
+body .photo-home-page,
+body .photo-home-page .hero-photo-section {
   margin: 0 !important;
   padding: 0 !important;
-  background: #111 !important;
 }
 
-/* First Home section: navbar and first photo must touch */
-.photo-home-page .hero-photo-section {
+body .photo-home-page .hero-photo-section {
   position: relative !important;
-  display: flex !important;
-  flex-direction: column !important;
-
+  display: block !important;
   width: 100% !important;
   height: auto !important;
   min-height: 0 !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-  gap: 0 !important;
-
-  overflow: visible !important;
-  line-height: 0 !important;
-}
-
-/* Navbar stays first and takes no bottom spacing */
-.photo-home-page .hero-photo-section > .hero-nav-layer {
-  position: relative !important;
-  inset: auto !important;
-
-  order: 1 !important;
-
-  display: block !important;
-  width: 100% !important;
-  height: auto !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-
-  transform: none !important;
-  line-height: normal !important;
-  z-index: 100 !important;
-}
-
-.photo-home-page .hero-photo-section > .hero-nav-layer > .coded-nav {
-  width: 100% !important;
-  max-width: none !important;
-
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-
-  border-bottom-left-radius: 0 !important;
-  border-bottom-right-radius: 0 !important;
-}
-
-/* First photo starts immediately after navbar */
-.photo-home-page .hero-photo-section > .photo-section-image {
-  position: relative !important;
-  inset: auto !important;
-
-  order: 2 !important;
-
-  display: block !important;
-
-  width: 100% !important;
-  height: auto !important;
-
-  min-width: 0 !important;
-  min-height: 0 !important;
-  max-width: 100% !important;
-  max-height: none !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-
-  object-fit: contain !important;
-  object-position: center top !important;
-
-  transform: none !important;
-  clip-path: none !important;
-  -webkit-clip-path: none !important;
-
-  vertical-align: top !important;
-}
-
-/* Decorative line overlays the section and never creates a gap */
-.photo-home-page .hero-photo-section > .hero-load-line {
-  position: absolute !important;
-  top: 0 !important;
-  right: 0 !important;
-  left: 0 !important;
-
-  z-index: 120 !important;
-
-  width: 100% !important;
-  height: 2px !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-
-  pointer-events: none !important;
-}
-
-/* Space between the later About Me photos only */
-.photo-home-page .about-photo-only-section,
-.photo-home-page .bottom-photo-only-section {
-  position: relative !important;
-  display: block !important;
-
-  width: 100% !important;
-  height: auto !important;
-
-  margin-right: 0 !important;
-  margin-bottom: 0 !important;
-  margin-left: 0 !important;
-
-  padding: 0 !important;
-  overflow: hidden !important;
-}
-
-/* Second photo gets space above it */
-.photo-home-page .about-photo-only-section {
-  margin-top: clamp(26px, 3.5vw, 56px) !important;
-}
-
-/* Third photo gets space above it */
-.photo-home-page .bottom-photo-only-section {
-  margin-top: clamp(26px, 3.5vw, 56px) !important;
-}
-
-/* Ensure later photos remain full width */
-.photo-home-page .about-photo-only-section > .photo-section-image,
-.photo-home-page .bottom-photo-only-section > .photo-section-image {
-  display: block !important;
-
-  width: 100% !important;
-  height: auto !important;
-  max-width: 100% !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-
-  object-fit: contain !important;
-  object-position: center top !important;
-
-  vertical-align: top !important;
-}
-
-/* Mobile */
-@media (max-width: 700px) {
-  .photo-home-page .hero-photo-section {
-    margin: 0 !important;
-    padding: 0 !important;
-    gap: 0 !important;
-  }
-
-  .photo-home-page .hero-photo-section > .hero-nav-layer {
-    position: relative !important;
-    inset: auto !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  .photo-home-page .hero-photo-section > .photo-section-image {
-    width: 100% !important;
-    height: auto !important;
-    margin: 0 !important;
-  }
-
-  .photo-home-page .about-photo-only-section,
-  .photo-home-page .bottom-photo-only-section {
-    margin-top: 22px !important;
-  }
-}
-
-/* Very small phones */
-@media (max-width: 390px) {
-  .photo-home-page .about-photo-only-section,
-  .photo-home-page .bottom-photo-only-section {
-    margin-top: 16px !important;
-  }
-}
-
-/* ======================================================================
-   FINAL NO BLACK GAP BETWEEN NAVBAR AND FIRST PHOTO
-   Navbar overlays the first photo on every screen.
-   ====================================================================== */
-
-.photo-home-page .hero-photo-section {
-  position: relative !important;
-  display: block !important;
-
-  width: 100% !important;
-  height: auto !important;
-  min-height: 0 !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-
   overflow: hidden !important;
   line-height: 0 !important;
 }
 
-/* First photo begins at the very top of the hero */
-.photo-home-page .hero-photo-section > .photo-section-image {
+/* First image defines the hero height and begins at y = 0. */
+body .photo-home-page
+  .hero-photo-section
+  > img.photo-section-image {
   position: relative !important;
   inset: auto !important;
-
   z-index: 1 !important;
 
   display: block !important;
-
   width: 100% !important;
   height: auto !important;
-
-  min-width: 0 !important;
-  min-height: 0 !important;
   max-width: 100% !important;
   max-height: none !important;
 
@@ -12331,14 +12140,15 @@ body .reference-project-card:nth-child(5) {
   transform: none !important;
   clip-path: none !important;
   -webkit-clip-path: none !important;
-
   vertical-align: top !important;
 }
 
-/* Navbar sits on top of the first photo instead of creating a black row */
-.photo-home-page .hero-photo-section > .hero-nav-layer {
+/* Navbar is removed from normal flow and sits over the image. */
+body .photo-home-page
+  .hero-photo-section
+  > .hero-nav-layer {
   position: absolute !important;
-
+  inset: 0 0 auto 0 !important;
   top: 0 !important;
   right: 0 !important;
   bottom: auto !important;
@@ -12347,7 +12157,6 @@ body .reference-project-card:nth-child(5) {
   z-index: 1000 !important;
 
   display: block !important;
-
   width: 100% !important;
   height: auto !important;
 
@@ -12356,36 +12165,48 @@ body .reference-project-card:nth-child(5) {
 
   transform: none !important;
   line-height: normal !important;
-
   pointer-events: auto !important;
 }
 
-/* Keep the shared navbar design, but never add layout spacing */
-.photo-home-page .hero-photo-section > .hero-nav-layer > .coded-nav {
+/* Home navbar is translucent, so the first photo remains visible behind it. */
+body .photo-home-page
+  .hero-photo-section
+  > .hero-nav-layer
+  > .coded-nav {
   position: relative !important;
   inset: auto !important;
 
   width: 100% !important;
   max-width: none !important;
-
   height: auto !important;
   min-height: 0 !important;
   max-height: none !important;
 
   margin: 0 !important;
 
+  background:
+    linear-gradient(
+      180deg,
+      rgba(10, 24, 41, 0.72) 0%,
+      rgba(10, 24, 41, 0.34) 72%,
+      rgba(10, 24, 41, 0.08) 100%
+    ) !important;
+
+  border: 0 !important;
+  border-bottom: 1px solid rgba(220, 225, 230, 0.78) !important;
+  border-radius: 0 !important;
+
+  box-shadow: none !important;
   transform: none !important;
 }
 
-/* Loading line overlays the top and creates no space */
-.photo-home-page .hero-photo-section > .hero-load-line {
+/* Decorative line never occupies layout space. */
+body .photo-home-page
+  .hero-photo-section
+  > .hero-load-line {
   position: absolute !important;
-
-  top: 0 !important;
-  right: 0 !important;
-  left: 0 !important;
-
-  z-index: 1100 !important;
+  inset: 0 0 auto 0 !important;
+  z-index: 1200 !important;
 
   width: 100% !important;
   height: 2px !important;
@@ -12396,30 +12217,110 @@ body .reference-project-card:nth-child(5) {
   pointer-events: none !important;
 }
 
-/* Same overlay behavior on tablet and mobile */
-@media (max-width: 900px) {
-  .photo-home-page .hero-photo-section {
+/* Preserve spacing only before the second and third photos. */
+body .photo-home-page .about-photo-only-section,
+body .photo-home-page .bottom-photo-only-section {
+  margin-right: 0 !important;
+  margin-bottom: 0 !important;
+  margin-left: 0 !important;
+  padding: 0 !important;
+}
+
+body .photo-home-page .about-photo-only-section {
+  margin-top: clamp(26px, 3.5vw, 56px) !important;
+}
+
+body .photo-home-page .bottom-photo-only-section {
+  margin-top: clamp(26px, 3.5vw, 56px) !important;
+}
+
+/* Mobile-specific layout. */
+@media (max-width: 700px) {
+  body .photo-home-page .hero-photo-section {
+    position: relative !important;
     display: block !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  .photo-home-page .hero-photo-section > .hero-nav-layer {
-    position: absolute !important;
-    top: 0 !important;
-    right: 0 !important;
-    bottom: auto !important;
-    left: 0 !important;
-
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  .photo-home-page .hero-photo-section > .photo-section-image {
     width: 100% !important;
     height: auto !important;
+    min-height: 0 !important;
+
     margin: 0 !important;
     padding: 0 !important;
+    gap: 0 !important;
+
+    overflow: hidden !important;
+  }
+
+  body .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer {
+    position: absolute !important;
+    inset: 0 0 auto 0 !important;
+
+    width: 100% !important;
+    height: auto !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer
+    > .coded-nav {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+
+    margin: 0 !important;
+    padding:
+      max(9px, env(safe-area-inset-top))
+      14px
+      9px !important;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(10, 24, 41, 0.74) 0%,
+        rgba(10, 24, 41, 0.36) 70%,
+        rgba(10, 24, 41, 0.05) 100%
+      ) !important;
+
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  body .photo-home-page
+    .hero-photo-section
+    > img.photo-section-image {
+    position: relative !important;
+    top: 0 !important;
+
+    width: 100% !important;
+    height: auto !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    object-fit: contain !important;
+    object-position: center top !important;
+  }
+
+  body .photo-home-page .about-photo-only-section,
+  body .photo-home-page .bottom-photo-only-section {
+    margin-top: 22px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  body .photo-home-page
+    .hero-photo-section
+    > .hero-nav-layer
+    > .coded-nav {
+    padding-inline: 11px !important;
+  }
+
+  body .photo-home-page .about-photo-only-section,
+  body .photo-home-page .bottom-photo-only-section {
+    margin-top: 16px !important;
   }
 }
