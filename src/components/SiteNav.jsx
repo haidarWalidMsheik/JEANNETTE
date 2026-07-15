@@ -1,48 +1,48 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import SiteNav from "../components/SiteNav";
 
-export default function SiteNav({ dark = true }) {
-  const location = useLocation();
-
-  const navLinkClass = ({ isActive }) =>
-    `animated-nav-link${isActive ? " is-active" : ""}`;
-
-  const isProjectSurface =
-    location.pathname.startsWith("/category/") ||
-    location.pathname.startsWith("/project/");
+export default function Home() {
+  const base = import.meta.env.BASE_URL;
 
   return (
-    <header
-      className={`coded-nav ${dark ? "coded-nav-dark" : "coded-nav-light"}${
-        isProjectSurface ? " coded-nav-glass" : ""
-      }`}
-    >
-      <NavLink to="/" className="coded-logo" aria-label="Jeannette portfolio home">
-        <span>JEANNETTE'S</span>
-        <strong>PORTFOLIO</strong>
-      </NavLink>
+    <main className="photo-home-page">
+      <section className="photo-home-section hero-photo-section" id="about">
+        <img
+          className="photo-section-image"
+          src={`${base}design/home-hero-bg.jpeg`}
+          alt="Jeannette portfolio hero"
+        />
 
-      <nav className="coded-nav-links" aria-label="Main navigation">
-        <NavLink to="/" className={navLinkClass}>
-          ABOUT ME
-        </NavLink>
+        <div className="hero-load-line" aria-hidden="true" />
 
-        <NavLink to="/projects" className={navLinkClass}>
-          PROJECTS
-        </NavLink>
+        <div className="hero-nav-layer">
+          <SiteNav />
+        </div>
+      </section>
 
-        <NavLink to="/collaborate" className={navLinkClass}>
-          COLLABORATE
-        </NavLink>
+      <section className="photo-home-section about-photo-only-section">
+        <img
+          className="photo-section-image"
+          src={`${base}design/about-bg-clean.png`}
+          alt="Jeannette graphic designer section"
+        />
 
-        <NavLink
-          to="/admin-login"
-          className="admin-access-pill"
-          aria-label="Admin login"
-        >
-          <span aria-hidden="true">🔐</span>
-          <b>ADMIN</b>
-        </NavLink>
-      </nav>
-    </header>
+        <Link className="red-pill-button magnetic-button photo-check-button" to="/projects">
+          Check Ma Work
+        </Link>
+      </section>
+
+      <section className="photo-home-section bottom-photo-only-section">
+        <img
+          className="photo-section-image"
+          src={`${base}design/bottom-section-bg.png`}
+          alt="Jeannette skills and belief section"
+        />
+
+        <Link className="red-pill-button magnetic-button photo-collab-button" to="/collaborate">
+          Let’s Collaborate
+        </Link>
+      </section>
+    </main>
   );
 }
