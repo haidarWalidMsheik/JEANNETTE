@@ -85,7 +85,9 @@ async function prepareImageForUpload(file) {
     img.src = imageUrl;
     await img.decode();
 
-    const scale = Math.min(1, MAX_IMAGE_SIDE / Math.max(img.width, img.height));
+    // Preserve the width of tall portfolio designs. Limiting by the longest
+    // side would make a tall design too narrow and pixelated at full width.
+    const scale = Math.min(1, MAX_IMAGE_SIDE / img.width);
     const width = Math.max(1, Math.round(img.width * scale));
     const height = Math.max(1, Math.round(img.height * scale));
 
