@@ -13923,3 +13923,47 @@ html body #root
     white-space: nowrap !important;
   }
 }
+/* Projects title — larger, bold, exactly two lines */
+@media (min-width: 901px) {
+  html body #root
+  .route-transition
+  .coded-projects-landing
+  .reference-projects-title {
+    width: 370px !important;
+    max-width: 370px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    font-size: clamp(50px, 4.4vw, 66px) !important;
+    font-weight: 850 !important;
+
+    font-variation-settings:
+      "wght" 850,
+      "wdth" 50 !important;
+
+    line-height: 0.88 !important;
+    letter-spacing: 0.015em !important;
+
+    position: relative !important;
+    z-index: 5 !important;
+  }
+
+  html body #root
+  .route-transition
+  .coded-projects-landing
+  .reference-projects-title span {
+    display: block !important;
+    width: max-content !important;
+    max-width: none !important;
+    white-space: nowrap !important;
+  }
+
+  /* Preserve separation between the title and boxes */
+  html body #root
+  .route-transition
+  .coded-projects-landing
+  .reference-projects-grid {
+    margin-left: 35px !important;
+  }
+}
