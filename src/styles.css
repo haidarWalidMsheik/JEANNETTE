@@ -13553,3 +13553,336 @@ html body #root
     flex-direction: column;
   }
 }
+/* =========================================================
+   FINAL FIX: OPEN EACH PROJECT AT FULL BROWSER WIDTH
+   The project opens directly full-width. No image popup.
+   The complete image remains visible and can scroll vertically.
+   ========================================================= */
+
+.project-photo-only-page,
+.detail-page {
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 100svh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+  background: #000 !important;
+}
+
+.project-photo-only-stage,
+.detail-page .detail-hero,
+.detail-page .detail-image-card {
+  width: 100vw !important;
+  max-width: none !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  overflow: visible !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: #000 !important;
+}
+
+.project-photo-only-stage img,
+.detail-page .detail-hero img,
+.detail-page .detail-image-card img {
+  position: static !important;
+  display: block !important;
+  width: 100vw !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  object-fit: contain !important;
+  object-position: center top !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+/* Only the large title on each category/project page */
+html body #root
+.route-transition
+.coded-category-page
+.category-type-hero h1 {
+  font-weight: 550 !important;
+
+  font-variation-settings:
+    "wght" 550,
+    "wdth" 50 !important;
+
+  letter-spacing: 0.035em !important;
+
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+}
+/* Project card titles only */
+html body #root
+.route-transition
+.coded-category-page
+.project-type-card
+.project-type-copy h2 {
+  /* Slightly bold */
+  font-weight: 650 !important;
+
+  font-variation-settings:
+    "wght" 650,
+    "wdth" 50 !important;
+
+  /* Small spacing between letters */
+  letter-spacing: 0.065em !important;
+
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+}
+/* Reduce black space below project-card images */
+html body #root
+.route-transition
+.coded-category-page
+.project-type-card {
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+html body #root
+.route-transition
+.coded-category-page
+.project-type-card
+.project-type-copy {
+  flex: 0 0 auto !important;
+
+  /* Keep a comfortable amount of black space */
+  min-height: 90px !important;
+  padding: 16px 20px 18px !important;
+}
+/* =========================================================
+   FINAL MOBILE LOGO — MATCH THE REFERENCE
+   Both lines:
+   - white
+   - same font/design
+   - same visual width
+   - aligned at the same starting point
+   ========================================================= */
+
+@media (max-width: 900px) {
+  html body #root
+  .route-transition
+  .site-nav-component.site-nav-component.site-nav-component.site-nav-component
+  .coded-logo {
+    display: grid !important;
+    grid-template-rows: 18px 18px !important;
+
+    flex: 0 0 94px !important;
+    width: 94px !important;
+    min-width: 94px !important;
+    max-width: 94px !important;
+    height: 36px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    overflow: visible !important;
+    transform: none !important;
+  }
+
+  html body #root
+  .route-transition
+  .site-nav-component.site-nav-component.site-nav-component.site-nav-component
+  .coded-logo span,
+
+  html body #root
+  .route-transition
+  .site-nav-component.site-nav-component.site-nav-component.site-nav-component
+  .coded-logo strong {
+    display: block !important;
+    height: 18px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    font-family:
+      "Acumin Variable Concept ExtraCondensed Black",
+      "Arial Black",
+      Impact,
+      sans-serif !important;
+
+    color: #ffffff !important;
+    font-weight: 900 !important;
+    font-variation-settings:
+      "wght" 900,
+      "wdth" 50 !important;
+
+    line-height: 18px !important;
+    text-align: left !important;
+    white-space: nowrap !important;
+
+    -webkit-text-stroke: 0 !important;
+    text-shadow: none !important;
+    transform-origin: left center !important;
+  }
+
+  /* JEANNETTE'S */
+  html body #root
+  .route-transition
+  .site-nav-component.site-nav-component.site-nav-component.site-nav-component
+  .coded-logo span {
+    width: 94px !important;
+    font-size: 15px !important;
+    letter-spacing: -0.015em !important;
+    transform: none !important;
+  }
+
+  /* PORTFOLIO — larger because it contains fewer letters */
+  html body #root
+  .route-transition
+  .site-nav-component.site-nav-component.site-nav-component.site-nav-component
+  .coded-logo strong {
+    width: 94px !important;
+    font-size: 18px !important;
+    letter-spacing: 0.045em !important;
+    transform: none !important;
+  }
+}
+/* Projects landing main title only */
+html body #root
+.route-transition
+.coded-projects-landing
+.reference-projects-title,
+html body #root
+.route-transition
+.coded-projects-landing
+.reference-projects-title span {
+  letter-spacing: 0.035em !important;
+}
+/* Collaborate desktop artwork:
+   move the baked-in title slightly away from the left edge */
+@media (min-width: 901px) {
+  html body #root
+  .route-transition
+  .coded-collaborate-page::before {
+    left: 0 !important;
+    right: auto !important;
+
+    width: 104% !important;
+
+    background-size: 104% auto !important;
+    background-position: center top !important;
+    background-repeat: no-repeat !important;
+  }
+
+  /* Keep the input form safely above the artwork */
+  html body #root
+  .route-transition
+  .coded-collaborate-page
+  .coded-contact-form {
+    position: relative !important;
+    z-index: 10 !important;
+  }
+}
+/* Transparent black/red boxes — Projects landing only */
+html body #root
+.route-transition
+.coded-projects-landing
+.reference-project-card {
+  background:
+    radial-gradient(
+      circle at 88% 12%,
+      rgba(238, 33, 38, 0.16),
+      transparent 38%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(20, 20, 20, 0.68),
+      rgba(8, 8, 8, 0.52)
+    ) !important;
+
+  border-color: rgba(255, 255, 255, 0.14) !important;
+
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
+}
+
+/* Keep the decorative red layer subtle */
+html body #root
+.route-transition
+.coded-projects-landing
+.reference-project-card::before {
+  opacity: 0.55 !important;
+}
+
+/* Slightly more solid when hovered */
+html body #root
+.route-transition
+.coded-projects-landing
+.reference-project-card:hover,
+html body #root
+.route-transition
+.coded-projects-landing
+.reference-project-card:focus-visible {
+  background:
+    radial-gradient(
+      circle at 82% 18%,
+      rgba(238, 33, 38, 0.23),
+      transparent 40%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(22, 22, 22, 0.78),
+      rgba(8, 8, 8, 0.65)
+    ) !important;
+}
+/* Transparent black/red boxes — Projects landing only */
+html body #root
+.route-transition
+.coded-projects-landing
+.reference-project-card {
+  background:
+    radial-gradient(
+      circle at 88% 12%,
+      rgba(238, 33, 38, 0.16),
+      transparent 38%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(20, 20, 20, 0.68),
+      rgba(8, 8, 8, 0.52)
+    ) !important;
+
+  border-color: rgba(255, 255, 255, 0.14) !important;
+
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
+}
+
+/* Keep the decorative red layer subtle */
+html body #root
+.route-transition
+.coded-projects-landing
+.reference-project-card::before {
+  opacity: 0.55 !important;
+}
+
+/* Slightly more solid when hovered */
+html body #root
+.route-transition
+.coded-projects-landing
+.reference-project-card:hover,
+html body #root
+.route-transition
+.coded-projects-landing
+.reference-project-card:focus-visible {
+  background:
+    radial-gradient(
+      circle at 82% 18%,
+      rgba(238, 33, 38, 0.23),
+      transparent 40%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(22, 22, 22, 0.78),
+      rgba(8, 8, 8, 0.65)
+    ) !important;
+}
