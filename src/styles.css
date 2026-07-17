@@ -13886,3 +13886,20 @@ html body #root
       rgba(8, 8, 8, 0.65)
     ) !important;
 }
+/* Projects landing title — more bold */
+html body #root
+.route-transition
+.coded-projects-landing
+.reference-projects-title,
+html body #root
+.route-transition
+.coded-projects-landing
+.reference-projects-title span {
+  font-weight: 850 !important;
+
+  font-variation-settings:
+    "wght" 850,
+    "wdth" 50 !important;
+
+  -webkit-text-stroke: 0.15px currentColor !important;
+}
