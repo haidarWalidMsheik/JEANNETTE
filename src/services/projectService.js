@@ -3,7 +3,7 @@ import { categoryOrder } from "../config/categories";
 
 const MAX_ORIGINAL_IMAGE_SIZE = 25 * 1024 * 1024;
 const MAX_UPLOAD_IMAGE_SIZE = 5 * 1024 * 1024;
-const MAX_IMAGE_SIDE = 1800;
+const MAX_IMAGE_SIDE = 3000;
 
 function sortProjects(projects) {
   return [...projects].sort((a, b) => {
@@ -106,7 +106,7 @@ async function prepareImageForUpload(file) {
     ctx.fillRect(0, 0, width, height);
     ctx.drawImage(img, 0, 0, width, height);
 
-    const qualities = [0.86, 0.78, 0.68, 0.58];
+    const qualities = [0.92, 0.86, 0.78, 0.7];
     let bestBlob = null;
 
     for (const quality of qualities) {
