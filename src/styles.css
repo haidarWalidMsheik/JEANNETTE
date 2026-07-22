@@ -13967,3 +13967,95 @@ html body #root
     margin-left: 35px !important;
   }
 }
+
+/* =========================================================
+   ULTRA-WIDE SCREEN GUARD
+   Keep the public portfolio on its native 1920px design canvas.
+   Wider monitors show the same composition centered instead of
+   stretching the artwork and pushing its positioned content.
+   ========================================================= */
+@media (min-width: 1921px) {
+  html body #root .route-transition > .photo-home-page,
+  html body #root .route-transition > .coded-projects-landing,
+  html body #root .route-transition > .coded-category-page,
+  html body #root .route-transition > .coded-collaborate-page,
+  html body #root .route-transition > .project-photo-only-page {
+    width: 100% !important;
+    max-width: 1920px !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+  }
+
+  html body #root .project-photo-only-page .project-photo-only-stage,
+  html body #root .project-photo-only-page .project-photo-only-stage img,
+  html body #root .project-photo-only-page .detail-hero,
+  html body #root .project-photo-only-page .detail-image-card,
+  html body #root .project-photo-only-page .detail-hero img,
+  html body #root .project-photo-only-page .detail-image-card img {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* =========================================================
+   EMPHASIS FOR THE REQUESTED PORTFOLIO TITLES ONLY
+   ========================================================= */
+html body #root .route-transition
+.coded-projects-landing
+.reference-projects-title,
+html body #root .route-transition
+.coded-projects-landing
+.reference-projects-title span,
+html body #root .route-transition
+.coded-category-page
+.category-type-hero[data-category="branding"] h1,
+html body #root .route-transition
+.coded-category-page
+.category-type-hero[data-category="branding"] p {
+  font-family:
+    "Acumin ExtraCondensed Black",
+    "Arial Black",
+    Impact,
+    sans-serif !important;
+
+  font-weight: 900 !important;
+  font-variation-settings:
+    "wght" 900,
+    "wdth" 50 !important;
+}
+
+/* Keep the bold Projects title clear of the cards on laptops/desktops. */
+@media (min-width: 901px) and (max-width: 1179px) {
+  html body #root .route-transition
+  .coded-projects-landing
+  .reference-projects-title {
+    font-size: 32px !important;
+  }
+}
+
+@media (min-width: 1180px) and (max-width: 1679px) {
+  html body #root .route-transition
+  .coded-projects-landing
+  .reference-projects-title {
+    font-size: 3.2vw !important;
+  }
+}
+
+@media (min-width: 1680px) and (max-width: 1799px) {
+  html body #root .route-transition
+  .coded-projects-landing
+  .reference-projects-title {
+    font-size: calc(10vw - 114px) !important;
+  }
+}
+
+/* Bring the Collaboration form closer to the artwork on large screens only. */
+@media (min-width: 1600px) {
+  html body #root .route-transition
+  .coded-collaborate-page
+  .coded-contact-form {
+    margin-left: auto !important;
+    margin-right:
+      clamp(0px, calc((100vw - 1600px) * 0.5), 160px) !important;
+  }
+}

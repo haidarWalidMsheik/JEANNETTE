@@ -77,7 +77,7 @@ export default function CategoryPage() {
     <main className="coded-category-page">
       <SiteNav />
 
-      <section className="category-type-hero">
+      <section className="category-type-hero" data-category={category.slug}>
         <p>{category.name}</p>
         <h1>{copy.title}</h1>
         <span>{copy.text}</span>
