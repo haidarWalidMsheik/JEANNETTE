@@ -13998,7 +13998,7 @@ html body #root
 }
 
 /* =========================================================
-   EMPHASIS FOR THE REQUESTED PORTFOLIO TITLES ONLY
+   CONSISTENT DISPLAY FONT FOR PROJECT-TYPE PAGES
    ========================================================= */
 html body #root .route-transition
 .coded-projects-landing
@@ -14008,10 +14008,10 @@ html body #root .route-transition
 .reference-projects-title span,
 html body #root .route-transition
 .coded-category-page
-.category-type-hero[data-category="branding"] h1,
+.category-type-hero h1,
 html body #root .route-transition
 .coded-category-page
-.category-type-hero[data-category="branding"] p {
+.category-type-hero p {
   font-family:
     "Acumin ExtraCondensed Black",
     "Arial Black",
@@ -14057,5 +14057,67 @@ html body #root .route-transition
     margin-left: auto !important;
     margin-right:
       clamp(0px, calc((100vw - 1600px) * 0.5), 160px) !important;
+  }
+}
+
+/* Keep the compact mobile logo from running into the navbar labels. */
+@media (max-width: 700px) {
+  html body #root .route-transition
+  .site-nav-component.site-nav-component.site-nav-component.site-nav-component
+  .coded-logo {
+    flex-basis: 84px !important;
+    width: 84px !important;
+    min-width: 84px !important;
+    max-width: 84px !important;
+    overflow: hidden !important;
+  }
+
+  html body #root .route-transition
+  .site-nav-component.site-nav-component.site-nav-component.site-nav-component
+  .coded-logo span {
+    width: 84px !important;
+    font-size: 13.25px !important;
+  }
+
+  html body #root .route-transition
+  .site-nav-component.site-nav-component.site-nav-component.site-nav-component
+  .coded-logo strong {
+    width: 84px !important;
+    font-size: 15.5px !important;
+    letter-spacing: 0.025em !important;
+  }
+
+  html body #root .route-transition
+  .site-nav-component.site-nav-component.site-nav-component.site-nav-component
+  .coded-nav-links {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, 1fr)
+      minmax(0, 1.42fr)
+      42px !important;
+    flex: 1 1 0 !important;
+    width: auto !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    gap: 4px !important;
+    justify-items: stretch !important;
+  }
+
+  html body #root .route-transition
+  .site-nav-component.site-nav-component.site-nav-component.site-nav-component
+  .coded-nav-links .animated-nav-link {
+    width: 100% !important;
+    min-width: 0 !important;
+    justify-content: center !important;
+    font-size: clamp(7px, 2.2vw, 9px) !important;
+    letter-spacing: 0 !important;
+  }
+
+  html body #root .route-transition
+  .site-nav-component.site-nav-component.site-nav-component.site-nav-component
+  .coded-nav-links .admin-access-pill {
+    width: 42px !important;
+    min-width: 42px !important;
+    max-width: 42px !important;
   }
 }

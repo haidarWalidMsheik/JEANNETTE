@@ -79,7 +79,17 @@ export default function CategoryPage() {
 
       <section className="category-type-hero" data-category={category.slug}>
         <p>{category.name}</p>
-        <h1>{copy.title}</h1>
+        <h1>
+          {category.name === "Branding" ? (
+            <>
+              MEET
+              <br />
+              THE BRANDS.
+            </>
+          ) : (
+            copy.title
+          )}
+        </h1>
         <span>{copy.text}</span>
       </section>
 
