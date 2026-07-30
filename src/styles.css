@@ -14121,3 +14121,9 @@ html body #root .route-transition
     max-width: 42px !important;
   }
 }
+
+/* Home page: join the three artwork panels without changing their layout. */
+body .photo-home-page .about-photo-only-section,
+body .photo-home-page .bottom-photo-only-section {
+  margin-top: 0 !important;
+}

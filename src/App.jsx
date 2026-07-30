@@ -8,6 +8,7 @@ import Collaborate from "./pages/Collaborate";
 import AdminLogin from "./pages/AdminLogin";
 import Admin from "./pages/Admin";
 import BackToTop from "./components/BackToTop";
+import NavbarFlowLine from "./components/NavbarFlowLine";
 import VisitTracker from "./components/VisitTracker";
 
 export default function App() {
@@ -19,6 +20,8 @@ export default function App() {
 
   return (
     <>
+      <NavbarFlowLine />
+
       {/* Records one visit per browser session. Admin pages are excluded. */}
       <VisitTracker />
 
