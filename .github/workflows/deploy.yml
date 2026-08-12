@@ -27,11 +27,8 @@ jobs:
         with:
           node-version: 22
 
-      - name: Update npm
-        run: npm install -g npm@latest
-
       - name: Install dependencies
-        run: npm install --include=dev --legacy-peer-deps --no-audit --no-fund
+        run: npm ci --include=dev --no-audit --no-fund
 
       - name: Build
         run: npm run build

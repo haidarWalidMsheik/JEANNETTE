@@ -1,7 +1,8 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-const MAX_FAILED_ATTEMPTS = 5;
-const LOCK_TIME_MS = 2 * 60 * 60 * 1000;
+const MAX_REQUEST_BYTES = 16 * 1024;
+const MAX_EMAIL_LENGTH = 320;
+const MAX_PASSWORD_LENGTH = 1024;
 
 const supabaseUrl = Deno.env.get("SUPABASE_URL") || "";
 const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
@@ -12,10 +13,10 @@ const adminEmail = (
 
 const LOCK_EMAIL_KEY = "__admin_login__";
 
-type LoginAttempt = {
-  email: string;
-  ip_hash: string;
+type LoginReservation = {
+  allowed: boolean;
   failed_count: number;
+  tries_left: number;
   locked_until: string | null;
 };
 
@@ -45,8 +46,16 @@ function corsHeaders(request: Request) {
     "Access-Control-Allow-Headers":
       "authorization, x-client-info, apikey, content-type",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Cache-Control": "no-store",
     "Content-Type": "application/json",
+    "Vary": "Origin",
+    "X-Content-Type-Options": "nosniff",
   };
+}
+
+function isAllowedBrowserOrigin(request: Request) {
+  const origin = request.headers.get("origin");
+  return !origin || allowedOrigins.includes(origin);
 }
 
 function json(request: Request, body: unknown, status = 200) {
@@ -79,17 +88,20 @@ async function sha256(value: string) {
     .join("");
 }
 
-async function getAttempt(ipHash: string): Promise<LoginAttempt | null> {
-  const { data, error } = await db
-    .from("admin_login_locks")
-    .select("email, ip_hash, failed_count, locked_until")
-    .eq("email", LOCK_EMAIL_KEY)
-    .eq("ip_hash", ipHash)
-    .maybeSingle();
+async function reserveLoginAttempt(ipHash: string): Promise<LoginReservation> {
+  const { data, error } = await db.rpc("reserve_admin_login_attempt", {
+    p_ip_hash: ipHash,
+  });
 
   if (error) throw error;
 
-  return data as LoginAttempt | null;
+  const reservation = Array.isArray(data) ? data[0] : data;
+
+  if (!reservation || typeof reservation.allowed !== "boolean") {
+    throw new Error("Login limiter returned an invalid response.");
+  }
+
+  return reservation as LoginReservation;
 }
 
 async function clearAttempt(ipHash: string) {
@@ -100,43 +112,6 @@ async function clearAttempt(ipHash: string) {
     .eq("ip_hash", ipHash);
 
   if (error) throw error;
-}
-
-async function registerFailedAttempt(
-  ipHash: string,
-  currentAttempt: LoginAttempt | null
-) {
-  const nextFailedCount = Number(currentAttempt?.failed_count || 0) + 1;
-  const now = new Date();
-
-  const lockedUntil =
-    nextFailedCount >= MAX_FAILED_ATTEMPTS
-      ? new Date(Date.now() + LOCK_TIME_MS).toISOString()
-      : null;
-
-  const row = {
-    email: LOCK_EMAIL_KEY,
-    ip_hash: ipHash,
-    failed_count: nextFailedCount,
-    locked_until: lockedUntil,
-    last_failed_at: now.toISOString(),
-    updated_at: now.toISOString(),
-  };
-
-  const { error } = await db
-    .from("admin_login_locks")
-    .upsert(row, {
-      onConflict: "email,ip_hash",
-    });
-
-  if (error) throw error;
-
-  return {
-    failedCount: nextFailedCount,
-    triesLeft: Math.max(0, MAX_FAILED_ATTEMPTS - nextFailedCount),
-    locked: Boolean(lockedUntil),
-    lockedUntil,
-  };
 }
 
 Deno.serve(async (request: Request) => {
@@ -151,64 +126,77 @@ Deno.serve(async (request: Request) => {
   }
 
   try {
-    if (!supabaseUrl || !serviceRoleKey || !anonKey) {
-      return json(
-        request,
-        {
-          error: "Server login function is missing Supabase secrets.",
-        },
-        500
-      );
+    if (!isAllowedBrowserOrigin(request)) {
+      return json(request, { error: "Origin not allowed." }, 403);
     }
 
-    const body = await request.json().catch(() => null);
+    if (!supabaseUrl || !serviceRoleKey || !anonKey) {
+      console.error("Admin login is missing required Supabase secrets.");
+      return json(request, { error: "Login service unavailable." }, 503);
+    }
+
+    const requestBody = await request.text();
+    if (new TextEncoder().encode(requestBody).byteLength > MAX_REQUEST_BYTES) {
+      return json(request, { error: "Request is too large." }, 413);
+    }
+
+    let body: Record<string, unknown> | null = null;
+    try {
+      body = JSON.parse(requestBody);
+    } catch {
+      return json(request, { error: "Invalid JSON request." }, 400);
+    }
 
     const email = String(body?.email || "").trim().toLowerCase();
     const password = String(body?.password || "");
 
-    if (!email || !password) {
+    if (
+      !email ||
+      !password ||
+      email.length > MAX_EMAIL_LENGTH ||
+      password.length > MAX_PASSWORD_LENGTH
+    ) {
       return json(request, { error: "Email and password are required." }, 400);
     }
 
     const ip = getClientIp(request);
     const ipHash = await sha256(ip);
 
-    let attempt = await getAttempt(ipHash);
+    // The database function serializes reservations for this IP hash. Reserving
+    // before password verification makes parallel requests consume distinct
+    // attempts instead of overwriting one another after authentication.
+    const reservation = await reserveLoginAttempt(ipHash);
 
-    if (attempt?.locked_until) {
-      const lockedUntilTime = new Date(attempt.locked_until).getTime();
-
-      if (lockedUntilTime > Date.now()) {
-        return json(
-          request,
-          {
-            error: "Too many wrong login attempts. Please wait 2 hours.",
-            locked: true,
-            lockedUntil: attempt.locked_until,
-            remainingMs: lockedUntilTime - Date.now(),
-          },
-          429
-        );
-      }
-
-      await clearAttempt(ipHash);
-      attempt = null;
-    }
-
-    if (email !== adminEmail) {
-      const failed = await registerFailedAttempt(ipHash, attempt);
+    if (!reservation.allowed) {
+      const lockedUntilTime = reservation.locked_until
+        ? new Date(reservation.locked_until).getTime()
+        : Date.now();
 
       return json(
         request,
         {
-          error: failed.locked
+          error: "Too many wrong login attempts. Please wait 2 hours.",
+          locked: true,
+          lockedUntil: reservation.locked_until,
+          remainingMs: Math.max(0, lockedUntilTime - Date.now()),
+          triesLeft: 0,
+        },
+        429
+      );
+    }
+
+    if (email !== adminEmail) {
+      return json(
+        request,
+        {
+          error: reservation.locked_until
             ? "Too many wrong login attempts. Please wait 2 hours."
             : "Wrong admin email or password.",
-          locked: failed.locked,
-          lockedUntil: failed.lockedUntil,
-          triesLeft: failed.triesLeft,
+          locked: Boolean(reservation.locked_until),
+          lockedUntil: reservation.locked_until,
+          triesLeft: reservation.tries_left,
         },
-        failed.locked ? 429 : 401
+        reservation.locked_until ? 429 : 401
       );
     }
 
@@ -234,19 +222,17 @@ Deno.serve(async (request: Request) => {
       !authData?.access_token ||
       !authData?.refresh_token
     ) {
-      const failed = await registerFailedAttempt(ipHash, attempt);
-
       return json(
         request,
         {
-          error: failed.locked
+          error: reservation.locked_until
             ? "Too many wrong login attempts. Please wait 2 hours."
             : "Wrong admin email or password.",
-          locked: failed.locked,
-          lockedUntil: failed.lockedUntil,
-          triesLeft: failed.triesLeft,
+          locked: Boolean(reservation.locked_until),
+          lockedUntil: reservation.locked_until,
+          triesLeft: reservation.tries_left,
         },
-        failed.locked ? 429 : 401
+        reservation.locked_until ? 429 : 401
       );
     }
 
@@ -260,14 +246,7 @@ Deno.serve(async (request: Request) => {
       },
     });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Server error.";
-
-    return json(
-      request,
-      {
-        error: message,
-      },
-      500
-    );
+    console.error("Admin login failed internally:", error);
+    return json(request, { error: "Login service unavailable." }, 503);
   }
 });
