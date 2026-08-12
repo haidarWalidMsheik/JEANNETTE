@@ -3,6 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      if (
+        window.location.hash.includes("type=recovery") &&
+        window.location.pathname !== "/reset-password.html"
+      ) {
+        window.location.replace(
+          `/reset-password.html${window.location.hash}`
+        );
+      }
+    </script>
     <title>Jeannette Portfolio</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="theme-color" content="#111111" />

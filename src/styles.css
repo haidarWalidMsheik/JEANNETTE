@@ -238,6 +238,51 @@ textarea {
   user-select: all;
 }
 
+.admin-login-card .admin-link-button {
+  border: 0;
+  background: transparent;
+  color: #f5f5f5;
+  padding: 0.25rem;
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+  cursor: pointer;
+}
+
+.admin-login-card .admin-link-button:hover {
+  color: #ff202b;
+}
+
+.admin-login-card .admin-link-button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.admin-success-text {
+  color: #91e6ad;
+}
+
+.admin-password-rules {
+  margin: 0;
+  color: #b8b8b8;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.admin-primary-link {
+  border-radius: 999px;
+  padding: 12px 18px;
+  background: #ee2126;
+  color: #fff;
+  font-weight: 800;
+  text-align: center;
+  text-decoration: none;
+}
+
+.admin-primary-link:hover {
+  background: #ff3038;
+}
+
 .admin-login-card h1,
 .admin-page h1,
 .admin-page h2,

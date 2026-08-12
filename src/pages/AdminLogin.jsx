@@ -33,6 +33,8 @@ export default function AdminLogin() {
   const [lockedUntil, setLockedUntil] = useState(0);
   const [now, setNow] = useState(Date.now());
   const [loading, setLoading] = useState(false);
+  const [sendingRecovery, setSendingRecovery] = useState(false);
+  const [recoveryMessage, setRecoveryMessage] = useState("");
 
   const isLocked = lockedUntil && now < lockedUntil;
   const remainingMs = isLocked ? lockedUntil - now : 0;
@@ -282,6 +284,43 @@ export default function AdminLogin() {
     }
   }
 
+  async function handlePasswordRecovery() {
+    setError("");
+    setRecoveryMessage("");
+
+    if (!hasSupabase || !supabase) {
+      setError("Supabase is not connected.");
+      return;
+    }
+
+    if (!email.trim()) {
+      setError("Enter the admin Gmail first.");
+      return;
+    }
+
+    try {
+      setSendingRecovery(true);
+
+      const { error: recoveryError } =
+        await supabase.auth.resetPasswordForEmail(email.trim(), {
+          redirectTo: `${window.location.origin}/reset-password.html`,
+        });
+
+      if (recoveryError) {
+        setError("Could not send the recovery email. Please wait and try again.");
+        return;
+      }
+
+      setRecoveryMessage(
+        "If this is the administrator account, a secure recovery email has been sent."
+      );
+    } catch {
+      setError("Could not send the recovery email. Please wait and try again.");
+    } finally {
+      setSendingRecovery(false);
+    }
+  }
+
   return (
     <main className="admin-login-page">
       <form
@@ -371,6 +410,10 @@ export default function AdminLogin() {
 
         {error && <p className="error-text">{error}</p>}
 
+        {recoveryMessage && (
+          <p className="admin-success-text">{recoveryMessage}</p>
+        )}
+
         <button disabled={loading || (!mfaFactorId && isLocked)}>
           {loading
             ? "Checking..."
@@ -380,6 +423,17 @@ export default function AdminLogin() {
                 ? "Locked"
                 : "Login"}
         </button>
+
+        {!mfaFactorId && (
+          <button
+            className="admin-link-button"
+            type="button"
+            onClick={handlePasswordRecovery}
+            disabled={loading || sendingRecovery}
+          >
+            {sendingRecovery ? "Sending recovery email..." : "Forgot password?"}
+          </button>
+        )}
       </form>
     </main>
   );
