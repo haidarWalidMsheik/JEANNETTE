@@ -23,6 +23,10 @@ export default function AdminLogin() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [mfaCode, setMfaCode] = useState("");
+  const [mfaFactorId, setMfaFactorId] = useState("");
+  const [mfaQrCode, setMfaQrCode] = useState("");
+  const [mfaSecret, setMfaSecret] = useState("");
 
   const [error, setError] = useState("");
   const [triesLeft, setTriesLeft] = useState(5);
@@ -36,6 +40,10 @@ export default function AdminLogin() {
   useEffect(() => {
     setEmail("");
     setPassword("");
+    setMfaCode("");
+    setMfaFactorId("");
+    setMfaQrCode("");
+    setMfaSecret("");
     setError("");
   }, []);
 
@@ -51,6 +59,10 @@ export default function AdminLogin() {
     function resetFields() {
       setEmail("");
       setPassword("");
+      setMfaCode("");
+      setMfaFactorId("");
+      setMfaQrCode("");
+      setMfaSecret("");
     }
 
     window.addEventListener("pageshow", resetFields);
@@ -72,6 +84,61 @@ export default function AdminLogin() {
 
     if (isLocked) {
       setError(`Too many wrong login attempts. Try again after ${formatLockTime(remainingMs)}.`);
+      return;
+    }
+
+    if (mfaFactorId) {
+      if (!/^\d{6}$/.test(mfaCode.trim())) {
+        setError("Enter the 6-digit authenticator code.");
+        return;
+      }
+
+      try {
+        setLoading(true);
+
+        const { error: mfaError } = await supabase.auth.mfa.challengeAndVerify({
+          factorId: mfaFactorId,
+          code: mfaCode.trim(),
+        });
+
+        if (mfaError) {
+          setMfaCode("");
+          setError("Wrong or expired authenticator code.");
+          return;
+        }
+
+        const { data: verifiedAssurance, error: assuranceError } =
+          await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+
+        if (
+          assuranceError ||
+          verifiedAssurance?.currentLevel !== "aal2"
+        ) {
+          await supabase.auth.signOut();
+          setMfaCode("");
+          setMfaFactorId("");
+          setMfaQrCode("");
+          setMfaSecret("");
+          setError("Second-factor verification did not complete.");
+          return;
+        }
+
+        setEmail("");
+        setPassword("");
+        setMfaCode("");
+        setMfaFactorId("");
+        setMfaQrCode("");
+        setMfaSecret("");
+        setTriesLeft(5);
+        setLockedUntil(0);
+        navigate("/crud", { replace: true });
+      } catch {
+        setMfaCode("");
+        setError("Could not verify the authenticator code.");
+      } finally {
+        setLoading(false);
+      }
+
       return;
     }
 
@@ -131,6 +198,76 @@ export default function AdminLogin() {
         return;
       }
 
+      const { data: assurance, error: assuranceError } =
+        await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+
+      if (assuranceError) {
+        await supabase.auth.signOut();
+        setPassword("");
+        setError("Could not verify login security level.");
+        return;
+      }
+
+      if (assurance?.currentLevel !== "aal2") {
+        const { data: factors, error: factorsError } =
+          await supabase.auth.mfa.listFactors();
+        const totpFactors = (factors?.all || []).filter(
+          (factor) => factor.factor_type === "totp"
+        );
+        const verifiedFactor = totpFactors.find(
+          (factor) => factor.status === "verified"
+        );
+
+        if (factorsError) {
+          await supabase.auth.signOut();
+          setPassword("");
+          setError("Your second authentication factor is unavailable.");
+          return;
+        }
+
+        if (!verifiedFactor) {
+          for (const factor of totpFactors) {
+            if (factor.status !== "verified") {
+              const { error: unenrollError } =
+                await supabase.auth.mfa.unenroll({ factorId: factor.id });
+
+              if (unenrollError) {
+                await supabase.auth.signOut();
+                setPassword("");
+                setError("Could not restart authenticator setup.");
+                return;
+              }
+            }
+          }
+
+          const { data: enrollment, error: enrollmentError } =
+            await supabase.auth.mfa.enroll({
+              factorType: "totp",
+              friendlyName: "Jeannette Portfolio Admin",
+            });
+
+          if (enrollmentError || !enrollment?.id || !enrollment?.totp) {
+            await supabase.auth.signOut();
+            setPassword("");
+            setError("Could not start authenticator setup.");
+            return;
+          }
+
+          setMfaQrCode(enrollment.totp.qr_code || "");
+          setMfaSecret(enrollment.totp.secret || "");
+          setMfaFactorId(enrollment.id);
+        } else {
+          setMfaQrCode("");
+          setMfaSecret("");
+          setMfaFactorId(verifiedFactor.id);
+        }
+
+        setPassword("");
+        setMfaCode("");
+        setError("");
+        return;
+      }
+
       setEmail("");
       setPassword("");
       setTriesLeft(5);
@@ -156,15 +293,30 @@ export default function AdminLogin() {
         <p className="admin-kicker">Jeannette Portfolio</p>
         <h1>Admin Login</h1>
 
-        {isLocked ? (
+        {mfaFactorId && (
+          <p className="admin-muted">
+            {mfaQrCode
+              ? "Scan this code once, then enter the 6-digit code from your authenticator app."
+              : "Enter the 6-digit code from your authenticator app."}
+          </p>
+        )}
+
+        {mfaQrCode && (
+          <div className="admin-mfa-setup">
+            <img src={mfaQrCode} alt="Authenticator setup QR code" />
+            {mfaSecret && <code>{mfaSecret}</code>}
+          </div>
+        )}
+
+        {!mfaFactorId && isLocked ? (
           <p className="error-text">
             Locked. Try again after {formatLockTime(remainingMs)}.
           </p>
-        ) : (
+        ) : !mfaFactorId ? (
           <p className="admin-muted">
             You have {triesLeft} login tries.
           </p>
-        )}
+        ) : null}
 
         <label>
           Admin Gmail
@@ -178,7 +330,7 @@ export default function AdminLogin() {
             autoCorrect="off"
             autoCapitalize="none"
             placeholder="Admin Gmail"
-            disabled={loading || isLocked}
+            disabled={loading || isLocked || Boolean(mfaFactorId)}
             required
           />
         </label>
@@ -194,15 +346,39 @@ export default function AdminLogin() {
             autoCorrect="off"
             autoCapitalize="none"
             placeholder="Password"
-            disabled={loading || isLocked}
-            required
+            disabled={loading || isLocked || Boolean(mfaFactorId)}
+            required={!mfaFactorId}
           />
         </label>
 
+        {mfaFactorId && (
+          <label>
+            Authenticator code
+            <input
+              value={mfaCode}
+              onChange={(event) =>
+                setMfaCode(event.target.value.replace(/\D/g, "").slice(0, 6))
+              }
+              type="text"
+              inputMode="numeric"
+              autoComplete="one-time-code"
+              placeholder="123456"
+              disabled={loading}
+              required
+            />
+          </label>
+        )}
+
         {error && <p className="error-text">{error}</p>}
 
-        <button disabled={loading || isLocked}>
-          {loading ? "Checking..." : isLocked ? "Locked" : "Login"}
+        <button disabled={loading || (!mfaFactorId && isLocked)}>
+          {loading
+            ? "Checking..."
+            : mfaFactorId
+              ? "Verify code"
+              : isLocked
+                ? "Locked"
+                : "Login"}
         </button>
       </form>
     </main>

@@ -61,14 +61,31 @@ export default function VisitTracker() {
     let cancelled = false;
 
     async function recordVisit() {
-      const { error } = await supabase.from("website_visits").insert({
-        visitor_id: getVisitorId(),
-        path: currentPath.slice(0, 300),
-      });
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/record-visit`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              apikey: import.meta.env.VITE_SUPABASE_ANON_KEY,
+            },
+            body: JSON.stringify({
+              visitorId: getVisitorId(),
+              path: currentPath.slice(0, 300),
+            }),
+          }
+        );
 
-      if (error && !cancelled) {
-        console.error("Could not record website visit:", error);
-        sessionStorage.removeItem(SESSION_VISIT_KEY);
+        if (response.status >= 500 && !cancelled) {
+          console.error("Could not record website visit.");
+          sessionStorage.removeItem(SESSION_VISIT_KEY);
+        }
+      } catch {
+        if (!cancelled) {
+          console.error("Could not record website visit.");
+          sessionStorage.removeItem(SESSION_VISIT_KEY);
+        }
       }
     }
 

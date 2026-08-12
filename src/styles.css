@@ -217,6 +217,27 @@ textarea {
   color: #aaa;
 }
 
+.admin-mfa-setup {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 14px;
+  background: #fff;
+  color: #111;
+}
+
+.admin-mfa-setup img {
+  width: min(240px, 100%);
+  height: auto;
+}
+
+.admin-mfa-setup code {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  user-select: all;
+}
+
 .admin-login-card h1,
 .admin-page h1,
 .admin-page h2,

@@ -1,0 +1,7 @@
+# Both functions are intentionally reachable before authentication. Each
+# handler validates its own narrow input and applies database-backed limits.
+[functions.admin-login]
+verify_jwt = false
+
+[functions.record-visit]
+verify_jwt = false

@@ -88,6 +88,36 @@ async function sha256(value: string) {
     .join("");
 }
 
+async function readLimitedBody(request: Request, maxBytes: number) {
+  if (!request.body) return "";
+
+  const reader = request.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let totalBytes = 0;
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+
+    totalBytes += value.byteLength;
+    if (totalBytes > maxBytes) {
+      await reader.cancel();
+      return null;
+    }
+
+    chunks.push(value);
+  }
+
+  const body = new Uint8Array(totalBytes);
+  let offset = 0;
+  for (const chunk of chunks) {
+    body.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+
+  return new TextDecoder().decode(body);
+}
+
 async function reserveLoginAttempt(ipHash: string): Promise<LoginReservation> {
   const { data, error } = await db.rpc("reserve_admin_login_attempt", {
     p_ip_hash: ipHash,
@@ -135,8 +165,8 @@ Deno.serve(async (request: Request) => {
       return json(request, { error: "Login service unavailable." }, 503);
     }
 
-    const requestBody = await request.text();
-    if (new TextEncoder().encode(requestBody).byteLength > MAX_REQUEST_BYTES) {
+    const requestBody = await readLimitedBody(request, MAX_REQUEST_BYTES);
+    if (requestBody === null) {
       return json(request, { error: "Request is too large." }, 413);
     }
 

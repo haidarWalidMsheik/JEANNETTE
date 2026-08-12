@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { hasSupabase, isCurrentUserFixedAdmin, supabase } from "../lib/supabase";
 import { CATEGORY_NAMES, categoryOrder } from "../config/categories";
@@ -66,6 +66,7 @@ export default function Admin() {
   const [visitorStatsError, setVisitorStatsError] = useState("");
   const [visitorRealtimeConnected, setVisitorRealtimeConnected] =
     useState(false);
+  const visitorRefreshTimer = useRef(null);
 
   async function checkAdmin() {
     if (!hasSupabase || !supabase) {
@@ -147,7 +148,11 @@ export default function Admin() {
           table: "website_visits",
         },
         () => {
-          loadVisitorStats(false);
+          // Coalesce bursts of Realtime events into one aggregate query.
+          clearTimeout(visitorRefreshTimer.current);
+          visitorRefreshTimer.current = setTimeout(() => {
+            loadVisitorStats(false);
+          }, 750);
         }
       )
       .subscribe((channelStatus) => {
@@ -165,6 +170,7 @@ export default function Admin() {
 
     return () => {
       componentActive = false;
+      clearTimeout(visitorRefreshTimer.current);
       setVisitorRealtimeConnected(false);
       supabase.removeChannel(visitorChannel);
     };
